@@ -16,7 +16,7 @@ use yii\helpers\Url;
 <ul>
     <?php foreach ($categories as $category): ?>
         <li>
-            <a href="<?= Url::to(['/category/view', 'id' => $category->id]) ?>">
+            <a href="<?= Url::to($category->getUrl()) ?>">
                 <?= Html::img($category->getThumbFileUrl('image', 'thumb'), [
                     'alt' => $category->title,
                     'title' => $category->title,

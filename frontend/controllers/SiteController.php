@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Product;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -14,6 +15,8 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\NotFoundHttpException;
+use yz\shoppingcart\ShoppingCart;
 
 /**
  * Site controller
@@ -255,6 +258,63 @@ class SiteController extends Controller
 
         return $this->render('resendVerificationEmail', [
             'model' => $model
+        ]);
+    }
+
+    public function actionBuy($id, $amount = 1)
+    {
+        $product = Product::findOne($id);
+        if (!$product || $amount < 1) {
+            throw new NotFoundHttpException();
+        }
+
+        /** @var ShoppingCart $cart */
+        $cart = Yii::$app->cart;
+        $cart->put($product, $amount);
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionSub($id, $amount = 1)
+    {
+        $product = Product::findOne($id);
+        if (!$product || $amount < 1) {
+            throw new NotFoundHttpException();
+        }
+
+        /** @var ShoppingCart $cart */
+        $cart = Yii::$app->cart;
+        $position = $cart->getPositionById($product->getId());
+        if ($position->getQuantity() <= $amount) {
+            $cart->removeById($product->getId());
+        } else {
+            $cart->update($product, $position->getQuantity() - $amount);
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionRemove($id)
+    {
+        $product = Product::findOne($id);
+        if (!$product) {
+            throw new NotFoundHttpException();
+        }
+
+        /** @var ShoppingCart $cart */
+        $cart = Yii::$app->cart;
+        $cart->removeById($product->getId());
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionCart()
+    {
+        /** @var ShoppingCart $cart */
+        $cart = Yii::$app->cart;
+
+        return $this->render('cart', [
+            'cart' => $cart,
         ]);
     }
 }

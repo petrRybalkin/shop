@@ -109,4 +109,12 @@ class Product extends ActiveRecord implements CartPositionInterface
             'product_image.main' => true
         ]);
     }
+
+    public function getUrl()
+    {
+        return [
+            '/product/view',
+            'id' => $this->id,
+        ];
+    }
 }

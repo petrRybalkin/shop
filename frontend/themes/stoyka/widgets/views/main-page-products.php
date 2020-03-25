@@ -13,7 +13,7 @@ use yii\helpers\Html;
 
 <?php foreach($categories as $category): ?>
     <h3>
-        <?= Html::a($category->title, ['URL_NA_CATEGORY']) ?>
+        <?= Html::a($category->title, $category->getUrl()) ?>
     </h3>
     <?php foreach($category->getProducts()->limit(20)->all() as $product): ?>
         <?= $this->render('//product/_one', [

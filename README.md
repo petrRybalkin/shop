@@ -1,60 +1,54 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Advanced Project Template</h1>
-    <br>
-</p>
+[![Latest Stable Version](https://github.com/overtrue/phplint)
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
+## Usage
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
+### CLI
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
+```shell
+Usage:
+  phplint [options] [--] [<path>]...
 
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
+Arguments:
+  path                               Path to file or directory to lint.
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Build Status](https://travis-ci.com/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.com/yiisoft/yii2-app-advanced)
-
-DIRECTORY STRUCTURE
--------------------
-
+Options:
+      --exclude=EXCLUDE              Path to file or directory to exclude from linting (multiple values allowed)
+      --extensions=EXTENSIONS        Check only files with selected extensions (default: php)
+  -j, --jobs=JOBS                    Number of parraled jobs to run (default: 5)
+  -c, --configuration=CONFIGURATION  Read configuration from config file (default: ./.phplint.yml).
+      --no-configuration             Ignore default configuration file (default: ./.phplint.yml).
+      --no-cache                     Ignore cached data.
+      --cache=CACHE                  Path to the cache file.
+      --json[=JSON]                  Output JSON results to a file.
+      --xml[=XML]                    Output JUnit XML results to a file.
+  -h, --help                         Display this help message
+  -q, --quiet                        Do not output any message
+  -V, --version                      Display this application version
+      --ansi                         Force ANSI output
+      --no-ansi                      Disable ANSI output
+  -n, --no-interaction               Do not ask any interactive question
+  -v|vv|vvv, --verbose               Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+Help:
+ Lint something
 ```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-    tests/               contains tests for common classes    
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for backend application    
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for frontend application
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
+
+example:
+
+```shell
+$ ./vendor/bin/phplint ./ --exclude=vendor
+```
+You can also define configuration as a file `.phplint.yml`:
+
+```yaml
+path: ./
+jobs: 10
+cache: build/phplint.cache
+extensions:
+  - php
+exclude:
+  - vendor
+```
+
+```shell
+$ ./vendor/bin/phplint
 ```

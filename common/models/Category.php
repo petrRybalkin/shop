@@ -134,4 +134,12 @@ class Category extends ActiveRecord
             'parent_id' => $this->id,
         ]);
     }
+
+    public function getUrl()
+    {
+        return [
+            '/category/view',
+            'id' => $this->id,
+        ];
+    }
 }

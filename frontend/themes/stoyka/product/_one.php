@@ -12,7 +12,7 @@ use yii\helpers\Url;
 
 <hr>
 
-<a href="<?= Url::to(['URL_NA_TOVAR']) ?>">
+<a href="<?= Url::to($product->getUrl()) ?>">
     <h4><?= $product->title ?></h4>
 
     <?= Html::img($product->image ? $product->image->getThumbFileUrl('image', 'thumb') : 'DEFAULT IMAGE', [
@@ -25,7 +25,14 @@ use yii\helpers\Url;
 
 <p>Цена: <?= Yii::$app->formatter->asDecimal($product->price) ?> грн</p>
 
+<p>Кол-во: при изменении добжен меняться параметр amount в ссылке ниже (кнопка купить)</p>
 
 <p>
-    <a href="javascript:;" class="btn btn-success">Купить</a>
+    <?= Html::a('Купить', [
+        '/site/buy',
+        'id' => $product->id,
+        'amount' => 1,
+    ], [
+        'class' => 'btn btn-success'
+    ]) ?>
 </p>

@@ -9,7 +9,7 @@ use frontend\widgets\MainPageProductsWidget;
 $this->title = 'Bar Stoyka';
 
 ?>
-<div class="site-index">
+<div class="site-index wrapper">
 
     <?= CategorySliderWidget::widget() ?>
     <?= CartWidget::widget() ?>

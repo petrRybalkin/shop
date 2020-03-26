@@ -1,5 +1,6 @@
 <?php
 
+use common\models\Category;
 use common\models\Product;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -9,30 +10,32 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\ProductSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Products';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Товары';
 ?>
 <div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить товар', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'category_id',
+            [
+                'attribute' => 'category_id',
+                'filter' => Category::getParentsList(),
+                'value' => function (Product $model) {
+                    return $model->category->title;
+                }
+            ],
             'title',
-            'description:ntext',
+            'description:html',
             'price',
             //'old_price',
             //'seoTitle',
@@ -43,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{update} {images} {delete}',
                 'buttons' => [
                     'images' => function ($url, Product $model) {
-                        return Html::a('<span class="glyphicon glyphicon-plus"></span>', ['image', 'id' => $model->id], [
+                        return Html::a('<span class="glyphicon glyphicon-plus"></span>', ['/product-image/index', 'id' => $model->id], [
                             'title' => Yii::t('yii', 'Images'),
                         ]);
                     }

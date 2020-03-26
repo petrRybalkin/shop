@@ -1,5 +1,3 @@
-[![Latest Stable Version](https://github.com/overtrue/phplint)
-
 ## Usage
 
 ### CLI

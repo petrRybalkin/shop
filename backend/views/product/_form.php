@@ -2,6 +2,7 @@
 
 use common\models\Category;
 use yii\helpers\Html;
+use yii\redactor\widgets\Redactor;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -17,7 +18,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'description')->widget(Redactor::class, [
+        'clientOptions' => [
+            'imageManagerJson' => ['/redactor/upload/image-json'],
+            'imageUpload' => ['/redactor/upload/image'],
+            'fileUpload' => ['/redactor/upload/file'],
+            'lang' => 'ru',
+            'plugins' => ['clips', 'fontcolor','imagemanager']
+        ]
+    ])?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 

@@ -4,23 +4,20 @@ use common\models\Category;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\CategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Категории';
 ?>
 <div class="category-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить категорию', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -40,11 +37,11 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'show_in_main',
                 'filter' => [
-                    0 => 'No',
-                    1 => 'Yes',
+                    0 => 'Нет',
+                    1 => 'Да',
                 ],
                 'value' => function (Category $model) {
-                    return $model->show_in_main ? 'Yes' : 'No';
+                    return $model->show_in_main ? 'Да' : 'Нет';
                 }
             ],
 //            'parent_id',
@@ -53,7 +50,10 @@ $this->params['breadcrumbs'][] = $this->title;
 //            'seoTitle',
             //'seoDescription:ntext',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{update} {delete}',
+            ],
         ],
     ]); ?>
 

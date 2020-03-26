@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="category-form">
+<div class="product-image-form">
 
     <?php $form = ActiveForm::begin([
         'enableClientValidation' => false,

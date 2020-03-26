@@ -21,7 +21,8 @@
         "omnilight/yii2-shopping-cart": "1.3.0",
         "yii-dream-team/yii2-upload-behavior": "1.2.3",
         "yii2mod/yii2-rbac": "2.2.1",
-        "dmstr/yii2-adminlte-asset": "^2.1"
+        "dmstr/yii2-adminlte-asset": "^2.1",
+        "yiidoc/yii2-redactor": "2.0.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

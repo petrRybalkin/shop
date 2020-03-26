@@ -79,12 +79,12 @@ class Category extends ActiveRecord
         return [
             'id' => 'ID',
             'parent_id' => 'Parent ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'seoTitle' => 'Seo Title',
-            'seoDescription' => 'Seo Description',
-            'image' => 'Image',
-            'show_in_main' => 'Show in main page',
+            'title' => 'Заголовок',
+            'description' => 'Описание',
+            'seoTitle' => 'Seo title',
+            'seoDescription' => 'Seo description',
+            'image' => 'Изображение',
+            'show_in_main' => 'Отображать на главной?',
         ];
     }
 

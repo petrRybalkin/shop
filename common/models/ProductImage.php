@@ -74,9 +74,9 @@ class ProductImage extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID',
-            'image' => 'Image',
-            'main' => 'Main',
+            'product_id' => 'Товар',
+            'image' => 'Изображение',
+            'main' => 'Использовать как главное?',
         ];
     }
 

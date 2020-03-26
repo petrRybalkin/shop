@@ -3,11 +3,11 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Product */
+/* @var $model common\models\Page */
 
-$this->title = 'Добавить товар';
+$this->title = 'Создать статью';
 ?>
-<div class="product-create">
+<div class="page-create">
 
     <?= $this->render('_form', [
         'model' => $model,

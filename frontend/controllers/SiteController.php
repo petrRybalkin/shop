@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Page;
 use common\models\Product;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -315,6 +316,17 @@ class SiteController extends Controller
 
         return $this->render('cart', [
             'cart' => $cart,
+        ]);
+    }
+
+    public function actionPage($slug)
+    {
+        if (!$model = Page::findBySlug($slug)) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->render('page', [
+            'model' => $model,
         ]);
     }
 }

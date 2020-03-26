@@ -5,6 +5,7 @@
 
 use frontend\components\JsonLDHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\web\View;
@@ -92,12 +93,12 @@ AppAsset::register($this);
                             <nav>
                                 <ul class="clear">
                                     <li><a href="/" class="main-logo"></a></li>
-                                    <li><a href="/gifts/">Акции</a></li>
-                                    <li><a href="/about_delivery/">Доставка</a></li>
-                                    <li><a href="/reviews/">Отзывы</a></li>
-                                    <li><a href="#" class="promocode-nav js-promocode-window">Промокод</a></li>
+                                    <li><a href="<?= Url::to(['/']) ?>">Акции</a></li>
+                                    <li><a href="<?= Url::to(['/']) ?>">Доставка</a></li>
+                                    <!-- <li><a href="/reviews/">Отзывы</a></li>
+                                    <li><a href="#" class="promocode-nav js-promocode-window">Промокод</a></li> -->
                                     <li class="contact-items">
-                                        <a href="tel:+74956171424"><strong class="main-phone">+7 (495) 617-14-24</strong></a>
+                                        <a href="tel:+380666555773"><strong class="main-phone">+38 (066) 655-57-73</strong></a>
                                         <a href="#" class="phone-call- phone-call-link">заказать звонок</a>
                                     </li>
                                 </ul>
@@ -107,22 +108,25 @@ AppAsset::register($this);
                             <nav>
                                 <ul class="clear">
                                     <li class="no-register">
-                                        <a href="/auth/signin/">Войти</a>
-                                        <a href="/auth/register/">Регистрация</a>
+                                        <a href="<?= Url::to(['/site/login']) ?>">Войти</a>
+                                        <a href="<?= Url::to(['/site/signup']) ?>">Регистрация</a>
                                     </li>
-                                    <li><a href="/basket/" class="header-bottom__basket">105 р.</a><span class="cart-count">1</span></li>
+                                    <li><?= CartWidget::widget(); ?></li>
                                 </ul>
                             </nav>
                         </div>
+
                     </div>
                 </div>
+
                 <div class="bg-header">
-                    <div class="header-wrap js-header-resp resp-sticky" style="position: fixed; top: 0px;">
+                    <div class="header-wrap js-header-resp">
+                    <!-- <div class="header-wrap js-header-resp resp-sticky" style="position: fixed; top: 0px;"> -->
                         <header>
                             <div class="content"><!-- new responsive header -->
                                 <div class="header-resp hidden-lg-up">
                                     <div class="header-resp__logo">
-                                        <a href="/"><img src="/static_root/css/images/logo-header.1fa1f84f685a.png" alt="logo"></a>
+                                        <a href="/"><?= Html::img('@web/img/logo-header3.png', ['alt'=>'logo']); ?></a>
                                     </div>
                                     <div class="header-resp__nav">
                                         <button type="button" class="ssm-toggle-nav navbar-toggle active ssm-nav-visible" data-toggle="collapse">
@@ -132,9 +136,9 @@ AppAsset::register($this);
                                         </button>
                                     </div>
                                     <div class="header-resp__cart">
-                                        <a href="/basket/" class="header-bottom__basket">105 р.</a>
-                                        <span class="cart-count">1</span>
+                                         <?= CartWidget::widget(); ?>
                                     </div>
+                                   
                                 </div>
                             </div>
                         </header>
@@ -144,7 +148,7 @@ AppAsset::register($this);
                             <!-- <div class="navbar-logo"></div> -->
                             <div class="navbar-wrap">
                                 <ul class="navbar-menu">
-                                    <li class="phone-link"><a href="tel:+74956171424">+7 (495) 617-14-24</a></li>
+                                    <li class="phone-link"><a href="tel:+380666555773">+38 (066) 655-57-73</a></li>
                                     <li class="gift-link"><a href="/gifts/">Промокод / Акции</a></li>
                                     <li class="delivery-link"><a href="/about_delivery/">О доставке</a></li>
                                     <li><a href="/menu/top-10/" class="js-scroll-to-cat-mob" data-url="/menu/top-10/" data-hash="#cat-30" style="background-image: url('/media_root/categories/mini/Top-20-menu-icon.png')">ТОП-10</a></li>
@@ -260,7 +264,7 @@ AppAsset::register($this);
                                                 <div data-img="/static_root/images/slide-hh.06c0f1d147a2.jpg" style="height:100%; position:relative;">
                                                     <a href="/menu/rolly/roll-bangkok/" style="display:block; height:100%; position:relative; z-index:1000;">&nbsp;</a>
                                                     <div style="position:absolute; top:36%; left:29%; font-size:2.6vw; text-transform:uppercase; font-weight:bold;">Ролл Бангкок</div>
-                                                    <div style="position:absolute; top:60%; left:48%; font-size:2vw; color:#ac0808;">за <strong style="font-size:3vw; color:#ac0808;">170</strong> руб.
+                                                    <div style="position:absolute; top:60%; left:48%; font-size:2vw; color:#ac0808;">за <strong style="font-size:3vw; color:#ac0808;">170</strong> грн.
                                                     </div>
                                                     <img style="position:absolute; top:17%; left:67%; font-size:36px; width:24%;" src="/media_root/products/Rolls-Bangkok_BIG.png" alt="Ролл Бангкок">
                                                 </div>
@@ -383,17 +387,270 @@ AppAsset::register($this);
                     <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div>
                     <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
                 </div>
+
+                <div class="content index-categories">
+                    <div class="clear">
+                        <div class="change-view-xs right hidden-sm-up" style="margin-top:-20px;" data-t="None">
+                            <span class="icon icon-fz28 icon-sort5 active" data-view="mob-grid" style="display:inline-block !important; margin-right:5px;"></span>
+                            <a href="#" class="catview__btn catview--list js-catview-list " data-view="mob-list" style="display:inline-block !important;"></a>
+                        </div>
+                    </div>
+                    <?= Breadcrumbs::widget([
+                        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                    ]) ?>
+                    <?= Alert::widget() ?>
+                    <?= $content ?>
+
+                    <!-- <div class="products" id="cat-30">
+                        <p class="products__title">ТОП-10</p>
+                        <span class="products__description products__description--top-10"></span>
+                        <ul class="list-product clear five None list-cat-top-10 wok-product-list-">
+                            <li class="product with-accent lucky-product-False" data-href="/menu/top-10/set-postnyi-36-sht-680g/" data-id="211" data-image="/media_root/products/mini/Assorti-Postnoe_Min_gCTAC7V.png" data-title="Сет Постный [36 шт., 680г.]" data-is-lucky="False" data-price="342" data-price-half="" data-description="Ассорти для вегетарианцов и людей, соблюдающих пост со скидкой 50% - роллы с авокадо, огурцом, болгарским перцем, помидором, маринованным дайконом и маринованными водорослями. Дополнительные скидки на данный сет не распространяются." data-weight="680" data-unique_code="663" data-is-active="true" data-recommendation-url="" data-disallow_discount="true">
+                                <a href="/menu/top-10/set-postnyi-36-sht-680g/" class="product__capture">
+                                    <span class="product__img">
+                                        <img class="lazy loaded" src="/media_root/products/mini/Assorti-Postnoe_Min_gCTAC7V.png" data-src="/media_root/products/mini/Assorti-Postnoe_Min_gCTAC7V.png" alt="Сет Постный [36 шт., 680г.]" data-title="Ассорти для вегетарианцов и людей, соблюдающих пост со скидкой 50% - роллы с авокадо, огурцом, болгарским перцем, помидором, маринованным дайконом и маринованными водорослями. Дополнительные скидки на данный сет не распространяются." data-was-processed="true">
+                                    </span>
+                                    <p class="product__title" data-title="Сет Постный [36 шт., 680г.]: ">Сет Постный [36 шт., 680г.]</p>
+                                    <div class="product__info"></div>
+                                </a>
+                                <div class="product__descr" style="display:none;">
+                                    Ассорти для вегетарианцов и людей, соблюдающих пост со скидкой 50% - роллы с авокадо, огурцом, болгарским перцем, помидором, маринованным дайконом и маринованными водорослями. Дополнительные скидки на данный сет не распространяются.
+                                </div>
+                                <div class="product__weight" style="display:none;">680 г.</div>
+                                <div class="product-buy">
+                                    <p class="product-price product-price--top-10"><span>342</span> p.</p>
+                                    <span class="counter">
+                                        <input type="text" name="counter" value="1">
+                                        <i class="ui-spinner-button ui-spinner-up plus"><span></span></i>
+                                        <i class="ui-spinner-button ui-spinner-down minus"><span></span></i>
+                                    </span>
+                                    <span class="icon icon-cart icon-fz22 add-to-basket add-product-to-basket"></span>
+                                </div>
+                                <div class="label" style="background-color:#ff0000">Скидка 50%</div>
+                            </li>
+                        </ul>
+                    </div> -->
+
+                </div>
+
+                <section style="margin-top: 70px;">
+                    <div class="content index-bottom-content">
+                        <p>&nbsp;</p>
+                        <h2 style="text-align: center;font-size:24px;">Заказать суши вкусно и выгодно у нас</h2>
+                        <p>&nbsp;</p>
+                        <table align="center" border="0" cellpadding="1" cellspacing="1">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center; background-color: rgb(255, 255, 255);">
+                                        <p>&nbsp;</p>
+                                        <p><?= Html::img('@web/img/icon-2.png', ['alt'=>'', 'style'=>'width: 48px; height: 47px;']); ?></p>
+                                        <p><?= Html::img('@web/img/icon-line.png', ['alt'=>'', 'style'=>'width: 300px; height: 20px;']); ?></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: rgb(255, 255, 255);">
+                                        <p style="text-align: center;">&nbsp;</p>
+                                        <p style="text-align: center;"><strong>День рождения с <?= Html::encode($this->title); ?>!</strong></p>
+                                        <p style="text-align: center;">&nbsp;</p>
+                                        <p style="text-align: center;">При заказе на день рождения скидка 20%</p>
+                                        <p style="text-align: center;">&nbsp;</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>&nbsp;</p>
+                        <table align="center" border="0" cellpadding="1" cellspacing="1">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center; background-color: rgb(255, 255, 255);">
+                                        <p>&nbsp;</p>
+                                        <p><?= Html::img('@web/img/icon-4.png', ['alt'=>'', 'style'=>'width: 39px; height: 52px;']); ?></p>
+                                        <p><?= Html::img('@web/img/icon-line.png', ['alt'=>'', 'style'=>'width: 300px; height: 20px;']); ?></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: rgb(255, 255, 255);">
+                                        <p style="text-align: center;">&nbsp;</p>
+                                        <p style="text-align: center;"><strong>Подарки при каждом заказе</strong></p>
+                                        <p style="text-align: center;">&nbsp;</p>
+                                        <p style="text-align: center;">При заказе на сумму от 200грн., 250грн., 400грн., 500грн..</p>
+                                        <p style="text-align: center;">&nbsp;</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>&nbsp;</p>
+                        <table align="center" border="0" cellpadding="1" cellspacing="1">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center; background-color: rgb(255, 255, 255);">
+                                        <p>&nbsp;</p>
+                                        <p><?= Html::img('@web/img/icon-3.png', ['alt'=>'', 'style'=>'width: 45px; height: 51px;']); ?></p>
+                                        <p><?= Html::img('@web/img/icon-line.png', ['alt'=>'', 'style'=>'width: 300px; height: 20px;']); ?></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: rgb(255, 255, 255);">
+                                        <p style="text-align: center;">&nbsp;</p>
+                                        <p style="text-align: center;"><strong>Счастливый час каждый день!</strong></p>
+                                        <p style="text-align: center;">&nbsp;</p>
+                                        <p style="text-align: center;">Ежедневно с 13:00 до 14:30 скидка до 50%</p>
+                                        <p style="text-align: center;">на одно из популярных блюд</p>
+                                        <p style="text-align: center;">&nbsp;</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h1 class="title-step">Доставка суши и роллов в Северодонецке!</h1>
+                        <div style="font-size: 16px;">
+                            <p><?= Html::img('@web/img/main1.png', ['alt'=>'', 'style'=>'width: 156px; height: 100px; float: left; margin-left: 10px; margin-right: 10px;']); ?>
+                                Компания <?= Html::encode($this->title); ?> занимается доставкой блюд японской кухни, суши и роллов, лапши вок, а также пиццы уже много лет. За это время клиентами нашей компании стали многие тысячи человек, а большинство из них - постоянными гостями нашего сайта и заказывают доставку суши и пиццы уже постоянно.</p>
+                            <p>&nbsp;</p>
+                            <p>Наша доставка суши популярна среди клиентов, потому что мы работаем в первую очереди для них, чтобы доставлять не только суши и роллы, но и хорошее настроение.</p><p>&nbsp;</p><p>Для доставки суши и вок, так же как и для доставки пиццы или роллов, мы с любовью готовим и тщательно подходим к выбору поставщиков продуктов, которые используются в приготовлении блюд, бережно храним и щепетильно относимся к свежести и качеству каждого ингредиента, который будет использован в роллах, суши или пицце.</p>
+                            <p>&nbsp;</p>
+                            <p>Вы можете заказать в <?= Html::encode($this->title); ?> роллы и суши с доставкой по Северодонецке - как в офис, так и домой, будучи абсолютно уверенными в надежности Вашего выбора.</p>
+                            <p>&nbsp;</p>
+                            <h3 style="text-align: center;"><span style="color:#A52A2A;">Мы начинаем принимать заказы с 10-00 и работаем до 23-00 ежедневно.</span></h3>
+                            <p>&nbsp;</p>
+                            <p><?= Html::img('@web/img/main2-2.png', ['alt'=>'', 'style'=>'width: 156px; height: 100px; float: left; margin-left: 10px; margin-right: 10px;']); ?>Наши повара начинают готовить заказанные вами роллы и суши только после того, как операторы примут заказ и уточнят все нюансы заказа. Заказ выходит, как говорится, «из-под ножа», никаких полуфабрикатов и заготовок роллов, суши или пиццы мы не используем в работе. Поэтому все наши клиенты могут быть уверены в свежести и качестве, хоть такое приготовление и занимает немного больше времени, чем при работе с заготовками.
+                            <span style="color:#A52A2A;"><strong>Обычное время доставки заказа составляет 45...90 минут с учётом времени приготовления</strong></span>. Горячие блюда мы доставляем в специальных термосумках.</p>
+                            <p>&nbsp;</p>
+                            <p><?= Html::img('@web/img/main3-2.png', ['alt'=>'', 'style'=>'width:156px;height:100px;float:left;margin-left:10px;margin-right:10px;']); ?></p>
+                            <p>Заказывать суши, роллы и пиццу в <?= Html::encode($this->title); ?> не только просто, но и выгодно!</p>
+                            <p>&nbsp;</p>
+                            <p>Каждый клиент, зарегистрировавшийся у нас на сайте, становится участником скидочной и бонусной программ, и с каждым следующим заказом получает скидку – сначала 2%, потом 3%, 5% и 8% - после седьмого заказа.</p>
+                            <p>&nbsp;</p>
+                            <h3 style="text-align: center;"><span style="color:#A52A2A;"><strong>Все заказы комплектуются необходимым количеством соевого соуса, имбиря и васаби по количеству персон. </strong></span></h3>
+                            <h3 style="text-align: center;"><span style="color:#A52A2A;"><strong>Это бесплатно для вас – за наш счёт, и всегда будет бесплатно!</strong></span></h3>
+                            <p>&nbsp;</p>
+                            <p><?= Html::img('@web/img/present2.png', ['alt'=>'', 'style'=>'width:125px;height:125px;margin-left: 20px; margin-right: 20px; float: left;']); ?>Кроме того, нашим клиентам доступны все наши Акции – «Счастливый час» (когда одно из популярных блюд предлагается со скидкой до 50%), «День рождения» (скидка 20%), «второй ролл в подарок» (акция проводится на ограниченный перечень роллов) и многие другие.</p>
+                            <p>&nbsp;</p>
+                            <p>А также при оформлении заказа суши и роллов на страничке «Мой обед» (в корзине) вы можете<span style="color:#A52A2A;"><strong> ввести промо-код и получить при этом ДОПОЛНИТЕЛЬНЫЙ подарок или скидку</strong></span> Подробнее об акциях читайте <a href="/gifts/">здесь</a>.</p>
+                            <p>&nbsp;</p>
+                            Заказать суши, роллы и пиццу с доставкой у нас не только просто и выгодно – но и удобно! Вы можете повторить любой ваш заказ в один клик, заказывая суши и роллы с сайта, мобильного приложения или сообщив о таком желании оператору по телефону. Оплатить заказ вы можете при получении – наличными курьеру, или банковской картой или электронными деньгами – через сайт при оформлении заказать
+
+                            <p>&nbsp;</p>
+                            <p><?= Html::img('@web/img/main5-2.png', ['alt'=>'', 'style'=>'width: 125px; height: 80px; margin-left: 20px; margin-right: 20px; float: left;']); ?>И мы действительно не только заботимся о наших клиентах, но стараемся для них. Именно поэтому заказывая суши и роллы в <?= Html::encode($this->title) ?> вы можете попросить не класть какой-то ингредиент, разложить ваш заказ по контейнерам так чтобы было удобнее разделить приятную трапезу с друзьями и коллегами. И насладиться нашими большими, щедрыми порциями – ДА, мы не нарезаем роллы на большое количество кусочков только чтобы изобразить видимость количества. Наши роллы и суши весят действительно столько, сколько указано в меню на сайте.</p>
+                            <p>&nbsp;</p>
+                            <h3 style="text-align: center;"><span style="color:#A52A2A;">Ваши суши и вок, вместе с роллами и вкусной пиццей ждут вашего заказа!</span></h3>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </div>
 
+        <div class="footer">
+            <footer>
+                <div class="footer-top">
+                    <div class="content">
+                        <p style="text-align: center;"><?= Html::encode($this->title); ?> - профессиональный подход к японской кухне. Мы знаем толк в том что делаем.</p>
+                        <p style="text-align: center;">И готовы поделиться этим с Вами. Доставка суши и хорошего настроения к Вам.</p>
+                    </div>
+                </div>
+                <div class="footer-middle">
+                    <div class="content">
+                        <div class="list-menu">
+                            <p>
+                                <a href="/"><?= Html::encode($this->title); ?></a> - доставка <a href="/menu/sushi/">суши</a>, <a href="/menu/rolly/">роллов</a>, <a href="/menu/boks-sushi/">бокс-суши</a>, <a href="/menu/onigiri/">онигири</a>, <a href="/menu/sashimi/">сашими</a>, <a href="/menu/assorti-sety/">ассорти-сетов суши и роллов</a>, <a href="/menu/salaty/">салатов</a>, <a href="/menu/supy/">супов</a>, <a href="/wok/">лапши вок</a>, <a href="/menu/pizzas/">пиццы</a>, <a href="/menu/goriachee/">горячих блюд</a> и <a href="/menu/deserty/">десертов</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-bottom desktop">
+                        <div class="content clear">
+                            <div class="logo logo-footer"><div>
+                                <a href="/"><?= Html::img('@web/img/logo-header3.png', ['alt'=>'logo']); ?></a>
+                                <span>
+                                    <span class="copy">©</span><span class="text">«<?= Html::encode($this->title); ?>» — <br> Доставка суши и <br> хорошего настроения. <?= date('Y') ?></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="footer-bottom__social">
+                            <div class="list-two-row clear">
+                                <nav>
+                                    <ul>
+                                        <li class="footer-link-title"><a href="/about/">О компании</a></li>
+                                        <li class="footer-link-title"><a href="/interesting/fakty-o-yaponii/">Полезная информация</a></li>
+                                        <li>- <a href="/contacts/">Контакты</a></li>
+                                        <li>- <a href="/zakaz-sushi/">Заказ суши</a></li>
+                                        <li>- <a href="/gifts/">Акции</a></li>
+                                        <li>- <a href="/sushi-na-dom/">Суши на дом</a></li>
+                                        <li>- <a href="/standarts/">Наши стандарты</a></li>
+                                        <li>- <a href="/dostavka-sushi/">Доставка суши</a></li>
+                                        <li>- <a href="/delivery/">Доставка</a> / <a href="/payment/">Оплата</a></li>
+                                        <li>- <a href="/interesting/fakty-o-yaponii/istoriya-vozniknoveniya-sushi/">История суши</a></li>
+                                        <li>- <a href="/reviews/">Отзывы</a></li>
+                                        <li>- <a href="/interesting/fakty-o-yaponii/kak-pravilno-est-sushi/">Как есть суши?</a></li>
+                                        <li>- <a href="/vacancy/">Вакансии</a></li>
+                                        <li>- <a href="/interesting/fakty-o-yaponii/raznovidnosti-rollov/">Разновидности роллов</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="footer-bottom__application">
+                            <p class="application-title">&nbsp;</p>
+                        </div>
+                        <div class="footer-bottom__developer">
+                            <a href="tel:+380666555773" class="number-developer">+38 (066) 655-57-73</a>
+                            <div class="delivery-text">Доставка с 9:00 до 23:00</div>
+                            <a href="mailto:info@sushi-profi.ru" class="email-to">info@barstoyka.lg.ua</a>
+                            <div class="social clear">
+                                <ul>
+                                    <li><a href="https://twitter.com/" target="_blank" rel="nofollow"><span class="icon icon-twitter"></span></a></li>
+                                    <li><a href="https://www.facebook.com/" target="_blank" rel="nofollow"><span class="icon icon-facebook icon-fb"></span></a></li>
+                                    <li><a href="https://vk.com/" target="_blank" rel="nofollow"><span class="icon icon-vkontakte icon-vk"></span></a></li>
+                                    <li><a href="https://www.instagram.com//" target="_blank" rel="nofollow" class="icon-ig"></a></li>
+                                </ul>
+                            </div>
+                            <a href="/sitemap/" class="sitemap-link">Карта сайта</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
 
-        <footer class="footer">
-            <div class="container">
-                <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-                <p class="pull-right"><?= Yii::powered() ?></p>
-            </div>
-        </footer>
+        <div class="footer--resp hidden-lg-up">
+            <footer>
+                <div class="footer-bottom">
+                    <div class="footer-bottom__social">
+                        <div class="social clear">
+                            <ul>
+                                <li><a href="https://twitter.com/" target="_blank" rel="nofollow"><span class="icon icon-twitter"></span></a></li>
+                                <li><a href="https://www.facebook.com/" target="_blank" rel="nofollow"><span class="icon icon-facebook icon-fb"></span></a></li>
+                                <li><a href="https://vk.com/" target="_blank" rel="nofollow"><span class="icon icon-vkontakte icon-vk"></span></a></li>
+                                <li><a href="https://www.instagram.com//" target="_blank" rel="nofollow" class="icon-ig"></a></li>
+                            </ul>
+                        </div>
+                        <div class="list-two-row clear">
+                            <nav>
+                                <ul>
+                                    <li><a href="/about/">О компании</a></li>
+                                    <li><a href="/interesting/fakty-o-yaponii/">Полезная информация</a></li>
+                                    <li><a href="/contacts/">Контакты</a></li>
+                                    <li><a href="/zakaz-sushi/">Заказ суши</a></li>
+                                    <li><a href="/gifts/">Акции</a></li>
+                                    <li><a href="/sushi-na-dom/">Суши на дом</a></li>
+                                    <li><a href="/standarts/">Наши стандарты</a></li>
+                                    <li><a href="/dostavka-sushi/">Доставка суши</a></li>
+                                    <li><a href="/delivery/">Доставка</a> / <a href="/payment/">Оплата</a></li>
+                                    <li><a href="/interesting/fakty-o-yaponii/istoriya-vozniknoveniya-sushi/">История суши</a></li>
+                                    <li><a href="/reviews/">Отзывы</a></li>
+                                    <li><a href="/interesting/fakty-o-yaponii/kak-pravilno-est-sushi/">Как есть суши?</a></li>
+                                    <li><a href="/vacancy/">Вакансии</a></li>
+                                    <li><a href="/interesting/fakty-o-yaponii/raznovidnosti-rollov/">Разновидности роллов</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="footer-bottom__developer">
+                        <a href="tel:+380666555773" class="number-developer">+38 (066) 655-57-73</a>
+                        <a href="mailto:info@sushi-profi.ru" class="email-to">info@barstoyka.lg.ua</a>
+                        <div class="footer-bottom__slogan">«<?= Html::encode($this->title); ?>» — Доставка суши и хорошего настроения. <?= date('Y') ?></div>
+                    </div>
+                </div>
+            </footer>
+        </div>
 
     <?php $this->endBody() ?>
     </body>

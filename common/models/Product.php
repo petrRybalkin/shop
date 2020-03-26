@@ -2,9 +2,11 @@
 
 namespace common\models;
 
+use frontend\components\JsonLDHelper;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
 
@@ -57,7 +59,13 @@ class Product extends ActiveRecord implements CartPositionInterface
             [['category_id', 'price', 'old_price'], 'integer'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
+            [
+                ['category_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Category::class,
+                'targetAttribute' => ['category_id' => 'id']
+            ],
         ];
     }
 
@@ -116,5 +124,34 @@ class Product extends ActiveRecord implements CartPositionInterface
             '/product/view',
             'id' => $this->id,
         ];
+    }
+
+    /**
+     * @see https://schema.org/Product
+     */
+    public function seo()
+    {
+        $view = Yii::$app->view;
+        $view->title = $this->seoTitle;
+        $view->registerMetaTag([
+            'name' => 'description',
+            'content' => $this->seoDescription,
+        ]);
+
+        $seo = [
+            '@context' => 'http=>//schema.org',
+            '@type' => 'Product',
+            'name' => $this->title,
+            'offers' => [
+                '@type' => 'AggregateOffer',
+                'price' => $this->price,
+                'priceCurrency' => 'UAH'
+            ]
+        ];
+        if ($this->image) {
+            $seo['image'] = Url::to($this->image->getImageFileUrl('image'), true);
+        }
+        
+        JsonLDHelper::add($seo);
     }
 }

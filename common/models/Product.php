@@ -68,11 +68,11 @@ class Product extends ActiveRecord implements CartPositionInterface
     {
         return [
             'id' => 'ID',
-            'category_id' => 'Category ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'price' => 'Price',
-            'old_price' => 'Old Price',
+            'category_id' => 'Категория',
+            'title' => 'Заголовок',
+            'description' => 'Описание',
+            'price' => 'Цена',
+            'old_price' => 'Старая цена',
             'seoTitle' => 'Seo Title',
             'seoDescription' => 'Seo Description',
         ];

@@ -21,7 +21,7 @@ use yii\helpers\Url;
     ]) ?>
 </a>
 
-<p><?= $product->description ?></p>
+<?= $product->description ?>
 
 <p>Цена: <?= Yii::$app->formatter->asDecimal($product->price) ?> грн</p>
 

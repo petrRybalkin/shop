@@ -118,3 +118,9 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+/** new style */
+.slider-category li{display: inline-block;}
+.slider-category li a{}
+.slider-category li a img{}
+.slider-category li a p{text-align:center} 

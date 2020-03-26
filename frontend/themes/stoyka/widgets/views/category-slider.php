@@ -11,9 +11,9 @@ use yii\helpers\Url;
 
 ?>
 
-<h3>Это слайдер категорий</h3>
+<!--<h3>Это слайдер категорий</h3>-->
 
-<ul>
+<ul class="slider-category">
     <?php foreach ($categories as $category): ?>
         <li>
             <a href="<?= Url::to($category->getUrl()) ?>">
@@ -21,7 +21,7 @@ use yii\helpers\Url;
                     'alt' => $category->title,
                     'title' => $category->title,
                 ]) ?>
-                <?= $category->title ?>
+                <p><?= $category->title ?></p>
             </a>
         </li>
     <?php endforeach; ?>

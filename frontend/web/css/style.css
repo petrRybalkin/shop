@@ -1,0 +1,25 @@
+
+/* header */
+
+header {
+    position: relative;
+    z-index: 997;
+    /*height: 67px;*/
+}
+/** slider-category */
+.slider-category li{display:inline-block}
+.slider-category li a{}
+.slider-category li a img{}
+.slider-category li a p{text-align:center} 
+
+/* footer */
+
+
+/* media */
+@media (max-width: 1239px){
+header {
+	    height: 67px;
+	    padding: 0!important;
+	}
+}
+

@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\Page;
+use common\models\Delivery;
 use common\models\Product;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -326,6 +327,17 @@ class SiteController extends Controller
         }
 
         return $this->render('page', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionDelivery($slug)
+    {
+        if (!$model = Delivery::findBySlug($slug)) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->render('delivery', [
             'model' => $model,
         ]);
     }

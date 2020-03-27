@@ -2471,6 +2471,22 @@ label[for="id_captcha_1"]{margin-right:20px}
 .promocode-paste{cursor:pointer}
 .label{position:absolute;top:7px;right:7px;padding:2px 6px;font-size:14px;color:#fff;letter-spacing:-0.5px;text-transform:uppercase;border-radius:3px}
 .hidden-xs-up{display:none!important}
+.static-page.delivery{}
+.static-page.delivery .block{padding:10px 15px;}
+.static-page.delivery .block.clear ul{padding-left:15px}
+.static-page.delivery .block.clear ul li{padding-left:12px;font-size:18px;line-height:18px;position:relative;margin-top:17px}
+.static-page.delivery .block.clear ul li:first-child {margin-top:0}
+.static-page.delivery .block.clear ul li:before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ed7272;
+    display: block;
+    position: absolute;
+    left: -17px;
+    top: 4px;
+}
 @media(max-width:33.9em){.hidden-xs-down{display:none!important}}
 @media(min-width:34em){.hidden-sm-up{display:none!important}}
 @media(max-width:47.9em){.hidden-sm-down{display:none!important}}

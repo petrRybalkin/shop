@@ -33,57 +33,57 @@ AppAsset::register($this);
     </head>
     <body>
     <?php $this->beginBody() ?>
-        <header>
-            <?php
-            NavBar::begin([
-                'brandLabel' => Yii::$app->name,
-                'brandImage' => '../images/logo-header3.png',
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
-            ]);
-            $menuItems = [
-                //['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Доставка и Оплата', 'url' => ['/']],
-                ['label' => 'О нас', 'url' => ['/site/about']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
-            ];
-            if (Yii::$app->user->isGuest) {
-                $menuItems[] = ['label' => 'Войти', 'url' => ['/site/login']];
-                $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
-            } else {
-                $menuItems[] = '<li>'
-                    . Html::beginForm(['/site/logout'], 'post')
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>';
-            }
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => $menuItems,
-            ]);
-            NavBar::end();
+        <!-- <header> -->
+             <?php
+            // NavBar::begin([
+            //     'brandLabel' => Yii::$app->name,
+            //     'brandImage' => Url::to('@web/images/logo-header3.png'),
+            //     'brandUrl' => Yii::$app->homeUrl,
+            //     'options' => [
+            //         'class' => 'navbar-inverse navbar-fixed-top',
+            //     ],
+            // ]);
+            // $menuItems = [
+            //     //['label' => 'Home', 'url' => ['/site/index']],
+            //     ['label' => 'Доставка и Оплата', 'url' => ['/']],
+            //     ['label' => 'О нас', 'url' => ['/site/about']],
+            //     ['label' => 'Contact', 'url' => ['/site/contact']],
+            // ];
+            // if (Yii::$app->user->isGuest) {
+            //     $menuItems[] = ['label' => 'Войти', 'url' => ['/site/login']];
+            //     $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
+            // } else {
+            //     $menuItems[] = '<li>'
+            //         . Html::beginForm(['/site/logout'], 'post')
+            //         . Html::submitButton(
+            //             'Logout (' . Yii::$app->user->identity->username . ')',
+            //             ['class' => 'btn btn-link logout']
+            //         )
+            //         . Html::endForm()
+            //         . '</li>';
+            // }
+            // echo Nav::widget([
+            //     'options' => ['class' => 'navbar-nav navbar-right'],
+            //     'items' => $menuItems,
+            // ]);
+            // NavBar::end();
 
-            echo CartWidget::widget();
+            // echo CartWidget::widget();
             ?>
-            <div class="container">
-                <?= CategorySliderWidget::widget() ?>
-            </div>
-        </header>
-        <div class="wrap">
+            <!-- <div class="container">
+                <?//= CategorySliderWidget::widget() ?>
+            </div> -->
+       <!--  </header> -->
+        <!-- <div class="wrap">
             
             <div class="container">
-                <?= Breadcrumbs::widget([
-                    'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-                ]) ?>
-                <?= Alert::widget() ?>
-                <?= $content ?>
+                <?//= Breadcrumbs::widget([
+                  //  'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                //]) ?>
+                <?//= Alert::widget() ?>
+                <?//= $content ?>
             </div>
-        </div>
+        </div> -->
 
         <div class="container">
             <div class="wrapper">
@@ -183,7 +183,7 @@ AppAsset::register($this);
                             </div>
                         </div>
                     </div>
-                    <section class="banner" style="margin-top: 70px;">
+                    <!-- <section class="banner" style="margin-top: 70px;">
                         <div class="content">
                             <div class="action-resp" style="display:none;">
                                 <style></style>
@@ -250,8 +250,8 @@ AppAsset::register($this);
                                 </div>
                             </div>
                         </div>
-                    </section>
-                    <section class="actions hidden-sm-down" style="margin-top: 70px;">
+                    </section> -->
+                    <!-- <section class="actions hidden-sm-down" style="margin-top: 70px;">
                         <style></style>
                         <div class="fotorama--hidden"></div>
                         <div class="fotorama fotorama1585210857197" data-width="100%" data-max-width="100%" data-click="false" data-loop="true" data-autoplay="true">
@@ -318,8 +318,9 @@ AppAsset::register($this);
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </section> -->
                 </div>
+
                 <div class="swiper-container cat-nav hidden-sm-down swiper-container-initialized swiper-container-horizontal swiper-container-free-mode">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide swiper-slide-active" style="width: 58.9286px; margin-right: 30px;">

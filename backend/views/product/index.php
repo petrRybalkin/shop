@@ -4,7 +4,6 @@ use common\models\Category;
 use common\models\Product;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\ProductSearch */
@@ -17,8 +16,6 @@ $this->title = 'Товары';
     <p>
         <?= Html::a('Добавить товар', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -54,7 +51,5 @@ $this->title = 'Товары';
             ],
         ],
     ]); ?>
-
-    <?php Pjax::end(); ?>
 
 </div>

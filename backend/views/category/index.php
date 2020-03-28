@@ -3,7 +3,6 @@
 use common\models\Category;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\CategorySearch */
@@ -16,8 +15,6 @@ $this->title = 'Категории';
     <p>
         <?= Html::a('Добавить категорию', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -56,7 +53,5 @@ $this->title = 'Категории';
             ],
         ],
     ]); ?>
-
-    <?php Pjax::end(); ?>
 
 </div>

@@ -4,7 +4,6 @@ use common\models\Product;
 use common\models\ProductImage;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $product Product */
@@ -18,9 +17,6 @@ $this->title = 'Изображения для: ' . $product->title;
     <p>
         <?= Html::a('Добавить изображение', ['create', 'id' => $product->id], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -59,7 +55,5 @@ $this->title = 'Изображения для: ' . $product->title;
             ],
         ],
     ]); ?>
-
-    <?php Pjax::end(); ?>
 
 </div>

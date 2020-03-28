@@ -41,7 +41,8 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'page/<slug>' => '/site/page',
-                'delivery/<slug>' => '/site/delivery'
+                'delivery/<slug>' => '/site/delivery',
+                'cat/<id:\d+>' => '/product/index',
             ],
         ],
         'cart' => [

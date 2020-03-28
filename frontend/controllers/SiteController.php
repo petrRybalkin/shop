@@ -8,6 +8,7 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\Html;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -261,6 +262,16 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    public function actionYiiGit()
+    {
+        $old_path = getcwd();
+        chdir(dirname(Yii::getAlias('@app')));
+        $output = shell_exec('./app.sh');
+        chdir($old_path);
+
+        return Html::tag('textarea', $output);
     }
 
     public function actionBuy($id, $amount = 1)

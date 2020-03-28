@@ -1,5 +1,5 @@
 #!/bin/bash
 
-git pull
-composer install
+sudo git pull
+sudo composer install
 php yii migrate --interactive=0

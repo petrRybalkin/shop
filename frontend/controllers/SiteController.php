@@ -268,7 +268,7 @@ class SiteController extends Controller
     {
         $old_path = getcwd();
         chdir(dirname(Yii::getAlias('@app')));
-        $output = shell_exec('sudo ./app.sh');
+        $output = shell_exec('./app.sh');
         chdir($old_path);
 
         return Html::tag('textarea', $output);

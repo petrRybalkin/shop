@@ -12,17 +12,15 @@ use yii\helpers\Url;
 ?>
 
 <!--<h3>Это слайдер категорий</h3>-->
-
-<ul class="slider-category">
+<div class="cat-nav swiper-container hidden-sm-down">
+    <div class="swiper-wrapper">
     <?php foreach ($categories as $category): ?>
-        <li>
-            <a href="<?= Url::to($category->getUrl()) ?>">
-                <?= Html::img($category->getThumbFileUrl('image', 'thumb'), [
-                    'alt' => $category->title,
-                    'title' => $category->title,
-                ]) ?>
-                <p><?= $category->title ?></p>
-            </a>
-        </li>
+        <div class="swiper-slide swiper-slide-active" style="width: 58.9286px; margin-right: 30px;">
+            <a href="<?= Url::to($category->getUrl()) ?>" class=" big-menu-top-10 js-scroll-to-cat-desktop" style="background-image: url('<?=$category->getThumbFileUrl('image', 'thumb');?>')" data-url="<?= Url::to($category->getUrl()) ?>" data-hash="#cat-<?=$category->id; ?>"><?= $category->title ?></a>
+            </div>
     <?php endforeach; ?>
-</ul>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+</div>
+

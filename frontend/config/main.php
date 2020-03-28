@@ -40,7 +40,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'page/<slug>' => '/site/page'
+                'page/<slug>' => '/site/page',
+                'delivery/<slug>' => '/site/delivery'
             ],
         ],
         'cart' => [

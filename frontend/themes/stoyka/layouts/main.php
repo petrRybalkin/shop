@@ -76,7 +76,7 @@ AppAsset::register($this);
                             <nav>
                                 <ul class="clear">
                                     <li><a href="/" class="main-logo"></a></li>
-                                    <li><a href="<?= Url::to(['/page/akcii']) ?>">Акции</a></li>
+                                    <li><a href="<?= Url::to(['/page/akcii']) ?>">Акции1</a></li>
                                     <li><a href="<?= Url::to(['/delivery/dostavka-i-oplata']) ?>">Доставка</a></li>
                                     <li style="display:none"><a href="/reviews/">Отзывы</a></li>
                                     <li style="display:none"><a href="#" class="promocode-nav js-promocode-window">Промокод</a></li> -->

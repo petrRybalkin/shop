@@ -91,8 +91,12 @@ AppAsset::register($this);
                             <nav>
                                 <ul class="clear">
                                     <li class="no-register">
-                                        <a href="<?= Url::to(['/site/login']) ?>">Войти</a>
-                                        <a href="<?= Url::to(['/site/signup']) ?>">Регистрация</a>
+                                        <?php if(Yii::$app->user->isGuest): ?>
+                                            <?= Html::a('Войти', ['/site/login']) ?>
+                                        <?php else: ?>
+                                            <?= Html::a('Выйти', ['/site/logout']) ?>
+                                        <?php endif; ?>
+                                        <?= Html::a('Регистрация', ['/site/signup']) ?>
                                     </li>
                                     <li><?= CartWidget::widget(); ?></li>
                                 </ul>
@@ -182,6 +186,8 @@ AppAsset::register($this);
                         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                     ]) ?>
                     <?= Alert::widget() ?>
+
+
                     <?= $content ?>
 
             </div>

@@ -1,6 +1,8 @@
 <?php
 use common\models\Category;
+use yii\data\ArrayDataProvider;
 use yii\helpers\Html;
+use yii\widgets\ListView;
 
 /**
  * @var $this yii\web\View
@@ -19,11 +21,18 @@ use yii\helpers\Html;
 		    <h3>
 		        <?= Html::a($category->title, $category->getUrl()) ?>
 		    </h3>
-		    <?php foreach($category->getProducts()->limit(20)->all() as $product): ?>
-		        <?= $this->render('//product/_one', [
-		            'product' => $product,
-		        ]) ?>
-		    <?php endforeach; ?>
+
+            <?= ListView::widget([
+                'itemView' => '//product/_one',
+                'dataProvider' => new ArrayDataProvider([
+                    'allModels' => $category->getProducts()->limit(20)->all(),
+                    'pagination' => false,
+                ]),
+                'itemOptions' => [
+                    'tag' => false,
+                ],
+            ]) ?>
+
 	    </ul>
 	</div>
 <?php endforeach; ?>

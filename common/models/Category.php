@@ -138,8 +138,18 @@ class Category extends ActiveRecord
     public function getUrl()
     {
         return [
-            '/category/view',
+            '/product/index',
             'id' => $this->id,
         ];
+    }
+
+    public function seo()
+    {
+        $view = Yii::$app->view;
+        $view->title = $this->seoTitle;
+        $view->registerMetaTag([
+            'name' => 'description',
+            'content' => $this->seoDescription,
+        ]);
     }
 }

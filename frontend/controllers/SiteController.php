@@ -1,13 +1,16 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Order;
 use common\models\Page;
 use common\models\Delivery;
 use common\models\Product;
+use common\models\Profile;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
@@ -326,9 +329,33 @@ class SiteController extends Controller
         /** @var ShoppingCart $cart */
         $cart = Yii::$app->cart;
 
+        $model = new Order();
+
+        /** @var Profile $profile */
+        $profile = ArrayHelper::getValue(Yii::$app->user, 'identity.profile') ?: new Profile();
+        if (!$profile->isNewRecord) {
+            $model->name = $profile->name;
+            $model->phone = $profile->phone;
+            $model->city = $profile->city;
+            $model->address = $profile->address;
+        }
+        $model->price = $cart->getCost();
+
+        if ($model->load(Yii::$app->request->post())
+            && $model->save()) {
+            $cart->removeAll();
+            return $this->redirect(['success']);
+        }
+
         return $this->render('cart', [
+            'model' => $model,
             'cart' => $cart,
         ]);
+    }
+
+    public function actionSuccess()
+    {
+        return $this->render('success');
     }
 
     public function actionPage($slug)

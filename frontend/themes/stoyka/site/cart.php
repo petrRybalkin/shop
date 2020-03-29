@@ -1,6 +1,8 @@
 <?php
 
+use common\models\Order;
 use common\models\Product;
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yz\shoppingcart\ShoppingCart;
@@ -8,6 +10,7 @@ use yz\shoppingcart\ShoppingCart;
 /**
  * @var $this yii\web\View
  * @var $cart ShoppingCart
+ * @var $model Order
  */
 
 $this->title = 'Корзина';
@@ -57,3 +60,18 @@ $this->title = 'Корзина';
         Итого: <?= Yii::$app->formatter->asDecimal($cart->getCost()) ?> грн
     </div>
 </div>
+
+
+<?php $form = ActiveForm::begin(['id' => 'order-form']); ?>
+
+<?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+<?= $form->field($model, 'phone')->textInput() ?>
+<?= $form->field($model, 'city')->textInput() ?>
+<?= $form->field($model, 'address')->textInput() ?>
+<?= $form->field($model, 'description')->textarea() ?>
+
+<div class="form-group">
+    <?= Html::submitButton('Оформить', ['class' => 'btn btn-success']) ?>
+</div>
+
+<?php ActiveForm::end(); ?>

@@ -14,12 +14,7 @@ $model->seo();
 
 ?>
 
-<h2>Все картинки маленькие</h2>
-<?php foreach($model->images as $image): ?>
-    <?= Html::img($image->getThumbFileUrl('image', 'thumb'), [
-        'class' => 'img-thumbnail',
-    ]) ?>
-<?php endforeach; ?>
+
 
 <div class="content only-backs clear">
     <div class="clear">
@@ -60,6 +55,14 @@ $model->seo();
                                         'alt' => $model->title,
                                     ]) ?>
                                 <?php endif; ?>
+                                <br>
+                                <div style="display: none">
+                                    <?php foreach($model->images as $image): ?>
+                                        <?= Html::img($image->getThumbFileUrl('image', 'thumb'), [
+                                            'class' => 'img-thumbnail',
+                                        ]) ?>
+                                    <?php endforeach; ?>
+                                </div>
                             </span>
                             <p class="product__title" data-title=""><?= $model->title ?></p>
                         </a>

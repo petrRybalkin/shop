@@ -32,6 +32,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'old_price')->textInput() ?>
 
+    <?= $form->field($model, 'weight')->textInput() ?>
+
     <?= $form->field($model, 'seoTitle')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'seoDescription')->textarea(['rows' => 6]) ?>

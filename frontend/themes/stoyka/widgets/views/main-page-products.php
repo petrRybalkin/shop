@@ -12,16 +12,15 @@ use yii\widgets\ListView;
 ?>
 
 <h2>Товары на главной</h2>
+<?php //= //Html::a($category->title, $category->getUrl()); 
+?>
 
 <?php foreach($categories as $category): ?>
 	<div class="products" id="cat-<?=$category->id; ?>">
     	<p class="products__title"><?= $category->title; ?></p>
     	<span class="products__description products__description--cat-<?=$category->id;?>"></span>
     	<ul class="list-product clear five None list-cat-<?=$category->id;?> wok-product-list-">
-		    <h3>
-		        <?= Html::a($category->title, $category->getUrl()) ?>
-		    </h3>
-
+		    
             <?= ListView::widget([
                 'itemView' => '//product/_one',
                 'dataProvider' => new ArrayDataProvider([

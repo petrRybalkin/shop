@@ -10,8 +10,6 @@ use yii\helpers\Url;
  */
 ?>
 
-<hr>
-
 <li class="product with-accent lucky-product-False" data-href="<?= Url::to($model->getUrl()); ?>" data-id="<?= $model->id; ?>" data-title="<?= $model->title; ?>" data-is-lucky="False" data-price="<?= Yii::$app->formatter->asDecimal($model->price); ?>">
     <a href="<?= Url::to($model->getUrl()); ?>" class="product__capture">
         <span class="product__img">
@@ -29,19 +27,18 @@ use yii\helpers\Url;
     <div class="product__weight" style="display:none;">680 г.</div>
     <div class="product-buy">
         <p class="product-price"><span><?= Yii::$app->formatter->asDecimal($model->price); ?></span> грн.</p>
-         <span class="counter">
+        <span class="counter">
             <input type="text" name="counter" value="1">
             <i class="ui-spinner-button ui-spinner-up plus"><span></span></i>
             <i class="ui-spinner-button ui-spinner-down minus"><span></span></i>
         </span>
-        <span class="icon icon-cart icon-fz22 add-to-basket add-product-to-basket"></span>
-            <?= Html::a('Купить', [
-                '/site/buy',
-                'id' => $model->id,
-                'amount' => 1,
-                ], [
-                    'class' => 'btn btn-success'
-            ]) ?>
+        <?= Html::a('<span class="icon icon-cart icon-fz22 add-to-basket add-product-to-basket"></span>', [
+            '/site/buy',
+            'id' => $model->id,
+            'amount' => 1,
+            ], 
+            //['class' => 'btn btn-success']
+        ) ?>
     </div>
     <!-- <div class="label" style="background-color:#ff0000">Скидка 50%</div> -->
 </li>

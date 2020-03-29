@@ -35,8 +35,8 @@ class ProductController extends Controller
         $category = $this->findCategory($id);
 
         $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $searchModel->category_id = $id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'category' => $category,

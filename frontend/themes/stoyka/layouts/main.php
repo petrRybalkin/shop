@@ -6,8 +6,6 @@
 use frontend\components\JsonLDHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
 use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
@@ -93,10 +91,10 @@ AppAsset::register($this);
                                     <li class="no-register">
                                         <?php if(Yii::$app->user->isGuest): ?>
                                             <?= Html::a('Войти', ['/site/login']) ?>
+                                            <?= Html::a('Регистрация', ['/site/signup']) ?>
                                         <?php else: ?>
                                             <?= Html::a('Выйти', ['/site/logout']) ?>
                                         <?php endif; ?>
-                                        <?= Html::a('Регистрация', ['/site/signup']) ?>
                                     </li>
                                     <li><?= CartWidget::widget(); ?></li>
                                 </ul>

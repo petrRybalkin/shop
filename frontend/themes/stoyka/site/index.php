@@ -3,7 +3,6 @@
 use backend\models\Settings;
 use frontend\widgets\MainPageProductsWidget;
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 

@@ -1,16 +1,27 @@
 <?php
 
 use common\models\Product;
+use frontend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\View;
 
 /**
- * @var $this yii\web\View
+ * @var $this View
  * @var $model Product
  */
+
+$this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
+    'depends' => [
+        AppAsset::class
+    ],
+    'position' => View::POS_READY,
+]);
 ?>
 
-<li class="product with-accent lucky-product-False" data-href="<?= Url::to($model->getUrl()); ?>" data-id="<?= $model->id; ?>" data-title="<?= $model->title; ?>" data-is-lucky="False" data-price="<?= Yii::$app->formatter->asDecimal($model->price); ?>">
+<li class="product with-accent lucky-product-False" data-href="<?= Url::to($model->getUrl()); ?>"
+    data-id="<?= $model->id; ?>" data-title="<?= $model->title; ?>" data-is-lucky="False"
+    data-price="<?= Yii::$app->formatter->asDecimal($model->price); ?>">
     <a href="<?= Url::to($model->getUrl()); ?>" class="product__capture">
         <span class="product__img">
             <?= Html::img($model->image ? $model->image->getThumbFileUrl('image', 'thumb') : 'DEFAULT IMAGE', [
@@ -33,13 +44,20 @@ use yii\helpers\Url;
             <i class="ui-spinner-button ui-spinner-down minus"><span></span></i>
         </span>
         <?= Html::a('<span class="icon icon-cart icon-fz22 add-to-basket add-product-to-basket"></span>', [
-            '/site/buy',
-            'id' => $model->id,
-            'amount' => 1,
-            ], 
-            //['class' => 'btn btn-success']
+                '/site/buy',
+                'id' => $model->id,
+                'amount' => 1,
+            ],
+            [
+                'class' => 'cart-link',
+                'data' => [
+                    'url' => Url::to([
+                        '/site/buy',
+                        'id' => $model->id,
+                    ]),
+                ]
+            ]
         ) ?>
     </div>
-    <!-- <div class="label" style="background-color:#ff0000">Скидка 50%</div> -->
 </li>
                       

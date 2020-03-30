@@ -14,13 +14,17 @@ $category->seo();
 
 ?>
 
-<h1><?= $category->title ?></h1>
+<div class="products" id="cat-<?=$category->id; ?>">
+    <p class="products__title"><?= $category->title; ?></p>
+    <span class="products__description products__description--cat-<?=$category->id;?>"></span>
+    <ul class="list-product clear five None list-cat-<?=$category->id;?> wok-product-list-">
+		<?= ListView::widget([
+			'itemView' => '_one',
+			'dataProvider' => $dataProvider,
+			'itemOptions' => [
+			    'tag' => false,
+			],
+		]) ?>
 
-
-<?= ListView::widget([
-    'itemView' => '_one',
-    'dataProvider' => $dataProvider,
-    'itemOptions' => [
-        'tag' => false,
-    ],
-]) ?>
+	</ul>
+</div>

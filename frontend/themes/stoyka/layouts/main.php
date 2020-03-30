@@ -76,10 +76,10 @@ AppAsset::register($this);
                             <nav>
                                 <ul class="clear">
                                     <li><a href="/" class="main-logo"></a></li>
-                                    <li><a href="<?= Url::to(['/page/akcii']) ?>">Акции4</a></li>
+                                    <li><a href="<?= Url::to(['/page/akcii']) ?>">Акции</a></li>
                                     <li><a href="<?= Url::to(['/delivery/dostavka-i-oplata']) ?>">Доставка</a></li>
                                     <li style="display:none"><a href="/reviews/">Отзывы</a></li>
-                                    <li style="display:none"><a href="#" class="promocode-nav js-promocode-window">Промокод</a></li> -->
+                                    <li style="display:none"><a href="#" class="promocode-nav js-promocode-window">Промокод</a></li>
                                     <li class="contact-items">
                                         <a href="tel:+380666555773"><strong class="main-phone">+38 (066) 655-57-73</strong></a>
                                         <a href="#" class="phone-call- phone-call-link">заказать звонок</a>
@@ -252,7 +252,7 @@ AppAsset::register($this);
                                     <li><a href="https://twitter.com/" target="_blank" rel="nofollow"><span class="icon icon-twitter"></span></a></li>
                                     <li><a href="https://www.facebook.com/" target="_blank" rel="nofollow"><span class="icon icon-facebook icon-fb"></span></a></li>
                                     <li><a href="https://vk.com/" target="_blank" rel="nofollow"><span class="icon icon-vkontakte icon-vk"></span></a></li>
-                                    <li><a href="https://www.instagram.com//" target="_blank" rel="nofollow" class="icon-ig"></a></li>
+                                    <li><a href="https://www.instagram.com//" target="_blank" rel="nofollow"><span class="icon icon-instagram"></span></a></li>
                                 </ul>
                             </div>
                             <a href="/sitemap/" class="sitemap-link">Карта сайта</a>
@@ -271,7 +271,7 @@ AppAsset::register($this);
                                 <li><a href="https://twitter.com/" target="_blank" rel="nofollow"><span class="icon icon-twitter"></span></a></li>
                                 <li><a href="https://www.facebook.com/" target="_blank" rel="nofollow"><span class="icon icon-facebook icon-fb"></span></a></li>
                                 <li><a href="https://vk.com/" target="_blank" rel="nofollow"><span class="icon icon-vkontakte icon-vk"></span></a></li>
-                                <li><a href="https://www.instagram.com//" target="_blank" rel="nofollow" class="icon-ig"></a></li>
+                                <li><a href="https://www.instagram.com//" target="_blank" rel="nofollow"><span class="icon icon-instagram"></span></a></li>
                             </ul>
                         </div>
                         <div class="list-two-row clear">

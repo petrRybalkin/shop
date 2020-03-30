@@ -1898,11 +1898,11 @@ font-style:normal;cursor:pointer;position:absolute;left:0;top:-11px}
 .summ-block .left{border:2px dashed #939292;margin:0 0 0 10px;padding:25px 50px;overflow:hidden;float:left;-moz-border-radius:13px;-webkit-border-radius:13px;border-radius:13px}
 .summ-block .left p{color:#5d5d5d;font:18px/40px "PT Sans",Arial,sans-serif;margin-right:60px;float:left}
 .summ-block .left .button{float:left}
-.summ-block .right{float:right;margin-right:10px;width:260px;font-family:"PT Sans",Arial,sans-serif}
+.summ-block .right{float:right;margin-right:10px;width:290px;font-family:"PT Sans",Arial,sans-serif}
 .summ-block .right p{color:#5d5d5d;font-size:16px}
 .summ-block .right p:first-child{margin-bottom:17px}
-.summ-block .right p b{font-size:25px;font-weight:normal}
-.summ-block .right p i{font-size:25px;font-style:normal;font-weight:bold}
+.summ-block .right p b{font-size:24px;font-weight:normal}
+.summ-block .right p i{font-size:24px;font-style:normal;font-weight:bold}
 .summ-block .right p i .icon-rubl{font-size:20px}
 .summ-block .right p .red{color:#e76b6b}
 .summ-block .right p>span{font-weight:bold}

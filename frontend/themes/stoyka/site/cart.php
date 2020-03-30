@@ -161,14 +161,19 @@ $this->title = 'Корзина';
                 <div class="right non-auth">
                     <p class="clear">
                         <span>Сумма: <span class="total-summ"><?= Yii::$app->formatter->asDecimal($cart->getCost()) ?></span> грн</span>
-                                                            <?= Yii::$app->formatter->asDecimal($product->getCost()) ?> грн.
                     </p>
+                    <p class="clear">
+                        <span>Доставка: <span class="total-summ">35</span> грн</span>
+                    </p>
+                    <?php 
+                        $sum = Yii::$app->formatter->asDecimal($cart->getCost());
+                        $allSum = $sum + 35;
+                    ?>
                     <p>
                         <b>Итого к оплате: 
-                            <i class="red"><span class="summ-discount"><?= Yii::$app->formatter->asDecimal($cart->getCost()) ?></span> грн</i>
+                            <i class="red"><span class="summ-discount"><?= $allSum ?></span> грн</i>
                         </b>
                     </p>
-                    <p>Общий вес: <em class="total-weight">680 г.</em></p>
                 </div>
             </div>
             <div class="card-block clear">
@@ -185,49 +190,7 @@ $this->title = 'Корзина';
                                 </a>
                                 <span class="dd-pointer dd-pointer-down"></span>
                             </div>
-                            <!-- <ul class="dd-options dd-click-off-close" style="width: 540px;">
-                                <li>
-                                    <a class="dd-option dd-option-selected"> 
-                                        <input class="dd-option-value" type="hidden" value="Cash">
-                                        <img class="dd-option-image dd-image-right" src="/static_root/css/images/pay/cash.c8638fd47eed.png">
-                                        <label class="dd-option-text">Наличные</label>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dd-option">
-                                        <input class="dd-option-value" type="hidden" value="SbrfMerchant">
-                                        <img class="dd-option-image dd-image-right" src="/static_root/css/images/pay/visa.77a4e8594dfe.png">
-                                        <label class="dd-option-text">Кредитная карта</label>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dd-option">
-                                        <input class="dd-option-value" type="hidden" value="Qiwi40RIBRM">
-                                        <img class="dd-option-image dd-image-right" src="/static_root/css/images/pay/qiwi.d65da0211ba6.png">
-                                        <label class="dd-option-text">QIWI</label>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dd-option">
-                                        <input class="dd-option-value" type="hidden" value="YandexMerchantRIB2R">
-                                        <img class="dd-option-image dd-image-right" src="/static_root/css/images/pay/yandex.aa8fd7b48705.png">
-                                        <label class="dd-option-text">Яндекс деньги</label>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dd-option">
-                                        <input class="dd-option-value" type="hidden" value="WMROM">
-                                        <img class="dd-option-image dd-image-right" src="/static_root/css/images/pay/webmoney.e7820efa9c05.png">
-                                        <label class="dd-option-text">Web-money</label>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dd-option">
-                                        <input class="dd-option-value" type="hidden" value="OtherEMoney">
-                                        <label class="dd-option-text">Прочие электронные деньги</label>
-                                    </a>
-                                </li>
-                            </ul> -->
+                            
                         </div>
                     </div>
                     <div class="right">

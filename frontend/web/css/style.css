@@ -1051,7 +1051,7 @@ textarea:focus{border-color:#00b6f4;-moz-box-shadow:inset 0 0 5px 0 rgba(0,182,2
 .basket .counter{float:none;display:inline-block}
 .basket .table{width:100%;display:table}
 .basket-empty{color:#5e5e5e;font:35px "PT Sans",Arial,sans-serif;text-align:center;padding:270px 0 40px;position:relative}
-.basket-empty:before{content:'\e603';color:#e76b6b;font-family:icomoon;font-size:150px;position:absolute;left:50%;top:80px;margin-left:-75px}
+.basket-empty:before{content:'\e93a';color:#e76b6b;font-family:icomoon;font-size:150px;position:absolute;left:50%;top:80px;margin-left:-75px}
 .basket-note{margin:0 10px 20px;padding-top:10px;border-top:1px solid #d2d0cf;text-align:right;font-style:italic;color:#949291}
 .basket-note div{display:inline-block;background:url("images/complect.9126e2ec3c89.png") no-repeat;background-size:200px;padding-left:220px;line-height:3.4}
 .birthday{padding:2px 12px 24px;border-bottom:1px solid #e5e5e5}

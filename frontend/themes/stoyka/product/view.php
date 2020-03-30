@@ -51,6 +51,15 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
                     ]) ?>
                 <?php endif; ?>
             </div>
+            <div class="extra-images">
+                <ul>
+                <?php foreach($model->images as $image): ?>
+                    <li data-image_full="<?=$model->image->getImageFileUrl('image') ?>" class="">
+                        <?= Html::img($image->getThumbFileUrl('image', 'thumb'), ['alt' => 'img-thumbnail']) ?>
+                    </li>
+                <?php endforeach; ?> 
+                </ul>
+            </div>
             <div class="suggestions hidden-sm-down" style="display:none">
                 <h3>Многим понравилось еще</h3>
                 <ul class="list-product clear">
@@ -64,13 +73,6 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
                                     ]) ?>
                                 <?php endif; ?>
                                 <br>
-                                <div style="display: none">
-                                    <?php foreach($model->images as $image): ?>
-                                        <?= Html::img($image->getThumbFileUrl('image', 'thumb'), [
-                                            'class' => 'img-thumbnail',
-                                        ]) ?>
-                                    <?php endforeach; ?>
-                                </div>
                             </span>
                             <p class="product__title" data-title=""><?= $model->title ?></p>
                         </a>

@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\models\Settings;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
@@ -20,6 +21,7 @@ use yz\shoppingcart\ShoppingCart;
  * @property string|null $city
  * @property string|null $address
  * @property int|null $price
+ * @property int|null $delivery
  * @property string|null $description
  * @property string|null $created_at
  * @property string|null $updated_at
@@ -64,7 +66,8 @@ class Order extends ActiveRecord
                     }
                 }
             ],
-            [['user_id', 'price'], 'integer'],
+            [['delivery'], 'default', 'value' => Settings::calcDeliveryPrice()],
+            [['user_id', 'price', 'delivery'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'phone', 'city', 'address', 'description'], 'string', 'max' => 255],
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
@@ -92,6 +95,7 @@ class Order extends ActiveRecord
             'city' => Yii::t('app', 'City'),
             'address' => Yii::t('app', 'Address'),
             'price' => Yii::t('app', 'Price'),
+            'delivery' => Yii::t('app', 'Delivery price'),
             'description' => Yii::t('app', 'Description'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
@@ -138,7 +142,7 @@ class Order extends ActiveRecord
             $item = new OrderItem();
             $item->product_id = $product->getId();
             $item->title = $product->title;
-            $item->weight = 0;
+            $item->weight = $product->weight;
             $item->price = $product->price;
             $item->amount = $product->getQuantity();
             $this->link('orderItems', $item);

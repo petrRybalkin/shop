@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use backend\models\Settings;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -26,9 +27,9 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'settings'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['manager'],
                     ],
                 ],
             ],
@@ -44,11 +45,27 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
+    public function beforeAction($action)
+    {
+        if ($action->id === 'settings') {
+            Yii::$app->getModule('settings')->init();
+        }
+        return parent::beforeAction($action);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function actions()
     {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
+            ],
+            'settings' => [
+                'class' => 'pheme\settings\SettingsAction',
+                'modelClass' => Settings::class,
+                'viewName' => 'settings',
             ],
         ];
     }

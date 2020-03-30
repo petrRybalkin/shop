@@ -14,6 +14,9 @@ return [
             'class' => yii\rbac\DbManager::class,
             'defaultRoles' => ['guest', 'user'],
         ],
+        'settings' => [
+            'class' => 'pheme\settings\components\Settings',
+        ],
     ],
     'modules' => [
         'rbac' => [

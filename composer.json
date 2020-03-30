@@ -22,7 +22,8 @@
         "yii-dream-team/yii2-upload-behavior": "1.2.3",
         "yii2mod/yii2-rbac": "2.2.1",
         "dmstr/yii2-adminlte-asset": "^2.1",
-        "yiidoc/yii2-redactor": "2.0.1"
+        "yiidoc/yii2-redactor": "2.0.1",
+        "pheme/yii2-settings": "0.7"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

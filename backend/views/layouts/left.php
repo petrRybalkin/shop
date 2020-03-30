@@ -34,6 +34,7 @@
                     ['label' => 'Каталог', 'icon' => 'file-code-o', 'url' => ['/category']],
                     ['label' => 'Товары', 'icon' => 'file-code-o', 'url' => ['/product']],
                     ['label' => 'Статьи', 'icon' => 'file-code-o', 'url' => ['/page']],
+                    ['label' => 'Настойки', 'icon' => 'file-code-o', 'url' => ['/site/settings']],
 //                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
 //                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [

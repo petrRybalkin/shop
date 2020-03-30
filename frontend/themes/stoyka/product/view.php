@@ -1,16 +1,24 @@
 <?php
 
 use common\models\Product;
-use common\models\Category;
+use frontend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\web\View;
 
 /**
- * @var $this yii\web\View
+ * @var $this View
  * @var $model Product
  */
 
 $model->seo();
+
+$this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
+    'depends' => [
+        AppAsset::class
+    ],
+    'position' => View::POS_READY,
+]);
 
 ?>
 
@@ -100,7 +108,13 @@ $model->seo();
                         'id' => $model->id,
                         'amount' => 1,
                     ], [
-                        'class' => 'button add-product-to-basket-from-item'
+                        'class' => 'button add-product-to-basket-from-item cart-link',
+                        'data' => [
+                            'url' => Url::to([
+                                '/site/buy',
+                                'id' => $model->id,
+                            ]),
+                        ]
                     ]) ?>
                 </div>
                 <div class="delivery-profit-text" style="display:none;">Доставка бесплатно</div>

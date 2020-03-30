@@ -17,74 +17,6 @@ use yz\shoppingcart\ShoppingCart;
 $this->title = 'Корзина';
 ?>
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h1 class="panel-title">
-            Корзина
-        </h1>
-    </div>
-    <div class="panel-body">
-        <?php if ($cart->isEmpty): ?>
-            <div class="alert alert-danger" role="alert">
-                Ваша корзина пуста
-            </div>
-        <?php else: ?>
-            <ul>
-                <?php /** @var Product $product */
-                foreach ($cart->getPositions() as $product): ?>
-                    <ol>
-                        <a href="<?= Url::to($product->getUrl()) ?>">
-                            <h4><?= $product->title ?></h4>
-
-                            <?= Html::img($product->image ? $product->image->getThumbFileUrl('image',
-                                'thumb') : 'DEFAULT IMAGE', [
-                                'alt' => $product->title,
-                                'title' => $product->title,
-                            ]) ?>
-                        </a>
-
-                        <p>
-                            <?= Html::a('Добавить 1', ['/site/buy', 'id' => $product->id, 'amount' => 1]) ?>
-                            <?= Html::a('Убрать 1', ['/site/sub', 'id' => $product->id, 'amount' => 1]) ?>
-                            <?= Html::a('Удалить из корзины', ['/site/remove', 'id' => $product->id]) ?>
-                        </p>
-
-                        <p>Стоимость: <?= Yii::$app->formatter->asDecimal($product->price) ?> грн</p>
-                        <p>Кол-во: <?= Yii::$app->formatter->asDecimal($product->getQuantity()) ?> шт.</p>
-                        <p>Цена: <?= Yii::$app->formatter->asDecimal($product->getCost()) ?> грн.</p>
-                    </ol>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-    </div>
-    <div class="panel-footer" style="text-align: right">
-        <p>
-            Всего: <?= Yii::$app->formatter->asDecimal($cart->getCost()) ?> грн
-        </p>
-        <p>
-            Стоимость доставки: <?= Yii::$app->formatter->asDecimal(Settings::calcDeliveryPrice()) ?> грн
-            <?php if(Settings::calcDeliveryPrice()): ?>
-                (* При заказе свыше <?= Settings::calcDeliveryMin() ?> грн, доставка бесплатная)
-            <?php endif; ?>
-        </p>
-        <p style="font-weight: bold">
-            Итого: <?= Yii::$app->formatter->asDecimal($cart->getCost() + Settings::calcDeliveryPrice()) ?> грн
-        </p>
-    </div>
-</div>
-
-
-<?php $form = ActiveForm::begin(['id' => 'order-form']); ?>
-
-<?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
-<?= $form->field($model, 'phone')->textInput() ?>
-<?= $form->field($model, 'city')->textInput() ?>
-<?= $form->field($model, 'address')->textInput() ?>
-<?= $form->field($model, 'description')->textarea() ?>
-
-<div class="form-group">
-    <?= Html::submitButton('Оформить', ['class' => 'btn btn-success']) ?>
-</div>
 
 <!--- new card -->
 <div class="content">
@@ -93,7 +25,11 @@ $this->title = 'Корзина';
             <ul><li><a href="/">Главная</a></li><li>Корзина</li></ul>
         </div>
     </div>
+
     <div class="basket-wrapper" data-min-order-price="750">
+        <?php if ($cart->isEmpty): ?>
+            <p class="basket-empty">Корзина еще пуста!</p>
+        <?php else: ?>
         <p class="products__title">Мой обед</p>
         <div class="block basket clear">
             <div class="table archive-two" id="basketItems">
@@ -107,113 +43,105 @@ $this->title = 'Корзина';
                     <div class="hidden-xs-down"><p></p></div>
                 </div>
 
-                <?php if ($cart->isEmpty): ?>
-                    <p class="basket-empty">Корзина еще пуста!</p>
-                <?php else: ?>
-                    <!-- <ul> -->
-                        <?php /** @var Product $product */
-                        foreach ($cart->getPositions() as $product): ?>
-                            <!-- <ol> -->
-                                
-                                <div class="row row-order" data-product-type="regular" data-href="<?= Url::to($product->getUrl()) ?>" data-gift="false" data-title="<?= $product->title ?>" data-id="172" data-image="<?= $product->image->getThumbFileUrl('image','thumb') ?>" data-quantity="4" data-description="<?= $product->description ?>" data-price="195" data-price-half="null" data-weight="170" data-unique-code="701" data-u-id="0" data-is-active="true" data-disallow_discount="false" data-promocode="null" data-min_total="null">
-                                    <div class="basket-item-title">
-                                        <div class="img">
-                                            <a href="<?= Url::to($product->getUrl()) ?>">
-                                                <!-- <img src="/media_root/products/Hot-Rolls-Kadji-iomi_BIG.png" class="img-office" alt="Ролл Каджи Ёми"> -->
-                                                <?= Html::img($product->image ? $product->image->getThumbFileUrl('image',
-                                                    'thumb') : 'DEFAULT IMAGE', [
-                                                    'alt' => $product->title,
-                                                    'title' => $product->title,
-                                                    'class' => "img-office",
-                                                ]) ?>
-                                            </a>
-                                        </div>
-                                        <div class="txt">
-                                            <a href="<?= Url::to($product->getUrl()) ?>" class="name-archive-product"><?= $product->title ?></a>
-                                            <span class="product-inside"><?= $product->description ?></span>
-                                        </div>
-                                    </div>
-                                    <div class="basket-item-weight"><p><?= $product->weight ?> г.</p></div>
-                                    <div class="basket-item-price"><p><span><?= Yii::$app->formatter->asDecimal($product->price) ?></span> грн</p></div>
-                                    <div class="basket-item-quantity">
-                                        <p class="basket-item-quantity" style="display:none;"><span><?= Yii::$app->formatter->asDecimal($product->getQuantity()) ?></span></p>
-                                        <span class="counter">
-                                            <input type="text" name="counter" value="<?= Yii::$app->formatter->asDecimal($product->getQuantity()) ?>">
-                                            <!-- <i class="ui-spinner-button ui-spinner-up plus"><span></span></i>
-                                            <i class="ui-spinner-button ui-spinner-down minus"><span></span></i> -->
-                                            <?= Html::a('<i class="ui-spinner-button ui-spinner-up plus"><span></span></i>', ['/site/buy', 'id' => $product->id, 'amount' => 1]) ?>
-                                            <?= Html::a('<i class="ui-spinner-button ui-spinner-down minus"><span></span></i>', ['/site/sub', 'id' => $product->id, 'amount' => 1]) ?>
-                                        </span>
-                                    </div>
-                                    <div class="basket-item-fullprice">
-                                        <p><span class="price-full"><?= Yii::$app->formatter->asDecimal($product->getCost()) ?></span> грн.</p>
-                                    </div>
-                                    <div class="basket-item-remove">
-                                        <!-- <a href="javascript:void(0);" class="btn-archive"><span class="icon icon-delete icon-fz14"></span></a> -->
-                                        <?= Html::a('<span class="icon icon-delete icon-fz14">', ['/site/remove', 'id' => $product->id, 'class' => 'btn-archive']) ?>
-                                    </div>
-                                
-                                </div>
-                            <!-- </ol> -->
-                        <?php endforeach; ?>
-                    <!-- </ul> -->
-                <?php endif; ?>
+            <?php /** @var Product $product */
+                foreach ($cart->getPositions() as $product): ?>
+
+                <div class="row row-order" data-product-type="regular"  data-gift="false" data-title="<?= $product->title ?>" data-id="<?= $product->id ?>">
+                    <div class="basket-item-title">
+                        <div class="img">
+                            <a href="<?= Url::to($product->getUrl()) ?>">
+                                <?= Html::img($product->image ? $product->image->getThumbFileUrl('image',
+                                    'thumb') : 'DEFAULT IMAGE', [
+                                    'alt' => $product->title,
+                                    'title' => $product->title,
+                                    'class' => "img-office",
+                                        ]) ?>
+                            </a>
+                        </div>
+                        <div class="txt">
+                            <a href="<?= Url::to($product->getUrl()) ?>" class="name-archive-product"><?= $product->title ?></a>
+                            <span class="product-inside"><?= $product->description ?></span>
+                        </div>
+                    </div>
+                    <div class="basket-item-weight"><p><?= $product->weight ?> г.</p></div>
+                    <div class="basket-item-price"><p><span><?= Yii::$app->formatter->asDecimal($product->price) ?></span> грн</p></div>
+                    <div class="basket-item-quantity">
+                        <p class="basket-item-quantity" style="display:none;"><span><?= Yii::$app->formatter->asDecimal($product->getQuantity()) ?></span></p>
+                        <span class="counter">
+                            <input type="text" name="counter" value="<?= Yii::$app->formatter->asDecimal($product->getQuantity()) ?>">
+                            <?= Html::a('<i class="ui-spinner-button ui-spinner-up plus"><span></span></i>', ['/site/buy', 'id' => $product->id, 'amount' => 1]) ?>
+                            <?= Html::a('<i class="ui-spinner-button ui-spinner-down minus"><span></span></i>', ['/site/sub', 'id' => $product->id, 'amount' => 1]) ?>
+                        </span>
+                    </div>
+                    <div class="basket-item-fullprice">
+                        <p><span class="price-full"><?= Yii::$app->formatter->asDecimal($product->getCost()) ?></span> грн.</p>
+                    </div>
+                    <div class="basket-item-remove">
+                        <?= Html::a('<span class="icon icon-delete icon-fz14">', ['/site/remove', 'id' => $product->id, 'class' => 'btn-archive']) ?>
+                    </div> 
+                </div>
+                            
+            <?php endforeach; ?>
+        
 
             </div>
             <div class="basket-note">
                 <div>Соевый соус, имбирь, васаби и бамбуковые палочки прилагаются к каждому заказу БЕСПЛАТНО в достаточном количестве.</div>
             </div>
             
-            <div class="proposal-product hidden" data-href="/menu/onigiri/onigiri-siake/" data-id="350" data-image="/media_root/products/Onigiri-Syake_BIG.png" data-title="Онигири Сякэ" data-price="160" data-description="Онигири с приправленным соусом спайси лососем." data-weight="95" data-unique_code="503" data-quantity="1" data-is-active="true"></div>
+            <div class="proposal-product hidden" data-id="350" data-title="<?= $product->title ?>" data-price="160" data-weight="95" data-unique_code="503" data-quantity="1" data-is-active="true"></div>
             <div class="summ-block clear">
-                <div class="left">
-                    <!-- <p class="amount-additional">Вам осталось 420 р. до РОЛЛА в ПОДАРОК!</p> -->
-                    <a href="/#categories" class="button small">Вернуться в меню</a>
-                </div>
+                <div class="left"><a href="/#categories" class="button small">Вернуться в меню</a></div>
                 <div class="right non-auth">
                     <p class="clear">
                         <span>Сумма: <span class="total-summ"><?= Yii::$app->formatter->asDecimal($cart->getCost()) ?></span> грн</span>
                     </p>
                     <p class="clear">
-                        <span>Доставка: <span class="total-summ">35</span> грн</span>
+                        <span>Стоимость доставки: <span class="total-summ"><?= Yii::$app->formatter->asDecimal(Settings::calcDeliveryPrice()) ?></span> грн</span>
+                        <?php if(Settings::calcDeliveryPrice()): ?>
+                            <span>(* При заказе свыше <span class="total-summ"><?= Settings::calcDeliveryMin() ?></span> грн, доставка бесплатная)</span>
+                        <?php endif; ?>
                     </p>
-                    <?php 
-                        $sum = Yii::$app->formatter->asDecimal($cart->getCost());
-                        $allSum = $sum + 35;
-                    ?>
                     <p>
                         <b>Итого к оплате: 
-                            <i class="red"><span class="summ-discount"><?= $allSum ?></span> грн</i>
+                            <i class="red"><span class="summ-discount"><?= Yii::$app->formatter->asDecimal($cart->getCost() + Settings::calcDeliveryPrice()) ?></span> грн</i>
                         </b>
                     </p>
                 </div>
             </div>
             <div class="card-block clear">
-                <form class="clear" id="order-unauthorized">
+                <?php $form = ActiveForm::begin(['id' => 'order-form', 'class' => 'clear']); ?>
                     <div class="left">
-                        <p class="title">Выберите форму оплаты:</p>
-                        <label class="hidden-xs-down">Выберите из списка</label>
+                        <p class="title">Форма оплаты:</p>
+                        <label class="hidden-xs-down"><!-- Выберите из списка -->&nbsp;</label>
                         <div id="dropdown" class="dd-container" style="width: 540px;">
                             <div class="dd-select" style="width: 540px; background: rgb(238, 238, 238);">
                                 <input class="dd-selected-value" type="hidden" value="Cash">
                                 <a class="dd-selected">
-                                    <img class="dd-selected-image dd-image-right" src="/static_root/css/images/pay/cash.c8638fd47eed.png">
-                                    <label class="dd-selected-text" style="line-height: 42px;">Наличные</label>
+                                    <img class="dd-selected-image dd-image-right" src="<?= Url::to('@web/img/cash.png') ?>">
+                                    <span class="dd-selected-text" style="line-height: 42px;">Наличные</span>
                                 </a>
-                                <span class="dd-pointer dd-pointer-down"></span>
                             </div>
-                            
                         </div>
                     </div>
                     <div class="right">
                         <p class="title hidden-xs-down">Информация о пользователе:</p>
                         <div class="form-block left">
-                            <label for="name">Ваше имя <i>*</i></label>
-                            <input type="text" name="name" id="name">
+                            <?= $form->field($model, 'name')->textInput(['autofocus' => true])->label('Имя: ') ?>
+                        </div>
+                        <div class="form-block left">
+                            <?= $form->field($model, 'phone')->textInput()->label('Телефон: ') ?>
+                        </div>
+                        <br>
+                        <div class="form-block left">
+                            <?= $form->field($model, 'city')->textInput()->label('Город: ') ?>
                         </div>
                         <div class="form-block right">
-                            <label for="phone-unregister">Номер телефона <i>*</i></label>
-                            <input type="tel" name="phone" id="phone-unregister">
+                            <?= $form->field($model, 'address')->textInput()->label('Адресс: ') ?>
+                        </div>
+                        <br>
+                        <div class="form-block right">
+                            <?= $form->field($model, 'description')->textarea(['cols'=>'70','rows'=>'3'])->label('Комментарий: ') ?>
                         </div>
                         <div class="button-loader-order-unauth">
                             <div class="loader-inner ball-scale-ripple-multiple">
@@ -222,13 +150,13 @@ $this->title = 'Корзина';
                                 <div></div>
                             </div>
                         </div>
-                        <!-- <button class="button nonauthorized-continue-order">Оформить заказ</button> -->
-                        <?= Html::submitButton('Оформить заказ', ['class' => 'button nonauthorized-continue-order']) ?>
+                        <?= Html::submitButton('Оформить заказ', ['class' => 'button nonauthorized-continue-order']) ?>   
                     </div>
-                </form>
+                <?php ActiveForm::end(); ?>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 </div>
 
-<?php ActiveForm::end(); ?>
+

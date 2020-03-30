@@ -51,6 +51,7 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
                     ]) ?>
                 <?php endif; ?>
             </div>
+            <?php if(count($model->images) > 1){ ?>
             <div class="extra-images">
                 <ul>
                 <?php foreach($model->images as $image): ?>
@@ -62,6 +63,7 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
                 <?php endforeach; ?> 
                 </ul>
             </div>
+            <?php } ?>
             <div class="suggestions hidden-sm-down" style="display:none">
                 <h3>Многим понравилось еще</h3>
                 <ul class="list-product clear">

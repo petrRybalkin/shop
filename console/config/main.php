@@ -25,6 +25,7 @@ return [
             'migrationPath' => [
                 '@app/migrations',
                 '@yii/rbac/migrations',
+                '@vendor/pheme/yii2-settings/migrations',
             ]
         ],
     ],

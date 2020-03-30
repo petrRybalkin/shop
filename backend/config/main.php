@@ -58,6 +58,10 @@ return [
             'uploadUrl' => '@web/images',
             'imageAllowExtensions'=>['jpg','png','gif']
         ],
+        'settings' => [
+            'class' => 'pheme\settings\Module',
+            'sourceLanguage' => 'ru',
+        ],
     ],
     'params' => $params,
 ];

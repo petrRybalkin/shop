@@ -1,5 +1,6 @@
 <?php
 
+use backend\models\Settings;
 use common\models\Order;
 use common\models\Product;
 use yii\bootstrap\ActiveForm;
@@ -56,8 +57,19 @@ $this->title = 'Корзина';
             </ul>
         <?php endif; ?>
     </div>
-    <div class="panel-footer">
-        Итого: <?= Yii::$app->formatter->asDecimal($cart->getCost()) ?> грн
+    <div class="panel-footer" style="text-align: right">
+        <p>
+            Всего: <?= Yii::$app->formatter->asDecimal($cart->getCost()) ?> грн
+        </p>
+        <p>
+            Стоимость доставки: <?= Yii::$app->formatter->asDecimal(Settings::calcDeliveryPrice()) ?> грн
+            <?php if(Settings::calcDeliveryPrice()): ?>
+                (* При заказе свыше <?= Settings::calcDeliveryMin() ?> грн, доставка бесплатная)
+            <?php endif; ?>
+        </p>
+        <p style="font-weight: bold">
+            Итого: <?= Yii::$app->formatter->asDecimal($cart->getCost() + Settings::calcDeliveryPrice()) ?> грн
+        </p>
     </div>
 </div>
 

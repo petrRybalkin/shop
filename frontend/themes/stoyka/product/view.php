@@ -54,8 +54,10 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
             <div class="extra-images">
                 <ul>
                 <?php foreach($model->images as $image): ?>
-                    <li data-image_full="<?=$model->image->getImageFileUrl('image') ?>" class="">
-                        <?= Html::img($image->getThumbFileUrl('image', 'thumb'), ['alt' => 'img-thumbnail']) ?>
+                    <li data-image_full="" class="">
+                        <a class="example-image-link" href="<?= $image->getImageFileUrl('image') ?>" data-lightbox="example-set" data-title="">
+                            <?= Html::img($image->getThumbFileUrl('image', 'thumb'), ['alt' => '', "class"=>"food-image"]) ?>
+                        </a>
                     </li>
                 <?php endforeach; ?> 
                 </ul>

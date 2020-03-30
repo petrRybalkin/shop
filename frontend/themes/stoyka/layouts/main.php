@@ -322,6 +322,12 @@ AppAsset::register($this);
               },
             });
           </script>
+          <script type="text/javascript">
+              $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+          </script>
     </body>
 </html>
 <?php $this->endPage() ?>

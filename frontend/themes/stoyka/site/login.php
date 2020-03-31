@@ -25,9 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="block clear login-block">
             <?php $form = ActiveForm::begin(['id' => 'login-form', 'class' => 'clear']); ?>
 
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Email: ') ?>
+                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
-                <?= $form->field($model, 'password')->passwordInput()->label('Пароль:: ') ?>
+                <?= $form->field($model, 'password')->passwordInput() ?>
 
                 <div class="login-checkbox clear">
                     <?= $form->field($model, 'rememberMe')->checkbox()->label('Запомнить меня') ?>

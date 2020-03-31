@@ -123,16 +123,6 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
                         ]
                     ]) ?>
                 </div>
-                <div class="delivery-profit-text" style="display:none;">Доставка бесплатно</div>
-                <div class="nutrition" style="display:none;">
-                    <p>Пищевая ценность на 100 грамм:</p>
-                    <div>
-                        <p>Белки<span>6,617 г.</span></p>
-                        <p>Жиры<span>14,16 г.</span></p>
-                        <p>Углеводы<span>30,25 г.</span></p>
-                    </div>
-                    <span>Калорийность: 274,908 ккал</span>
-                </div>
             </div>
             <div class="social"></div>
         </div>

@@ -302,7 +302,7 @@ AppAsset::register($this);
               slidesPerView: 14,
               spaceBetween: 30,
               slidesPerGroup: 1,
-              loop: true,
+              loop: false,
               loopFillGroupWithBlank: true,
               pagination: {
                 el: '.swiper-pagination',

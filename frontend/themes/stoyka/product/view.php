@@ -51,6 +51,19 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
                     ]) ?>
                 <?php endif; ?>
             </div>
+            <?php if(count($model->images) > 1){ ?>
+            <div class="extra-images">
+                <ul>
+                <?php foreach($model->images as $image): ?>
+                    <li data-image_full="" class="">
+                        <a class="example-image-link" href="<?= $image->getImageFileUrl('image') ?>" data-lightbox="example-set" data-title="">
+                            <?= Html::img($image->getThumbFileUrl('image', 'thumb'), ['alt' => '', "class"=>"food-image"]) ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?> 
+                </ul>
+            </div>
+            <?php } ?>
             <div class="suggestions hidden-sm-down" style="display:none">
                 <h3>Многим понравилось еще</h3>
                 <ul class="list-product clear">
@@ -64,13 +77,6 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
                                     ]) ?>
                                 <?php endif; ?>
                                 <br>
-                                <div style="display: none">
-                                    <?php foreach($model->images as $image): ?>
-                                        <?= Html::img($image->getThumbFileUrl('image', 'thumb'), [
-                                            'class' => 'img-thumbnail',
-                                        ]) ?>
-                                    <?php endforeach; ?>
-                                </div>
                             </span>
                             <p class="product__title" data-title=""><?= $model->title ?></p>
                         </a>

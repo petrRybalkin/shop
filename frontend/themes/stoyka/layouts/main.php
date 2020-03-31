@@ -305,7 +305,7 @@ AppAsset::register($this);
 
     <?php $this->endBody() ?>
     <!-- Initialize Swiper -->
-          <script>
+        <script>
             var swiper = new Swiper('.swiper-container', {
               slidesPerView: 14,
               spaceBetween: 30,
@@ -321,7 +321,13 @@ AppAsset::register($this);
                 prevEl: '.swiper-button-prev',
               },
             });
-          </script>
+        </script>
+        <script type="text/javascript">
+            $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });
+        </script>
     </body>
 </html>
 <?php $this->endPage() ?>

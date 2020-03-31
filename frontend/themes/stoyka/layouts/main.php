@@ -93,7 +93,9 @@ AppAsset::register($this);
                                             <?= Html::a('Войти', ['/site/login']) ?>
                                             <?= Html::a('Регистрация', ['/site/signup']) ?>
                                         <?php else: ?>
-                                            <?= Html::a('Выйти', ['/site/logout']) ?>
+                                            <?= Html::a('Выйти', ['/site/logout'], [
+                                                'data-method' => 'POST'
+                                            ]) ?>
                                         <?php endif; ?>
                                     </li>
                                     <li><?= CartWidget::widget(); ?></li>
@@ -136,12 +138,6 @@ AppAsset::register($this);
                                     <li class="phone-link"><a href="tel:+380666555773">+38 (066) 655-57-73</a></li>
                                     <li class="gift-link"><a href="<?= Url::to(['/page/akcii']) ?>">Акции</a></li>
                                     <li class="delivery-link"><a href="<?= Url::to(['/delivery/dostavka-i-oplata']) ?>">О доставке</a></li>
-                                    <?php //foreach ($categories as $category): ?>
-                                    <li>
-                                        <a href="<?//= Url::to($category->getUrl()) ?>" class="js-scroll-to-cat-mob" data-url="<?//= Url::to($category->getUrl()) ?>" data-hash="#cat-30" style="background-image: url('<?//= $category->getThumbFileUrl('image', 'thumb') ?>')"><?//= $category->title ?></a>
-                                    </li>
-                                    <?php //endforeach; ?>
-                                    <!-- <li><a href="/menu/top-10/" class="js-scroll-to-cat-mob" data-url="/menu/top-10/" data-hash="#cat-30" style="background-image: url('/media_root/categories/mini/Top-20-menu-icon.png')">ТОП-10</a></li> -->
                                 </ul>
                                 <hr>
                                 <ul class="navbar-othermenu guest">
@@ -150,10 +146,6 @@ AppAsset::register($this);
                                     <li style="display:none"><a href="#">Интересное</a></li>
                                     <li style="display:none"><a href="#">Отзывы</a></li>
                                     <li style="display:none"><a href="#">О нас</a></li>
-                                    <li>&nbsp;</li>
-                                    <li>&nbsp;</li>
-                                    <li>&nbsp;</li>
-                                    <li>&nbsp;</li>
                                 </ul>
                             </div>
                         </div>

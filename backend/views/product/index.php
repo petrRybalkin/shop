@@ -32,6 +32,7 @@ $this->title = 'Товары';
                 }
             ],
             'title',
+            'weight',
             'description:html',
             'price',
             //'old_price',

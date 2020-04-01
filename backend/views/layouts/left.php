@@ -31,6 +31,7 @@
                 'options' => ['class' => 'sidebar-menu tree', 'data-widget'=> 'tree'],
                 'items' => [
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
+                    ['label' => 'Заказы', 'icon' => 'file-code-o', 'url' => ['/order']],
                     ['label' => 'Каталог', 'icon' => 'file-code-o', 'url' => ['/category']],
                     ['label' => 'Товары', 'icon' => 'file-code-o', 'url' => ['/product']],
                     ['label' => 'Статьи', 'icon' => 'file-code-o', 'url' => ['/page']],

@@ -19,6 +19,7 @@ use yii\db\ActiveRecord;
  * @property string|null $description
  *
  * @property Order $order
+ * @property Product $product
  */
 class OrderItem extends ActiveRecord
 {
@@ -51,10 +52,10 @@ class OrderItem extends ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'order_id' => Yii::t('app', 'Order ID'),
             'product_id' => Yii::t('app', 'Product ID'),
-            'title' => Yii::t('app', 'Title'),
-            'weight' => Yii::t('app', 'Weight'),
-            'price' => Yii::t('app', 'Price'),
-            'amount' => Yii::t('app', 'Amount'),
+            'title' => Yii::t('app', 'Имя'),
+            'weight' => Yii::t('app', 'Вес'),
+            'price' => Yii::t('app', 'Стоимость'),
+            'amount' => Yii::t('app', 'Кол-во'),
             'description' => Yii::t('app', 'Description'),
         ];
     }
@@ -67,5 +68,15 @@ class OrderItem extends ActiveRecord
     public function getOrder()
     {
         return $this->hasOne(Order::class, ['id' => 'order_id']);
+    }
+
+    /**
+     * Gets query for [[Product]].
+     *
+     * @return ActiveQuery
+     */
+    public function getProduct()
+    {
+        return $this->hasOne(Product::class, ['id' => 'product_id']);
     }
 }

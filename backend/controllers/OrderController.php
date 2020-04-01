@@ -2,10 +2,9 @@
 
 namespace backend\controllers;
 
-use common\models\ProductImage;
 use Yii;
-use common\models\Product;
-use common\models\ProductSearch;
+use common\models\Order;
+use common\models\OrderSearch;
 use yii\db\StaleObjectException;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -13,9 +12,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProductController implements the CRUD actions for Product model.
+ * OrderController implements the CRUD actions for Order model.
  */
-class ProductController extends Controller
+class OrderController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -42,12 +41,12 @@ class ProductController extends Controller
     }
 
     /**
-     * Lists all Product models.
+     * Lists all Order models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProductSearch();
+        $searchModel = new OrderSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -57,45 +56,20 @@ class ProductController extends Controller
     }
 
     /**
-     * Creates a new Product model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Product();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['/product-image/index', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing Product model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * Displays a single Order model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionView($id)
     {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['/product-image/index', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
+        return $this->render('view', [
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Deletes an existing Product model.
+     * Deletes an existing Order model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -111,18 +85,31 @@ class ProductController extends Controller
     }
 
     /**
-     * Finds the Product model based on its primary key value.
+     * Finds the Order model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Product the loaded model
+     * @return Order the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Product::findOne($id)) !== null) {
+        if (($model = Order::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionStatus($id, $status)
+    {
+        $model = $this->findModel($id);
+        $model->status = $status;
+        if ($model->save()) {
+            Yii::$app->session->setFlash('success', 'Статус обновлен');
+        } else {
+            Yii::$app->session->setFlash('danger', $model->getFirstError('status'));
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
     }
 }

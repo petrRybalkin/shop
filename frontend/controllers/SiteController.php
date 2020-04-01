@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use backend\models\Settings;
 use common\models\Order;
 use common\models\Page;
 use common\models\Delivery;
@@ -341,8 +342,9 @@ class SiteController extends Controller
         }
         $model->price = $cart->getCost();
 
-        if ($model->load(Yii::$app->request->post())
-            && $model->save()) {
+        $load = $model->load(Yii::$app->request->post());
+        $model->delivery = Settings::calcDeliveryPrice();
+        if ($load && $model->save()) {
             $cart->removeAll();
             return $this->redirect(['success']);
         }

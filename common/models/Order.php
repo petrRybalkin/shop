@@ -9,6 +9,7 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yz\shoppingcart\ShoppingCart;
 
 /**
@@ -21,6 +22,7 @@ use yz\shoppingcart\ShoppingCart;
  * @property string|null $city
  * @property string|null $address
  * @property int|null $price
+ * @property int $status
  * @property int|null $delivery
  * @property string|null $description
  * @property string|null $created_at
@@ -31,6 +33,12 @@ use yz\shoppingcart\ShoppingCart;
  */
 class Order extends ActiveRecord
 {
+    const STATUS_NEW = 0;
+    const STATUS_ACCEPT = 1;
+    const STATUS_DELIVER = 2;
+    const STATUS_DONE = 3;
+    const STATUS_CANCEL = -1;
+
     /**
      * {@inheritdoc}
      */
@@ -66,8 +74,10 @@ class Order extends ActiveRecord
                     }
                 }
             ],
-            [['delivery'], 'default', 'value' => Settings::calcDeliveryPrice()],
-            [['user_id', 'price', 'delivery'], 'integer'],
+//            [['delivery'], 'default', 'value' => Settings::calcDeliveryPrice()],
+            [['status'], 'default', 'value' => self::STATUS_NEW],
+            [['status'], 'in', 'range' => array_keys(self::statusList())],
+            [['user_id', 'price', 'delivery', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'phone', 'city', 'address', 'description'], 'string', 'max' => 255],
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
@@ -89,17 +99,78 @@ class Order extends ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'status' => Yii::t('app', 'Статус'),
             'user_id' => Yii::t('app', 'User ID'),
-            'name' => Yii::t('app', 'Name'),
-            'phone' => Yii::t('app', 'Phone'),
-            'city' => Yii::t('app', 'City'),
-            'address' => Yii::t('app', 'Address'),
-            'price' => Yii::t('app', 'Price'),
-            'delivery' => Yii::t('app', 'Delivery price'),
-            'description' => Yii::t('app', 'Description'),
-            'created_at' => Yii::t('app', 'Created At'),
+            'name' => Yii::t('app', 'Заказчик'),
+            'phone' => Yii::t('app', 'Телефон'),
+            'city' => Yii::t('app', 'Город'),
+            'address' => Yii::t('app', 'Адрес'),
+            'price' => Yii::t('app', 'Стоимость'),
+            'delivery' => Yii::t('app', 'Стоимость доставки'),
+            'description' => Yii::t('app', 'Описание'),
+            'created_at' => Yii::t('app', 'Дата создания'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    public static function statusList()
+    {
+        return [
+            self::STATUS_NEW => 'Оформлен',
+            self::STATUS_ACCEPT => 'Принят в работу',
+            self::STATUS_DELIVER => 'Отправлен',
+            self::STATUS_DONE => 'Выполнен',
+            self::STATUS_CANCEL => 'Отменен',
+        ];
+    }
+
+    public static function statusColorList()
+    {
+        return [
+            self::STATUS_NEW => 'primary',
+            self::STATUS_ACCEPT => 'info',
+            self::STATUS_DELIVER => 'warning',
+            self::STATUS_DONE => 'success',
+            self::STATUS_CANCEL => 'danger',
+        ];
+    }
+
+    /**
+     * @param string $default
+     * @param null $status
+     * @return string
+     */
+    public function getStatusLabel($default = '-', $status = null)
+    {
+        return ArrayHelper::getValue(self::statusList(), $status ?: $this->status, $default);
+    }
+
+    /**
+     * @param string $default
+     * @param null $status
+     * @return string
+     */
+    public function getStatusColor($default = 'default', $status = null)
+    {
+        return ArrayHelper::getValue(self::statusColorList(), $status ?: $this->status, $default);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusTag()
+    {
+        return Html::tag('span', $this->getStatusLabel(), [
+            'class' => 'label label-' . $this->getStatusColor(),
+        ]);
+    }
+
+    public function getNextStatus()
+    {
+        if (in_array((int)$this->status, [self::STATUS_DONE, self::STATUS_CANCEL], true)) {
+            return null;
+        }
+        return $this->status + 1;
     }
 
     /**
@@ -124,29 +195,37 @@ class Order extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        if (!Yii::$app->user->isGuest) {
-            /** @var Profile $profile */
-            $profile = ArrayHelper::getValue(Yii::$app->user, 'identity.profile') ?: new Profile();
-            $profile->name = $this->name;
-            $profile->phone = $this->phone;
-            $profile->city = $this->city;
-            $profile->address = $this->address;
-            $profile->save();
+        if ($this->isNewRecord) {
+            if (!Yii::$app->user->isGuest) {
+                /** @var Profile $profile */
+                $profile = ArrayHelper::getValue(Yii::$app->user, 'identity.profile') ?: new Profile();
+                $profile->name = $this->name;
+                $profile->phone = $this->phone;
+                $profile->city = $this->city;
+                $profile->address = $this->address;
+                $profile->save();
+            }
+
+            /** @var ShoppingCart $cart */
+            $cart = Yii::$app->cart;
+
+            /** @var Product $product */
+            foreach ($cart->getPositions() as $product) {
+                $item = new OrderItem();
+                $item->product_id = $product->getId();
+                $item->title = $product->title;
+                $item->weight = $product->weight;
+                $item->price = $product->price;
+                $item->amount = $product->getQuantity();
+                $this->link('orderItems', $item);
+            }
         }
 
-        /** @var ShoppingCart $cart */
-        $cart = Yii::$app->cart;
-
-        /** @var Product $product */
-        foreach ($cart->getPositions() as $product) {
-            $item = new OrderItem();
-            $item->product_id = $product->getId();
-            $item->title = $product->title;
-            $item->weight = $product->weight;
-            $item->price = $product->price;
-            $item->amount = $product->getQuantity();
-            $this->link('orderItems', $item);
-        }
         return parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function getTotalPrice()
+    {
+        return $this->price + $this->delivery;
     }
 }

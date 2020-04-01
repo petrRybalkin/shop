@@ -7,25 +7,31 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Request password reset';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Запрос на сброс пароля';
 ?>
-<div class="site-request-password-reset">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out your email. A link to reset password will be sent there.</p>
+<section>
+    <div class="content">
+        <div class="clear">
+            <div class="breadcrumbs left">
+                <ul>
+                    <li><a href="/">Главная</a></li><li><?= Html::encode($this->title) ?></li>
+                </ul>
+            </div>
+        </div>
+        <p class="products__title"><?= Html::encode($this->title) ?></p>
+        <p>Пожалуйста введите Ваш Email. На него бует выслана ссылка для смены пароля:</p>
+        <div class="block clear login-block">
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form']); ?>
+             <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form', 'class' => 'clear']); ?>
 
                 <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
+                    <?= Html::submitButton('Отправить', ['class' => 'button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>
         </div>
     </div>
-</div>
+</section>

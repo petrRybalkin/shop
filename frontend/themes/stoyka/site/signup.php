@@ -7,29 +7,39 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Signup';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Регистрация';
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-signup">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to signup:</p>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'email') ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+<section>
+    <div class="content">
+        <div class="clear">
+            <div class="breadcrumbs left">
+                <ul><li><a href="/">Главная</a></li><li><?= Html::encode($this->title) ?></li></ul>
+            </div>
+        </div>
+        <p class="products__title"><?= Html::encode($this->title) ?></p>
+        <p class="products__description hidden-xs-down">Если вы планируете совершать покупки на нашем сайте, предлагаем вам зарегистрироваться. Это в дальнейшем упростит процесс оформления заказа. Звездочкой отмечены поля обязательные для заполнения.</p>
+        <div class="block clear login-block register">
+            <?php $form = ActiveForm::begin(['id' => 'form-signup', 'class' => 'sign-up']); ?>
+                <div class="clear">
+                    <div class="left">
+                    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+                    </div>
+                    <div class="right">
+                    <?= $form->field($model, 'email') ?>
+                    </div>
+                    <div class="left">
+                    <?= $form->field($model, 'password')->passwordInput() ?>
+                    </div>
                 </div>
+                
+                <?= Html::submitButton('Регистрация', ['class' => 'button', 'name' => 'signup-button']) ?>
+                <?= Html::a('У меня уже есть аккаунт', ['site/login']) ?>.
+                <p style="margin-top: 20px;font-size: 16px;font-weight: 700;">Нажмимая кнопку "Регистрация", вы тем самым соглашаетесь с правилами обслуживания клиентов компании "Суши Профи", порядком оказания услуг и информирования клиентов о заказах, новинках и проводимых акциях.</p>
 
             <?php ActiveForm::end(); ?>
         </div>
     </div>
-</div>
+</section>

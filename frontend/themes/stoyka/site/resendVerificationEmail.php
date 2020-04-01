@@ -6,25 +6,31 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Resend verification email';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Запрос на верификацию Email';
 ?>
-<div class="site-resend-verification-email">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out your email. A verification email will be sent there.</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'resend-verification-email-form']); ?>
-
-            <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
-
-            <div class="form-group">
-                <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
+<section>
+    <div class="content">
+        <div class="clear">
+            <div class="breadcrumbs left">
+                <ul>
+                    <li><a href="/">Главная</a></li><li><?= Html::encode($this->title) ?></li>
+                </ul>
             </div>
+        </div>
+        <p class="products__title"><?= Html::encode($this->title) ?></p>
+        <p>Пожалуйста, введите вашу электронную почту. Письмо с подтверждением будет отправлено туда.</p>
+        <div class="block clear login-block">
+
+            <?php $form = ActiveForm::begin(['id' => 'resend-verification-email-form', 'class' => 'clear']); ?>
+
+                <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
+
+                <div class="form-group">
+                    <?= Html::submitButton('Отправить', ['class' => 'button']) ?>
+                </div>
 
             <?php ActiveForm::end(); ?>
         </div>
     </div>
-</div>
+</section>

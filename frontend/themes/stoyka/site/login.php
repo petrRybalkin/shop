@@ -8,19 +8,18 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $this->title = 'Вход на сайт';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 
 <section>
     <div class="content">
-        <!-- <div class="clear">
+        <div class="clear">
             <div class="breadcrumbs left">
                 <ul>
-                    <li><a href="/">Главная</a></li><li><?//= Html::encode($this->title) ?></li>
+                    <li><a href="/">Главная</a></li><li><?= Html::encode($this->title) ?></li>
                 </ul>
             </div>
-        </div> -->
+        </div>
         <p class="products__title"><?= Html::encode($this->title) ?></p>
         <div class="block clear login-block">
             <?php $form = ActiveForm::begin(['id' => 'login-form', 'class' => 'clear']); ?>

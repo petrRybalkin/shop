@@ -80,6 +80,7 @@ class Order extends ActiveRecord
             [['user_id', 'price', 'delivery', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'phone', 'city', 'address', 'description'], 'string', 'max' => 255],
+            [['name', 'phone', 'address'], 'required'],
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [
                 ['user_id'],

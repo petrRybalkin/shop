@@ -164,13 +164,17 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Спасибо за регистрацию. Пожалуйста, проверьте ваш почтовый ящик для подтверждения по электронной почте.');
-            return $this->goHome();
+            return $this->redirect(['success-signup']);
         }
 
         return $this->render('signup', [
             'model' => $model,
         ]);
+    }
+
+     public function actionSuccessSignup()
+    {
+        return $this->render('success-signup');
     }
 
     /**

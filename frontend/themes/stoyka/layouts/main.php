@@ -116,7 +116,7 @@ AppAsset::register($this);
             <footer>
                 <div class="footer-top">
                     <div class="content">
-                        <p style="text-align: center;">Бар "Стойка" - профессиональный подход к японской кухне. Мы знаем толк в том что делаем.</p>
+                        <p style="text-align: center;">Кафе "Стойка" - профессиональный подход к японской кухне. Мы знаем толк в том что делаем.</p>
                         <p style="text-align: center;">И готовы поделиться этим с Вами. Доставка суши и хорошего настроения к Вам.</p>
                     </div>
                 </div>
@@ -124,7 +124,7 @@ AppAsset::register($this);
                     <div class="content">
                         <div class="list-menu">
                             <p>
-                                <a href="/">Бар "Стойка"</a> - доставка <a href="#">суши</a>, <a href="#">роллов</a>, <a href="#">бокс-суши</a>, <a href="#">онигири</a>, <a href="#">сашими</a>, <a href="#">ассорти-сетов суши и роллов</a>, <a href="#">салатов</a>, <a href="#">супов</a>, <a href="#">лапши вок</a>, <a href="#">пиццы</a>, <a href="#">горячих блюд</a> и <a href="#">десертов</a>.</p>
+                                <a href="/">Кафе "Стойка"</a> - доставка <a href="#">суши</a>, <a href="#">роллов</a>, <a href="#">бокс-суши</a>, <a href="#">онигири</a>, <a href="#">сашими</a>, <a href="#">ассорти-сетов суши и роллов</a>, <a href="#">салатов</a>, <a href="#">супов</a>, <a href="#">лапши вок</a>, <a href="#">пиццы</a>, <a href="#">горячих блюд</a> и <a href="#">десертов</a>.</p>
                             </div>
                         </div>
                     </div>
@@ -133,7 +133,7 @@ AppAsset::register($this);
                             <div class="logo logo-footer"><div>
                                 <a href="/"><?= Html::img('@web/img/logo-header3.png', ['alt'=>'logo']); ?></a>
                                 <span>
-                                    <span class="copy">©</span><span class="text">Бар «Стойка» — <br> Доставка суши и <br> хорошего настроения. <?= date('Y') ?></span>
+                                    <span class="copy">©</span><span class="text">Кафе «Стойка» — <br> Доставка суши и <br> хорошего настроения. <?= date('Y') ?></span>
                                 </span>
                             </div>
                         </div>

@@ -33,7 +33,7 @@ class ProductImageController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -131,9 +131,11 @@ class ProductImageController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $pId = $model->product_id;
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'id' => $pId]);
     }
 
     /**

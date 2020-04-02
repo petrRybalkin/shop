@@ -3,7 +3,7 @@
 namespace frontend\widgets;
 
 use common\models\Page;
-use yii\web\View;
+use yii\web\NotFoundHttpException;
 use yii\base\Widget;
 
 class MainPageDiscriptionWidget extends Widget

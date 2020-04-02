@@ -24,6 +24,8 @@ class Settings extends Model
 
     public function beforeValidate()
     {
+        $this->siteName = (string) $this->siteName;
+        $this->siteDescription = (string) $this->siteDescription;
         $this->deliveryPrice = (int) $this->deliveryPrice;
         $this->deliveryMin = (int) $this->deliveryMin;
         return parent::beforeValidate();

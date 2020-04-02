@@ -56,7 +56,7 @@ class ProductImage extends ActiveRecord
             [['product_id'], 'integer'],
             [['main'], 'integer'],
 //            [['image'], 'string', 'max' => 255],
-            ['image', 'file', 'extensions' => 'jpeg, gif, png'],
+            ['image', 'file', 'extensions' => 'jpeg, jpg, gif, png'],
             [
                 ['product_id'],
                 'exist',

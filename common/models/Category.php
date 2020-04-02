@@ -65,7 +65,7 @@ class Category extends ActiveRecord
             [['parent_id', 'show_in_main'], 'integer'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
-            [['image'], 'file', 'extensions' => 'jpeg, gif, png'],
+            [['image'], 'file', 'extensions' => 'jpg, jpeg, gif, png'],
             [['parent_id'], 'default', 'value' => 0],
             [['show_in_main'], 'default', 'value' => false],
         ];

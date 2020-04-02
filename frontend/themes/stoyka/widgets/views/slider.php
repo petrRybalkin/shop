@@ -3,12 +3,14 @@
 use common\models\Slider;
 use yii\helpers\Html;
 use yii\web\View;
+use frontend\assets\SliderAsset;
+
 
 /**
  * @var $this View
  * @var $sliders Slider[]
  */
-
+SliderAsset::register($this);
 ?>
 <?php if (!empty($sliders)){ ?>
 <div class="slider slider1">

@@ -9,11 +9,11 @@ use yii\helpers\Url;
 use yii\web\View;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
+use common\models\Slider;
 use common\widgets\Alert;
 use frontend\widgets\CategorySliderWidget;
 use frontend\widgets\CategoryMobileWidget;
 use frontend\widgets\CartWidget;
-use common\models\Slider;
 use frontend\widgets\SliderWidget;
 
 AppAsset::register($this);
@@ -91,10 +91,10 @@ AppAsset::register($this);
                             </div>
                         </div>
                     </section>
-                    <?php if(Yii::$app->controller->route == 'site/index'): ?>
+                    <?php if (Yii::$app->request->url == Yii::$app->homeUrl): ?>
                     <section class="actions hidden-sm-down" style="margin-top:-25px;">
                         <?= SliderWidget::widget([
-                                    'place' => Slider::PLACE_MAIN_TOP,
+                            'place' => Slider::PLACE_MAIN_TOP,
                         ]) ?>
                     </section> 
                     <?php endif; ?>

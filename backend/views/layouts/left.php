@@ -35,35 +35,34 @@
                     ['label' => 'Каталог', 'icon' => 'file-code-o', 'url' => ['/category']],
                     ['label' => 'Товары', 'icon' => 'file-code-o', 'url' => ['/product']],
                     ['label' => 'Статьи', 'icon' => 'file-code-o', 'url' => ['/page']],
+                    ['label' => 'Slider', 'icon' => 'file-code-o', 'url' => ['/slider']],
                     ['label' => 'Настойки', 'icon' => 'file-code-o', 'url' => ['/site/settings']],
-//                    ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
-//                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
-                    [
-                        'label' => 'Some tools',
-                        'icon' => 'share',
-                        'url' => '#',
-                        'items' => [
-                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
-                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
-                            [
-                                'label' => 'Level One',
-                                'icon' => 'circle-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
-                                    [
-                                        'label' => 'Level Two',
-                                        'icon' => 'circle-o',
-                                        'url' => '#',
-                                        'items' => [
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
-                                        ],
-                                    ],
-                                ],
-                            ],
-                        ],
-                    ],
+//                    [
+//                        'label' => 'Some tools',
+//                        'icon' => 'share',
+//                        'url' => '#',
+//                        'items' => [
+//                            ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii'],],
+//                            ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug'],],
+//                            [
+//                                'label' => 'Level One',
+//                                'icon' => 'circle-o',
+//                                'url' => '#',
+//                                'items' => [
+//                                    ['label' => 'Level Two', 'icon' => 'circle-o', 'url' => '#',],
+//                                    [
+//                                        'label' => 'Level Two',
+//                                        'icon' => 'circle-o',
+//                                        'url' => '#',
+//                                        'items' => [
+//                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
+//                                            ['label' => 'Level Three', 'icon' => 'circle-o', 'url' => '#',],
+//                                        ],
+//                                    ],
+//                                ],
+//                            ],
+//                        ],
+//                    ],
                 ],
             ]
         ) ?>

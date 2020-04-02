@@ -125,31 +125,6 @@
 	url('../fonts/PTSans-Italic.ttf')  format('truetype'),
 	url('../fonts/PTSans-Italic.svg#PTSans-Italic') format('svg');
 	font-weight:normal;font-style:italic}
-/* header */
-
-/*header {
-    position: relative;
-    z-index: 997}
-
-/** slider-category */
-/*.slider-category li{display:inline-block}
-.slider-category li a{}
-.slider-category li a img{}
-.slider-category li a p{text-align:center}*/
-
-
-/* footer */
-
-
-/* media */
-/*@media (max-width: 1239px){
-	header {
-	    height: 67px;
-	    padding: 0!important;
-	}
-}*/
-
-
 #smartbanner{position:absolute;left:0;top:-82px;border-bottom:1px solid #e8e8e8;width:100%;height:78px;font-family:'Helvetica Neue',sans-serif;background:-webkit-linear-gradient(top,#f4f4f4 0,#cdcdcd 100%);
 background-image:-ms-linear-gradient(top,#F4F4F4 0,#CDCDCD 100%);background-image:-moz-linear-gradient(top,#F4F4F4 0,#CDCDCD 100%);box-shadow:0 1px 2px rgba(0,0,0,0.5);z-index:9998;
 -webkit-font-smoothing:antialiased;overflow:hidden;-webkit-text-size-adjust:none}

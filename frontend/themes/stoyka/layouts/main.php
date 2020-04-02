@@ -13,6 +13,8 @@ use common\widgets\Alert;
 use frontend\widgets\CategorySliderWidget;
 use frontend\widgets\CategoryMobileWidget;
 use frontend\widgets\CartWidget;
+use common\models\Slider;
+use frontend\widgets\SliderWidget;
 
 AppAsset::register($this);
 ?>
@@ -83,13 +85,19 @@ AppAsset::register($this);
                     <section class="banner" style="margin-top: 70px;display:none;">
                         <div class="content">
                             <div class="action-resp" style="display:none;">
-                                <!-- content for slider in future -->
+                                <?= SliderWidget::widget([
+                                    'place' => Slider::PLACE_MAIN_TOP,
+                                ]) ?>
                             </div>
                         </div>
                     </section>
-                    <section class="actions hidden-sm-down" style="margin-top: 70px;display:none;">
-                        <!-- content for slider in future -->
+                    <?php if(Yii::$app->controller->route == 'site/index'): ?>
+                    <section class="actions hidden-sm-down" style="margin-top:-25px;">
+                        <?= SliderWidget::widget([
+                                    'place' => Slider::PLACE_MAIN_TOP,
+                        ]) ?>
                     </section> 
+                    <?php endif; ?>
                 </div>
                 
 
@@ -235,6 +243,8 @@ AppAsset::register($this);
                     $('.navbar').css({'transition-duration': '0.3s', 'transform': 'translate(-280px, 0px)'});
                 });
             });
+
+
             
         </script> 
     <!-- Initialize Swiper -->

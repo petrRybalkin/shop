@@ -1,10 +1,8 @@
 <?php
 
 use backend\models\Settings;
-use common\models\Slider;
 use frontend\widgets\MainPageProductsWidget;
 use frontend\widgets\MainPageDiscriptionWidget;
-use frontend\widgets\SliderWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -12,10 +10,6 @@ use yii\helpers\Url;
 
 Settings::seo();
 ?>
-
-<?= SliderWidget::widget([
-    'place' => Slider::PLACE_MAIN_TOP,
-]) ?>
 
 <?= MainPageProductsWidget::widget() ?>
 

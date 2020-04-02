@@ -19,6 +19,8 @@ class AppAsset extends AssetBundle
     public $js = [
         'js/swiper.min.js',
         'js/lightbox.js',
+        'js/mobilyslider.js',
+        'js/init.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

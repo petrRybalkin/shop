@@ -10,12 +10,19 @@ use yii\web\View;
  */
 
 ?>
-
-<h4>Slider (убери меня)</h4>
-
-<?php foreach($sliders as $slider): ?>
-    <?= Html::img($slider->getThumbFileUrl('image', 'thumb'), [
-        'alt' => 'Акция',
-        'class' => 'img-thumbnail',
-    ]) ?>
-<?php endforeach; ?>
+<?php if (!empty($sliders)){ ?>
+<div class="slider slider1">
+	<div class="sliderContent">
+		<?php foreach($sliders as $slider): ?>
+		    <div class="item">
+		      	<?= Html::img($slider->getThumbFileUrl('image', 'thumb'), [
+		        	'alt' => 'Акция',
+		        	'class' => 'img-slider',
+		        	'style' => 'width:100%',
+		    	]) ?>
+			</div>
+		<?php endforeach; ?>
+			
+	</div>
+</div>
+<?php } ?>

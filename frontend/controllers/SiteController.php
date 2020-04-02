@@ -349,6 +349,7 @@ class SiteController extends Controller
         $load = $model->load(Yii::$app->request->post());
         $model->delivery = Settings::calcDeliveryPrice();
         if ($load && $model->save()) {
+            $model->saveItems();
             $cart->removeAll();
             return $this->redirect(['success']);
         }

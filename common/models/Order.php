@@ -194,35 +194,31 @@ class Order extends ActiveRecord
         return $this->hasMany(OrderItem::class, ['order_id' => 'id']);
     }
 
-    public function afterSave($insert, $changedAttributes)
+    public function saveItems()
     {
-        if ($this->isNewRecord) {
-            if (!Yii::$app->user->isGuest) {
-                /** @var Profile $profile */
-                $profile = ArrayHelper::getValue(Yii::$app->user, 'identity.profile') ?: new Profile();
-                $profile->name = $this->name;
-                $profile->phone = $this->phone;
-                $profile->city = $this->city;
-                $profile->address = $this->address;
-                $profile->save();
-            }
-
-            /** @var ShoppingCart $cart */
-            $cart = Yii::$app->cart;
-
-            /** @var Product $product */
-            foreach ($cart->getPositions() as $product) {
-                $item = new OrderItem();
-                $item->product_id = $product->getId();
-                $item->title = $product->title;
-                $item->weight = $product->weight;
-                $item->price = $product->price;
-                $item->amount = $product->getQuantity();
-                $this->link('orderItems', $item);
-            }
+        if (!Yii::$app->user->isGuest) {
+            /** @var Profile $profile */
+            $profile = ArrayHelper::getValue(Yii::$app->user, 'identity.profile') ?: new Profile();
+            $profile->name = $this->name;
+            $profile->phone = $this->phone;
+            $profile->city = $this->city;
+            $profile->address = $this->address;
+            $profile->save();
         }
 
-        return parent::afterSave($insert, $changedAttributes);
+        /** @var ShoppingCart $cart */
+        $cart = Yii::$app->cart;
+
+        /** @var Product $product */
+        foreach ($cart->getPositions() as $product) {
+            $item = new OrderItem();
+            $item->product_id = $product->getId();
+            $item->title = $product->title;
+            $item->weight = $product->weight;
+            $item->price = $product->price;
+            $item->amount = $product->getQuantity();
+            $this->link('orderItems', $item);
+        }
     }
 
     public function getTotalPrice()

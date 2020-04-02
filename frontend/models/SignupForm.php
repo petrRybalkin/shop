@@ -41,7 +41,7 @@ class SignupForm extends Model
     {
         return [
             'email'=> 'Адрес эл. почты',
-            'username' => 'Фамилия и Имя',
+            'username' => 'Ваше имя',
             'password' => 'Пaроль',
         ];
     }

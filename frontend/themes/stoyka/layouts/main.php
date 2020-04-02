@@ -11,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
 use frontend\widgets\CategorySliderWidget;
+use frontend\widgets\CategoryMobileWidget;
 use frontend\widgets\CartWidget;
 
 AppAsset::register($this);
@@ -31,41 +32,7 @@ AppAsset::register($this);
     </head>
     <body>
     <?php $this->beginBody() ?>
-             <?php
-            // NavBar::begin([
-            //     'brandLabel' => Yii::$app->name,
-            //     'brandImage' => Url::to('@web/images/logo-header3.png'),
-            //     'brandUrl' => Yii::$app->homeUrl,
-            //     'options' => [
-            //         'class' => 'navbar-inverse navbar-fixed-top',
-            //     ],
-            // ]);
-            // $menuItems = [
-            //     //['label' => 'Home', 'url' => ['/site/index']],
-            //     ['label' => 'Доставка и Оплата', 'url' => ['/']],
-            //     ['label' => 'О нас', 'url' => ['/site/about']],
-            //     ['label' => 'Contact', 'url' => ['/site/contact']],
-            // ];
-            // if (Yii::$app->user->isGuest) {
-            //     $menuItems[] = ['label' => 'Войти', 'url' => ['/site/login']];
-            //     $menuItems[] = ['label' => 'Регистрация', 'url' => ['/site/signup']];
-            // } else {
-            //     $menuItems[] = '<li>'
-            //         . Html::beginForm(['/site/logout'], 'post')
-            //         . Html::submitButton(
-            //             'Logout (' . Yii::$app->user->identity->username . ')',
-            //             ['class' => 'btn btn-link logout']
-            //         )
-            //         . Html::endForm()
-            //         . '</li>';
-            // }
-            // echo Nav::widget([
-            //     'options' => ['class' => 'navbar-nav navbar-right'],
-            //     'items' => $menuItems,
-            // ]);
-            // NavBar::end();
-            ?>
-
+           
         <div class="container">
             <div class="wrapper">
                 <div class="header-bottom js-header-bottom clear">
@@ -108,47 +75,9 @@ AppAsset::register($this);
 
                 <div class="bg-header">
                     <div class="header-wrap js-header-resp">
-                    <!-- <div class="header-wrap js-header-resp resp-sticky" style="position: fixed; top: 0px;"> -->
-                        <header>
-                            <div class="content"><!-- new responsive header -->
-                                <div class="header-resp hidden-lg-up">
-                                    <div class="header-resp__logo">
-                                        <a href="/"><?= Html::img('@web/img/logo-header3.png', ['alt'=>'logo']); ?></a>
-                                    </div>
-                                    <div class="header-resp__nav">
-                                        <button type="button" class="ssm-toggle-nav navbar-toggle active ssm-nav-visible" data-toggle="collapse">
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                            <span class="icon-bar"></span>
-                                        </button>
-                                    </div>
-                                    <div class="header-resp__cart">
-                                         <?= CartWidget::widget(); ?>
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                        </header>
-                        <div class="ssm-overlay ssm-toggle-nav ssm-nav-visible" style="display: none;"></div>
-                        <div class="navbar" style="transition-duration: 0.3s; transform: translate(-280px, 0px);">
-                            <a href="#" class="menu-close ssm-toggle-nav ssm-nav-visible">×</a>
-                            <div class="navbar-logo"></div>
-                            <div class="navbar-wrap">
-                                <ul class="navbar-menu">
-                                    <li class="phone-link"><a href="tel:+380666555773">+38 (066) 655-57-73</a></li>
-                                    <li class="gift-link"><a href="<?= Url::to(['/page/akcii']) ?>">Акции</a></li>
-                                    <li class="delivery-link"><a href="<?= Url::to(['/delivery/dostavka-i-oplata']) ?>">О доставке</a></li>
-                                </ul>
-                                <hr>
-                                <ul class="navbar-othermenu guest">
-                                    <li><a href="<?= Url::to(['/site/login']) ?>">Войти</a></li>
-                                    <li><a href="<?= Url::to(['/site/signup']) ?>">Регистрация</a></li>
-                                    <li style="display:none"><a href="#">Интересное</a></li>
-                                    <li style="display:none"><a href="#">Отзывы</a></li>
-                                    <li style="display:none"><a href="#">О нас</a></li>
-                                </ul>
-                            </div>
-                        </div>
+
+                        <?= CategoryMobileWidget::widget() ?>
+                        
                     </div>
 
                     <section class="banner" style="margin-top: 70px;display:none;">
@@ -162,14 +91,14 @@ AppAsset::register($this);
                         <!-- content for slider in future -->
                     </section> 
                 </div>
+                
 
                 <?= CategorySliderWidget::widget() ?>
 
                 <div class="content index-categories">
                     <div class="clear">
                         <div class="change-view-xs right hidden-sm-up" style="margin-top:-20px;" data-t="None">
-                            <span class="icon icon-fz28 icon-sort5 active" data-view="mob-grid" style="display:inline-block !important; margin-right:5px;"></span>
-                            <a href="#" class="catview__btn catview--list js-catview-list " data-view="mob-list" style="display:inline-block !important;"></a>
+                            &nbsp;
                         </div>
                     </div>
                     <?= Breadcrumbs::widget([
@@ -292,10 +221,22 @@ AppAsset::register($this);
                     </div>
                 </div>
             </footer>
-        </div>
-        
+        </div> 
+
 
     <?php $this->endBody() ?>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.header-resp__nav button').on('click', function() {
+                    $('.navbar').css({'transition-duration': '0.3s', 'transform': 'translate(0px, 0px)'});
+                });
+
+                $('.navbar .menu-close').on('click', function() {
+                    $('.navbar').css({'transition-duration': '0.3s', 'transform': 'translate(-280px, 0px)'});
+                });
+            });
+            
+        </script> 
     <!-- Initialize Swiper -->
         <script>
             var swiper = new Swiper('.swiper-container', {

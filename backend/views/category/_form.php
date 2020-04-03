@@ -19,6 +19,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'show_in_main')->checkbox() ?>
 
+    <?= $form->field($model, 'sort')->textInput() ?>
+
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'image')->fileInput() ?>

@@ -122,12 +122,6 @@ AppAsset::register($this);
 
         <div class="footer">
             <footer>
-                <div class="footer-top">
-                    <div class="content">
-                        <p style="text-align: center;">Кафе "Стойка" - профессиональный подход к японской кухне. Мы знаем толк в том что делаем.</p>
-                        <p style="text-align: center;">И готовы поделиться этим с Вами. Доставка суши и хорошего настроения к Вам.</p>
-                    </div>
-                </div>
                 <div class="footer-middle">
                     <div class="content">
                         <div class="list-menu">
@@ -172,14 +166,11 @@ AppAsset::register($this);
                         </div>
                         <div class="footer-bottom__developer">
                             <a href="tel:+380666555773" class="number-developer">+38 (066) 655-57-73</a>
-                            <div class="delivery-text">Доставка с 9:00 до 23:00</div>
-                            <a href="mailto:info@sushi-profi.ru" class="email-to">info@barstoyka.lg.ua</a>
+                            <div class="delivery-text">Доставка с 10:00 до 22:30</div>
+                            <a href="mailto:cafe.stoyka@gmail.com" class="email-to">cafe.stoyka@gmail.com</a>
                             <div class="social clear">
                                 <ul>
-                                    <li><a href="https://twitter.com/" target="_blank" rel="nofollow"><span class="icon icon-twitter"></span></a></li>
-                                    <li><a href="https://www.facebook.com/" target="_blank" rel="nofollow"><span class="icon icon-facebook icon-fb"></span></a></li>
-                                    <li><a href="https://vk.com/" target="_blank" rel="nofollow"><span class="icon icon-vkontakte icon-vk"></span></a></li>
-                                    <li><a href="https://www.instagram.com//" target="_blank" rel="nofollow"><span class="icon icon-instagram"></span></a></li>
+                                    <li><a href="https://instagram.com/cafe.stoyka?igshid=150va43rgiur0" target="_blank" rel="nofollow"><span class="icon icon-instagram"></span></a></li>
                                 </ul>
                             </div>
                             <a href="/sitemap/" class="sitemap-link">Карта сайта</a>
@@ -224,8 +215,8 @@ AppAsset::register($this);
                     </div>
                     <div class="footer-bottom__developer">
                         <a href="tel:+380666555773" class="number-developer">+38 (066) 655-57-73</a>
-                        <a href="mailto:info@sushi-profi.ru" class="email-to">info@barstoyka.lg.ua</a>
-                        <div class="footer-bottom__slogan">Бар «Стойка» — Доставка суши и хорошего настроения. <?= date('Y') ?></div>
+                        <a href="mailto:cafe.stoyka@gmail.com" class="email-to">cafe.stoyka@gmail.com</a>
+                        <div class="footer-bottom__slogan">Кафе «Стойка» — Доставка суши и хорошего настроения. <?= date('Y') ?></div>
                     </div>
                 </div>
             </footer>

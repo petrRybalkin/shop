@@ -1219,7 +1219,7 @@ position:absolute;left:12px;top:50%;margin-top:-16px;font-weight:normal}
 .footer-bottom.desktop .list-two-row li.footer-link-title a{color:#000!important}
 .footer-bottom.desktop .list-two-row .footer-bottom__developer{margin-top:-5px}
 .footer-bottom.desktop .social{margin-left:16px;margin-top:25px}
-.footer-bottom.desktop .social li{margin-left:27px}
+.footer-bottom.desktop .social li{margin-left:27px;float:none}
 .footer-bottom.desktop .footer-bottom__developer{margin-top:-5px}
 .footer-bottom.desktop .logo-footer{margin-top:12px;width:15%}
 .app-lets-get-item{text-align:center;margin:-25px 0 25px;color:#b5b2b2;font-size:15px}
@@ -1740,7 +1740,7 @@ font-style:normal;cursor:pointer;position:absolute;left:0;top:-11px}
 .social li{float:left;margin-left:30px}
 .social li a{text-decoration:none;display:block;color:#de6c28;font:700 15px Sansation,Arial,sans-serif}
 .social li a:hover{text-decoration:underline}
-.social li a span{font-size:26px;display:block;float:left;margin:-5px 5px 0 0}
+.social li a span{font-size:26px;display:block;/*float:left;*/margin:-5px 5px 0 0}
 .social li:first-child{margin-left:0}
 .stars{width:93px;height:17px;position:relative;background:#e3e3e3;margin:0 auto}
 .stars:before{background:url("../img/icons.png") 0 -363px no-repeat;width:93px;height:17px;position:absolute;left:0;top:0;content:'';width:100%;height:100%}

@@ -24,6 +24,7 @@ $this->title = 'Товары';
 //            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            'sort',
             [
                 'attribute' => 'category_id',
                 'filter' => Category::getParentsList(),

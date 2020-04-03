@@ -23,6 +23,7 @@ $this->title = 'Категории';
 //            ['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            'sort',
             [
                 'attribute' => 'image',
                 'format' => 'raw',

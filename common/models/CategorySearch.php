@@ -5,6 +5,7 @@ namespace common\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Category;
+use yii\data\Sort;
 
 /**
  * CategorySearch represents the model behind the search form of `common\models\Category`.
@@ -46,6 +47,11 @@ class CategorySearch extends Category
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => new Sort([
+                'defaultOrder' => [
+                    'sort' => SORT_DESC,
+                ],
+            ]),
         ]);
 
         $this->load($params);

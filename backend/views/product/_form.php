@@ -28,6 +28,8 @@ use yii\widgets\ActiveForm;
         ]
     ])?>
 
+    <?= $form->field($model, 'sort')->textInput() ?>
+
     <?= $form->field($model, 'product_1c_id')->textInput() ?>
 
     <?= $form->field($model, 'price')->textInput() ?>

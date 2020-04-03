@@ -5,6 +5,7 @@ namespace common\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\Product;
+use yii\data\Sort;
 
 /**
  * ProductSearch represents the model behind the search form of `common\models\Product`.
@@ -46,6 +47,11 @@ class ProductSearch extends Product
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => new Sort([
+                'defaultOrder' => [
+                    'sort' => SORT_DESC,
+                ],
+            ]),
         ]);
 
         $this->load($params);

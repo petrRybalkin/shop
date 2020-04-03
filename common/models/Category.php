@@ -14,6 +14,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property int|null $parent_id
+ * @property int $sort
  * @property int|null $show_in_main
  * @property string|null $title
  * @property string|null $description
@@ -62,11 +63,11 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['parent_id', 'show_in_main'], 'integer'],
+            [['parent_id', 'show_in_main', 'sort'], 'integer'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
             [['image'], 'file', 'extensions' => 'jpg, jpeg, gif, png'],
-            [['parent_id'], 'default', 'value' => 0],
+            [['parent_id', 'sort'], 'default', 'value' => 0],
             [['show_in_main'], 'default', 'value' => false],
         ];
     }
@@ -79,6 +80,7 @@ class Category extends ActiveRecord
         return [
             'id' => 'ID',
             'parent_id' => 'Parent ID',
+            'sort' => 'Сортировка',
             'title' => 'Заголовок',
             'description' => 'Описание',
             'seoTitle' => 'Seo title',
@@ -95,7 +97,9 @@ class Category extends ActiveRecord
      */
     public function getProducts()
     {
-        return $this->hasMany(Product::class, ['category_id' => 'id']);
+        return $this->hasMany(Product::class, ['category_id' => 'id'])->orderBy([
+            'product.sort' => SORT_DESC,
+        ]);
     }
 
     /**
@@ -117,6 +121,8 @@ class Category extends ActiveRecord
     {
         return self::find()->where([
             'parent_id' => 0,
+        ])->orderBy([
+            'sort' => SORT_DESC,
         ]);
     }
 

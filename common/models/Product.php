@@ -16,6 +16,7 @@ use yz\shoppingcart\CartPositionTrait;
  *
  * @property int $id
  * @property int|null $category_id
+ * @property int $sort
  * @property string|null $title
  * @property string|null $description
  * @property int|null $price
@@ -58,9 +59,10 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id'], 'integer'],
+            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort'], 'integer'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
+            [['sort'], 'default', 'value' => 0],
             [
                 ['category_id'],
                 'exist',
@@ -80,6 +82,7 @@ class Product extends ActiveRecord implements CartPositionInterface
             'id' => 'ID',
             'product_1c_id' => '1C ID',
             'category_id' => 'Категория',
+            'sort' => 'Сортировка',
             'title' => 'Заголовок',
             'description' => 'Описание',
             'price' => 'Цена',

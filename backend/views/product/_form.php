@@ -31,6 +31,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'sort')->textInput() ?>
 
     <?= $form->field($model, 'product_1c_id')->textInput() ?>
+    <div>выбарите одну из опций (при надобности):</div>
+    <?= $form->field($model, 'superprice')->checkbox() ?>
+
+    <?= $form->field($model, 'hits')->checkbox() ?>
 
     <?= $form->field($model, 'price')->textInput() ?>
 

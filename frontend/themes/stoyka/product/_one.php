@@ -35,7 +35,7 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
     <div class="product__descr" style="display:none;">
         <?= $model->description; ?>
     </div>
-    <div class="product__weight" style="display:none;">680 г.</div>
+    <div class="product__weight" style="display:none;"><?= $model->weight; ?></div>
     <div class="product-buy">
         <p class="product-price"><span><?= Yii::$app->formatter->asDecimal($model->price); ?></span> грн.</p>
         <span class="counter">
@@ -59,5 +59,11 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
             ]
         ) ?>
     </div>
+    <?php if($model->superprice == 1) { ?>
+    <div class="label" style="background-color:#e76a6b">Суперцена</div>
+    <?php } ?>
+    <?php if($model->hits == 1) { ?>
+    <div class="label" style="background-color:#FF9800"> Хит! </div>
+    <?php } ?>
 </li>
                       

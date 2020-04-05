@@ -65,6 +65,7 @@ AppAsset::register($this);
                                             <?= Html::a('Выйти', ['/site/logout'], [
                                                 'data-method' => 'POST'
                                             ]) ?>
+                                            <?= Html::a('Личный кабинет', ['/profile/index']) ?>
                                         <?php endif; ?>
                                     </li>
                                     <li><?= CartWidget::widget(); ?></li>

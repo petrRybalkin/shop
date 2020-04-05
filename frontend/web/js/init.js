@@ -1,6 +1,12 @@
 $(function(){
 	
-	$('.slider1').mobilyslider();
+	$('.slider1').mobilyslider({
+		animationSpeed: 500,
+		autoplay: true,
+		autoplaySpeed: 3000,
+		pauseOnHover: true,
+		bullets: false
+	});
 	
 	$('.slider2').mobilyslider({
 		transition: 'vertical',

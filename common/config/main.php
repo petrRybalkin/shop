@@ -13,7 +13,7 @@ return [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp-pulse.com',
                 'username' => 'Cafe.stoyka@gmail.com',
-                'password' => 'ZeT5BXoXSN',
+                'password' => 'dfsdfsdf',
                 'port' => '2525',
                 'encryption' => false,
             ],

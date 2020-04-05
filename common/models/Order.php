@@ -99,7 +99,7 @@ class Order extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', '№ заказа'),
             'status' => Yii::t('app', 'Статус'),
             'user_id' => Yii::t('app', 'User ID'),
             'name' => Yii::t('app', 'Заказчик'),
@@ -157,13 +157,15 @@ class Order extends ActiveRecord
     }
 
     /**
+     * @param array $options
      * @return string
      */
-    public function getStatusTag()
+    public function getStatusTag($options = [])
     {
-        return Html::tag('span', $this->getStatusLabel(), [
-            'class' => 'label label-' . $this->getStatusColor(),
-        ]);
+        if (!array_key_exists('class', $options)) {
+            $options['class'] = 'label label-' . $this->getStatusColor();
+        }
+        return Html::tag('span', $this->getStatusLabel(), $options);
     }
 
     public function getNextStatus()

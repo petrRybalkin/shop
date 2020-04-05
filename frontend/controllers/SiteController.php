@@ -335,6 +335,7 @@ class SiteController extends Controller
         $cart = Yii::$app->cart;
 
         $model = new Order();
+        $model->person_count = 1;
 
         /** @var Profile $profile */
         $profile = ArrayHelper::getValue(Yii::$app->user, 'identity.profile') ?: new Profile();

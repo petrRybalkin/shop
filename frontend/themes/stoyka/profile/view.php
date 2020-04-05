@@ -64,6 +64,7 @@ YiiAsset::register($this);
                             'class' => 'hz hz-' . $model->getStatusColor(),
                         ]),
                     ],
+                    'person_count',
                     'name',
                     'phone',
                     'city',

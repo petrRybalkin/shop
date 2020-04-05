@@ -140,6 +140,10 @@ $this->title = 'Корзина';
                             <?= $form->field($model, 'address')->textInput()->label('Адресс: ') ?>
                         </div>
                         <br>
+                        <div class="form-block left">
+                            <?= $form->field($model, 'person_count')->textInput()->label('Кол-во персон: ') ?>
+                        </div>
+                        <br>
                         <div class="form-block right">
                             <?= $form->field($model, 'description')->textarea(['cols'=>'70','rows'=>'3'])->label('Комментарий: ') ?>
                         </div>

@@ -57,6 +57,7 @@ YiiAsset::register($this);
                         'format' => 'raw',
                         'value' => $model->getStatusTag(),
                     ],
+                    'person_count',
                     'name',
                     'phone',
                     'city',

@@ -22,6 +22,7 @@ use yz\shoppingcart\ShoppingCart;
  * @property string|null $city
  * @property string|null $address
  * @property int|null $price
+ * @property int|null $person_count
  * @property int $status
  * @property int|null $delivery
  * @property string|null $description
@@ -78,8 +79,9 @@ class Order extends ActiveRecord
             ],
 //            [['delivery'], 'default', 'value' => Settings::calcDeliveryPrice()],
             [['status'], 'default', 'value' => self::STATUS_NEW],
+            [['person_count'], 'default', 'value' => 1],
             [['status'], 'in', 'range' => array_keys(self::statusList())],
-            [['user_id', 'price', 'delivery', 'status'], 'integer'],
+            [['user_id', 'price', 'delivery', 'status', 'person_count'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'phone', 'city', 'address', 'description'], 'string', 'max' => 255],
             [['name', 'phone', 'address'], 'required'],
@@ -109,6 +111,7 @@ class Order extends ActiveRecord
             'city' => Yii::t('app', 'Город'),
             'address' => Yii::t('app', 'Адрес'),
             'price' => Yii::t('app', 'Стоимость'),
+            'person_count' => Yii::t('app', 'Кол-во персон'),
             'delivery' => Yii::t('app', 'Стоимость доставки'),
             'description' => Yii::t('app', 'Описание'),
             'created_at' => Yii::t('app', 'Дата создания'),

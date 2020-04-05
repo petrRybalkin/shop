@@ -7,6 +7,17 @@ return [
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp-pulse.com',
+                'username' => 'Cafe.stoyka@gmail.com',
+                'password' => 'ZeT5BXoXSN',
+                'port' => '2525',
+                'encryption' => false,
+            ],
+        ],
         'cache' => [
             'class' => yii\caching\FileCache::class,
         ],

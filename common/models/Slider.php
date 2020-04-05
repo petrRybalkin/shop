@@ -12,6 +12,7 @@ use yii\helpers\ArrayHelper;
  *
  * @property int $id
  * @property int|null $place
+ * @property string|null $url
  * @property string|null $image
  *
  * @mixin ImageUploadBehavior
@@ -66,6 +67,7 @@ class Slider extends ActiveRecord
     {
         return [
             [['place'], 'integer'],
+            [['url'], 'url'],
             [['image'], 'file', 'extensions' => 'jpg, jpeg, gif, png'],
         ];
     }
@@ -77,6 +79,7 @@ class Slider extends ActiveRecord
     {
         return [
             'id' => 'ID',
+            'url' => 'Ссылка',
             'place' => 'Место',
             'image' => 'Изображение',
         ];

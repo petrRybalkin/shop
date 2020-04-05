@@ -30,6 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]), ['view', 'id' => $model->id]);
                 }
             ],
+            'person_count',
             'name',
             'phone',
             'city',

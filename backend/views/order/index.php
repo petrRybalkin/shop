@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
 //            'user_id',
+            'person_count',
             'name',
             'phone',
             'city',

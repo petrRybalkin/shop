@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::img($model->getThumbFileUrl('image', 'pr'));
                 }
             ],
+            'url',
             [
                 'attribute' => 'place',
                 'filter' => Slider::placeList(),

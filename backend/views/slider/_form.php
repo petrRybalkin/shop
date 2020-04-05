@@ -16,6 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'place')->dropDownList(Slider::placeList()) ?>
 
+    <?= $form->field($model, 'url') ?>
+
     <?= $form->field($model, 'image')->fileInput() ?>
 
     <div class="form-group">

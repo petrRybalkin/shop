@@ -39,8 +39,6 @@ class Order extends ActiveRecord
     const STATUS_DELIVER = 2;
     const STATUS_DONE = 3;
     const STATUS_CANCEL = -1;
-    const TELEGRAM_TOKEN ='1175294706:AAFtbUYffixq6OBTQ21REVlPiE0Cq7gMrN8';
-    const TELEGRAM_CHATID = '817850218';
 
     /**
      * {@inheritdoc}
@@ -83,7 +81,8 @@ class Order extends ActiveRecord
             [['status'], 'in', 'range' => array_keys(self::statusList())],
             [['user_id', 'price', 'delivery', 'status', 'person_count'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name', 'phone', 'city', 'address', 'description'], 'string', 'max' => 255],
+            [['name', 'city', 'address', 'description'], 'string', 'max' => 255],
+            ['phone', 'integer'],
             [['name', 'phone', 'address'], 'required'],
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [

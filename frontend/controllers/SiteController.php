@@ -352,7 +352,7 @@ class SiteController extends Controller
         if ($load && $model->save()) {
             $model->saveItems();
             $cart->removeAll();
-            $this->render('send-to-telegram', ['model' => $model]);
+            //$this->render('send-to-telegram', ['model' => $model]);
             return $this->redirect(['success']);
         }
 

@@ -30,6 +30,8 @@ use yii\widgets\ListView;
             ]) ?>
 
         </ul>
+
+        <p class="products_more"><?= Html::a('показать все', $category->getUrl()) ?></p>
     </div>
 <?php endforeach; ?>
 

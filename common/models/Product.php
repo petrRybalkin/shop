@@ -59,7 +59,7 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort'], 'integer'],
+            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits'], 'integer'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 0],
@@ -87,6 +87,8 @@ class Product extends ActiveRecord implements CartPositionInterface
             'description' => 'Описание',
             'price' => 'Цена',
             'weight' => 'Вес (в граммах)',
+            'superprice' => '"Суперцена"',
+            'hits' => '"Хит"',
             'old_price' => 'Старая цена',
             'seoTitle' => 'Seo Title',
             'seoDescription' => 'Seo Description',

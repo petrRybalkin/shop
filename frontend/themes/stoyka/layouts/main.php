@@ -83,16 +83,17 @@ AppAsset::register($this);
                         
                     </div>
 
-                    <section class="banner" style="margin-top: 70px;display:none;">
+                    <?php if (Yii::$app->request->url == Yii::$app->homeUrl): ?>
+                    <section class="banner" style="margin-top:10px;">
                         <div class="content">
-                            <div class="action-resp" style="display:none;">
+                            <div class="action-resp">
                                 <?= SliderWidget::widget([
                                     'place' => Slider::PLACE_MAIN_TOP,
                                 ]) ?>
                             </div>
                         </div>
                     </section>
-                    <?php if (Yii::$app->request->url == Yii::$app->homeUrl): ?>
+                    
                     <section class="actions hidden-sm-down" style="margin-top:-25px;">
                         <?= SliderWidget::widget([
                             'place' => Slider::PLACE_MAIN_TOP,
@@ -126,8 +127,7 @@ AppAsset::register($this);
                 <div class="footer-middle">
                     <div class="content">
                         <div class="list-menu">
-                            <p>
-                                <a href="/">Кафе "Стойка"</a> - доставка <a href="#">суши</a>, <a href="#">роллов</a>, <a href="#">бокс-суши</a>, <a href="#">онигири</a>, <a href="#">сашими</a>, <a href="#">ассорти-сетов суши и роллов</a>, <a href="#">салатов</a>, <a href="#">супов</a>, <a href="#">лапши вок</a>, <a href="#">пиццы</a>, <a href="#">горячих блюд</a> и <a href="#">десертов</a>.</p>
+                            <p>&nbsp;</p>
                             </div>
                         </div>
                     </div>
@@ -187,10 +187,7 @@ AppAsset::register($this);
                     <div class="footer-bottom__social">
                         <div class="social clear">
                             <ul>
-                                <li><a href="https://twitter.com/" target="_blank" rel="nofollow"><span class="icon icon-twitter"></span></a></li>
-                                <li><a href="https://www.facebook.com/" target="_blank" rel="nofollow"><span class="icon icon-facebook icon-fb"></span></a></li>
-                                <li><a href="https://vk.com/" target="_blank" rel="nofollow"><span class="icon icon-vkontakte icon-vk"></span></a></li>
-                                <li><a href="https://www.instagram.com//" target="_blank" rel="nofollow"><span class="icon icon-instagram"></span></a></li>
+                                <li><a href="https://instagram.com/cafe.stoyka?igshid=150va43rgiur0" target="_blank" rel="nofollow"><span class="icon icon-instagram"></span></a></li>
                             </ul>
                         </div>
                         <div class="list-two-row clear">
@@ -235,9 +232,6 @@ AppAsset::register($this);
                     $('.navbar').css({'transition-duration': '0.3s', 'transform': 'translate(-280px, 0px)'});
                 });
             });
-
-
-            
         </script> 
     <!-- Initialize Swiper -->
         <script>

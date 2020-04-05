@@ -36,6 +36,8 @@ $this->title = 'Товары';
             'weight',
             'description:html',
             'price',
+            'superprice',
+            'hits',
             //'old_price',
             //'seoTitle',
             //'seoDescription:ntext',

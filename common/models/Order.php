@@ -81,7 +81,8 @@ class Order extends ActiveRecord
             [['status'], 'in', 'range' => array_keys(self::statusList())],
             [['user_id', 'price', 'delivery', 'status', 'person_count'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['name', 'phone', 'city', 'address', 'description'], 'string', 'max' => 255],
+            [['name', 'city', 'address', 'description'], 'string', 'max' => 255],
+            ['phone', 'integer'],
             [['name', 'phone', 'address'], 'required'],
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [

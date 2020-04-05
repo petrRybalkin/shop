@@ -57,8 +57,16 @@ use yii\bootstrap\NavBar;
         </ul>
         <hr>
         <ul class="navbar-othermenu guest">
-            <li><a href="<?= Url::to(['/site/login']) ?>">Войти</a></li>
-            <li><a href="<?= Url::to(['/site/signup']) ?>">Регистрация</a></li>
+            <?php if(Yii::$app->user->isGuest): ?>
+                <li><<?= Html::a('Войти', ['/site/login']) ?></li>
+                <li><<?= Html::a('Регистрация', ['/site/signup']) ?></li>
+            <?php else: ?>
+                <li><?= Html::a('Выйти', ['/site/logout'], [
+                    'data-method' => 'POST'
+                ]) ?></li>
+                <li><?= Html::a('Личный кабинет', ['/profile/index']) ?></li>
+                <?php endif; ?>
+            
             <li style="display:none"><a href="#">Интересное</a></li>
             <li style="display:none"><a href="#">Отзывы</a></li>
             <li style="display:none"><a href="#">О нас</a></li>

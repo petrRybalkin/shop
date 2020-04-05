@@ -351,10 +351,33 @@ class SiteController extends Controller
         if ($load && $model->save()) {
             $model->saveItems();
             $cart->removeAll();
+            $this->render('send-to-telegram', ['model' => $model]);
             return $this->redirect(['success']);
         }
 
         return $this->render('cart', [
+            'model' => $model,
+            'cart' => $cart,
+        ]);
+    }
+
+    public function actionSendToTelegram(){
+        /** @var ShoppingCart $cart */
+        $cart = Yii::$app->cart;
+
+        $model = new Order();
+
+        /** @var Profile $profile */
+        $profile = ArrayHelper::getValue(Yii::$app->user, 'identity.profile') ?: new Profile();
+        if (!$profile->isNewRecord) {
+            $model->name = $profile->name;
+            $model->phone = $profile->phone;
+            $model->city = $profile->city;
+            $model->address = $profile->address;
+            $model->description = $this->description;
+        }
+        $model->price = $cart->getCost();
+        return $this->render('send-to-telegram', [
             'model' => $model,
             'cart' => $cart,
         ]);

@@ -38,6 +38,8 @@ class Order extends ActiveRecord
     const STATUS_DELIVER = 2;
     const STATUS_DONE = 3;
     const STATUS_CANCEL = -1;
+    const TELEGRAM_TOKEN ='1175294706:AAFtbUYffixq6OBTQ21REVlPiE0Cq7gMrN8';
+    const TELEGRAM_CHATID = '817850218';
 
     /**
      * {@inheritdoc}

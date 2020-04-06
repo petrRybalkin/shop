@@ -219,6 +219,7 @@ class Order extends ActiveRecord
         foreach ($cart->getPositions() as $product) {
             $item = new OrderItem();
             $item->product_id = $product->getId();
+            $item->product_1c_id = $product->product_1c_id;
             $item->title = $product->title;
             $item->weight = $product->weight;
             $item->price = $product->price;

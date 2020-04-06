@@ -14,11 +14,14 @@ class Settings extends Model
     public $deliveryPrice;
     public $deliveryMin;
 
+    public $chatId;
+    public $telegramToken;
+
     public function rules()
     {
         return [
-            [['siteName', 'siteDescription'], 'string'],
-            [['deliveryPrice', 'deliveryMin'], 'integer'],
+            [['siteName', 'siteDescription', 'telegramToken'], 'string'],
+            [['deliveryPrice', 'deliveryMin', 'chatId'], 'integer'],
         ];
     }
 
@@ -26,19 +29,21 @@ class Settings extends Model
     {
         $this->siteName = (string) $this->siteName;
         $this->siteDescription = (string) $this->siteDescription;
+        $this->telegramToken = (string) $this->telegramToken;
         $this->deliveryPrice = (int) $this->deliveryPrice;
         $this->deliveryMin = (int) $this->deliveryMin;
+        $this->chatId = (int) $this->chatId;
         return parent::beforeValidate();
     }
 
     public function fields()
     {
-        return ['siteName', 'siteDescription', 'deliveryPrice', 'deliveryMin'];
+        return ['siteName', 'siteDescription', 'deliveryPrice', 'deliveryMin', 'chatId', 'telegramToken'];
     }
 
     public function attributes()
     {
-        return ['siteName', 'siteDescription', 'deliveryPrice', 'deliveryMin'];
+        return ['siteName', 'siteDescription', 'deliveryPrice', 'deliveryMin', 'chatId', 'telegramToken'];
     }
 
     public function attributeLabels()
@@ -48,6 +53,8 @@ class Settings extends Model
             'siteDescription' => 'Описание сайта',
             'deliveryPrice' => 'Стоимость доставки, грн',
             'deliveryMin' => 'Бесплатная доставка при заказе от, грн',
+            'chatId' => 'Telegram ID',
+            'telegramToken' => 'Telegram Token',
         ];
     }
 
@@ -76,13 +83,18 @@ class Settings extends Model
         return Yii::$app->settings;
     }
 
+    public static function getVal($key, $section = 'Settings')
+    {
+        return self::getSettings()->get($key, $section);
+    }
+
     public static function seo()
     {
         $view = Yii::$app->view;
-        $view->title = self::getSettings()->get('siteName', 'Settings');
+        $view->title = self::getVal('siteName');
         $view->registerMetaTag([
             'name' => 'description',
-            'content' => self::getSettings()->get('siteDescription', 'Settings'),
+            'content' => self::getVal('siteDescription'),
         ]);
     }
 }

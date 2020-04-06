@@ -11,9 +11,12 @@ $this->title = 'Настройки';
 
 <?= $form->field($model, 'siteName') ?>
 <?= $form->field($model, 'siteDescription')->textarea() ?>
-    <hr>
+<hr>
 <?= $form->field($model, 'deliveryPrice') ?>
 <?= $form->field($model, 'deliveryMin') ?>
+<hr>
+<?= $form->field($model, 'telegramToken') ?>
+<?= $form->field($model, 'chatId') ?>
 
 <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
 

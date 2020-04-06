@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use backend\models\Settings;
 use common\models\Order;
+use common\models\OrderItem;
 use common\models\Page;
 use common\models\Delivery;
 use common\models\Product;
@@ -172,7 +173,7 @@ class SiteController extends Controller
         ]);
     }
 
-     public function actionSuccessSignup()
+    public function actionSuccessSignup()
     {
         return $this->render('success-signup');
     }
@@ -336,6 +337,7 @@ class SiteController extends Controller
 
         $model = new Order();
         $model->person_count = 1;
+        $order = new OrderItem();
 
         /** @var Profile $profile */
         $profile = ArrayHelper::getValue(Yii::$app->user, 'identity.profile') ?: new Profile();
@@ -346,39 +348,26 @@ class SiteController extends Controller
             $model->address = $profile->address;
         }
         $model->price = $cart->getCost();
+        $orders = [$order->title, $order->product, $order->amount];
 
         $load = $model->load(Yii::$app->request->post());
         $model->delivery = Settings::calcDeliveryPrice();
         if ($load && $model->save()) {
             $model->saveItems();
             $cart->removeAll();
-            //$this->render('send-to-telegram', ['model' => $model]);
+            $text = 'Имя заказчика:'. $model->name .'
+                Телефон:'. $model->phone. '
+                Адрес:'. $model->address.'
+                Заказ:'. $order->order_id .'
+                Кол-во персон:'.$model->person_count.'
+                Сумма заказа:'. $model->price .'грн.
+                Комментарий:'.$model->description.'';
+            Yii::$app->sendTelegram->message_to_telegram(htmlspecialchars($text));
+
             return $this->redirect(['success']);
         }
 
         return $this->render('cart', [
-            'model' => $model,
-            'cart' => $cart,
-        ]);
-    }
-
-    public function actionSendToTelegram(){
-        /** @var ShoppingCart $cart */
-        $cart = Yii::$app->cart;
-
-        $model = new Order();
-
-        /** @var Profile $profile */
-        $profile = ArrayHelper::getValue(Yii::$app->user, 'identity.profile') ?: new Profile();
-        if (!$profile->isNewRecord) {
-            $model->name = $profile->name;
-            $model->phone = $profile->phone;
-            $model->city = $profile->city;
-            $model->address = $profile->address;
-            $model->description = $this->description;
-        }
-        $model->price = $cart->getCost();
-        return $this->render('send-to-telegram', [
             'model' => $model,
             'cart' => $cart,
         ]);

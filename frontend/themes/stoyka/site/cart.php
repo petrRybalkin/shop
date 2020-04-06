@@ -134,19 +134,17 @@ $this->title = 'Корзина';
                         </div>
                         <br>
                         <div class="form-block left">
-                            <?= $form->field($model, 'city')->textInput()->label('Город: ') ?>
-                        </div>
-                        <div class="form-block right">
                             <?= $form->field($model, 'address')->textInput()->label('Адресс: ') ?>
                         </div>
                         <br>
-                        <!-- <div class="form-block">
-                            <?//= //$form->field($model, 'person_count')->textInput(['style' => 'width:100%'])->label('Кол-во персон: ') ?>
-                        </div> -->
+                        <div class="form-block right">
+                            <?= $form->field($model, 'person_count')->textInput()->label('Кол-во персон: ') ?>
+                        </div>
                         <br>
                         <div class="form-block right">
                             <?= $form->field($model, 'description')->textarea(['cols'=>'70','rows'=>'3'])->label('Комментарий: ') ?>
                         </div>
+                        <br>
                         <div class="button-loader-order-unauth">
                             <div class="loader-inner ball-scale-ripple-multiple">
                                 <div></div>

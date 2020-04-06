@@ -347,12 +347,18 @@ class SiteController extends Controller
         }
         $model->price = $cart->getCost();
 
+
         $load = $model->load(Yii::$app->request->post());
         $model->delivery = Settings::calcDeliveryPrice();
         if ($load && $model->save()) {
             $model->saveItems();
             $cart->removeAll();
-            //$this->render('send-to-telegram', ['model' => $model]);
+            $text = 'Имя заказчика:'. $model->name .'\n
+            Телефон:'. $model->phone. '\n
+            Адрес:'. $model->address.'\n
+            Сумма заказа:'. $model->price .'грн. \n
+            Комментарий:'.$model->description.'';
+            Yii::$app->sendTelegram->message_to_telegram($text);
             return $this->redirect(['success']);
         }
 

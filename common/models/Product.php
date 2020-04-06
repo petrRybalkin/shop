@@ -23,12 +23,14 @@ use yz\shoppingcart\CartPositionTrait;
  * @property int|null $product_1c_id
  * @property int|null $old_price
  * @property int|null $weight
+ * @property int|null $list_id
  * @property string|null $seoTitle
  * @property string|null $seoDescription
  *
  * @property Category $category
  * @property ProductImage[] $images
  * @property ProductImage $image
+ * @property ProductList $list
  */
 class Product extends ActiveRecord implements CartPositionInterface
 {
@@ -59,7 +61,7 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits'], 'integer'],
+            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'list_id'], 'integer'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 0],
@@ -87,6 +89,7 @@ class Product extends ActiveRecord implements CartPositionInterface
             'description' => 'Описание',
             'price' => 'Цена',
             'weight' => 'Вес (в граммах)',
+            'list_id' => 'Доп опции',
             'superprice' => '"Суперцена"',
             'hits' => '"Хит"',
             'old_price' => 'Старая цена',
@@ -103,6 +106,16 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function getCategory()
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
+    }
+
+    /**
+     * Gets query for [[Category]].
+     *
+     * @return ActiveQuery
+     */
+    public function getList()
+    {
+        return $this->hasOne(ProductList::class, ['id' => 'list_id']);
     }
 
     /**

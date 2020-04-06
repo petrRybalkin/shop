@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property int|null $order_id
  * @property int|null $product_id
+ * @property int|null $product_1c_id
  * @property string|null $title
  * @property string|null $weight
  * @property int|null $price
@@ -37,7 +38,7 @@ class OrderItem extends ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'product_id', 'price', 'amount'], 'integer'],
+            [['order_id', 'product_id', 'product_1c_id', 'price', 'amount'], 'integer'],
             [['title', 'weight', 'description'], 'string', 'max' => 255],
             [['order_id'], 'exist', 'skipOnError' => true, 'targetClass' => Order::class, 'targetAttribute' => ['order_id' => 'id']],
         ];
@@ -52,6 +53,7 @@ class OrderItem extends ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'order_id' => Yii::t('app', 'Order ID'),
             'product_id' => Yii::t('app', 'Product ID'),
+            'product_1c_id' => Yii::t('app', '1C ID'),
             'title' => Yii::t('app', 'Имя'),
             'weight' => Yii::t('app', 'Вес'),
             'price' => Yii::t('app', 'Стоимость'),

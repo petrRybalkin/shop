@@ -8,6 +8,7 @@ use common\models\Page;
 use common\models\Delivery;
 use common\models\Product;
 use common\models\Profile;
+use frontend\components\Telegram;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -337,7 +338,6 @@ class SiteController extends Controller
 
         $model = new Order();
         $model->person_count = 1;
-        $order = new OrderItem();
 
         /** @var Profile $profile */
         $profile = ArrayHelper::getValue(Yii::$app->user, 'identity.profile') ?: new Profile();
@@ -348,21 +348,16 @@ class SiteController extends Controller
             $model->address = $profile->address;
         }
         $model->price = $cart->getCost();
-        $orders = [$order->title, $order->product, $order->amount];
 
         $load = $model->load(Yii::$app->request->post());
         $model->delivery = Settings::calcDeliveryPrice();
         if ($load && $model->save()) {
             $model->saveItems();
             $cart->removeAll();
-            $text = 'Имя заказчика:'. $model->name .'
-                Телефон:'. $model->phone. '
-                Адрес:'. $model->address.'
-                Заказ:'. $order->order_id .'
-                Кол-во персон:'.$model->person_count.'
-                Сумма заказа:'. $model->price .'грн.
-                Комментарий:'.$model->description.'';
-            Yii::$app->sendTelegram->message_to_telegram(htmlspecialchars($text));
+
+            /** @var Telegram $telegram */
+            $telegram = Yii::$app->telegram;
+            $telegram->sendOrderMessage($model);
 
             return $this->redirect(['success']);
         }

@@ -6,7 +6,9 @@ namespace frontend\components;
 use backend\models\Settings;
 use common\models\Order;
 use Exception;
+use Yii;
 use yii\base\Component;
+use yii\console\widgets\Table;
 
 class Telegram extends Component
 {
@@ -105,38 +107,38 @@ class Telegram extends Component
      */
     public function sendOrderMessage(Order $order, $chatId = null)
     {
-        $headerText = "Заказ №{$order->id}
-==================
-
-";
-        $orderText = "
-------------- | -------------";
+        $headerText = "<b>Заказ №{$order->id}</b>\n\n";
+        $orderText = [];
         foreach ($order->attributes as $attribute => $value) {
             if (in_array($attribute, ['status', 'user_id', 'updated_at'])) {
                 continue;
             }
-            $orderText .= ("\n" . $order->getAttributeLabel($attribute) . " | " . $value);
+            if ($attribute === 'created_at') {
+                $value = Yii::$app->formatter->asDatetime($value);
+            }
+            $orderText[] = ("<b>" . $order->getAttributeLabel($attribute) . "</b>: <i>" . $value . "</i>");
         }
-
+        $orderText = implode("\n", $orderText);
 
         $oneC = [];
-        $itemsText = "
-        
-        
-Название | Вес | Цена | Кол-во
--------- | --- | ---- | ------";
+        $details = [];
         foreach ($order->orderItems as $orderItem) {
-            $itemsText .= ("\n" . $orderItem->title . " | " . $orderItem->weight . " | " . $orderItem->price . " | " . $orderItem->amount);
             $oneC[] = "{$orderItem->product_1c_id}_{$orderItem->amount}";
+            $details[] = [
+                $orderItem->title,
+                $orderItem->weight,
+                $orderItem->price,
+                $orderItem->amount,
+            ];
         }
 
-        $oneC = "
+        $itemsText = (new Table())
+            ->setHeaders(['Название', 'Вес', 'Цена', 'Кол-во'])
+            ->setRows($details)
+            ->run();
 
-1C
-===========
+        $oneC = implode(" ", $oneC);
 
-" . implode(" ", $oneC) . ' ;';
-
-        return $this->sendMessage($headerText . $orderText . $itemsText . $oneC, $chatId);
+        return $this->sendMessage("$headerText $orderText <code>$itemsText</code>\n\n\n<code>$oneC</code>", $chatId, 'HTML');
     }
 }

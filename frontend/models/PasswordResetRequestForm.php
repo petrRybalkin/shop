@@ -1,6 +1,7 @@
 <?php
 namespace frontend\models;
 
+use backend\models\Settings;
 use Yii;
 use yii\base\Model;
 use common\models\User;
@@ -54,15 +55,16 @@ class PasswordResetRequestForm extends Model
             }
         }
 
+        $siteName = Settings::getVal('siteName');
         return Yii::$app
             ->mailer
             ->compose(
                 ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'],
                 ['user' => $user]
             )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setFrom([Yii::$app->params['supportEmail'] => $siteName])
             ->setTo($this->email)
-            ->setSubject('Password reset for ' . Yii::$app->name)
+            ->setSubject('Восстановление пароля на сайте ' . $siteName)
             ->send();
     }
 }

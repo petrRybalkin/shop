@@ -394,4 +394,14 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionT()
+    {
+        $model = Order::findOne(18);
+
+        /** @var Telegram $telegram */
+        $telegram = Yii::$app->telegram;
+
+        \yii\helpers\VarDumper::dump($telegram->sendOrderMessage($model, 817850218), 10, true);exit;
+    }
 }

@@ -1426,7 +1426,16 @@ background-size:contain;line-height:1.9;z-index:100}
 .list-product .product .bot,.list-product .product .left{bottom:0;left:0;transform:rotate(-180deg)}
 .list-product .product .left,.list-product .product .right{background:url("../img/icons.png") 0 -109px no-repeat;width:1px;height:174px}
 .list-product .product .top,.list-product .product .bot{background:url("../img/icons.png") 0 -293px no-repeat;width:92px;height:1px}
-.list-product .product__info{height:40px;margin:auto 10px 12px;color:#a7a4a4;font-size:13px;line-height:1.2;text-align:center}
+.list-product .product__info{height:50px;margin:1px 10px;color:#a7a4a4;font-size:13px;line-height:1.2;text-align:center}
+.list-product .product__info p{
+	/*white-space: nowrap;*/
+    overflow: hidden;
+   /* text-overflow: ellipsis;
+    padding: 5px;*/
+  display: -webkit-box;
+  -webkit-box-orient: vertical;  
+  -webkit-line-clamp: 2;
+}
 .list-product .product.with-accent,.list-product .product.lucky-product-True{-moz-box-shadow:0 0 15px 1px rgba(0,0,0,0.1);-webkit-box-shadow:0 0 15px 1px rgba(0,0,0,0.1);box-shadow:0 0 15px 1px rgba(0,0,0,0.1)}
 .list-product.five .product{width:16.6%}
 .list-product.five .product__info{display:block!important}

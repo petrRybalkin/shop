@@ -19,7 +19,7 @@ $this->registerJsFile(YII_DEBUG
 $list = $model->getProductListItems()->all();
 $default = [
     [
-        'id' => random_int(1, 100000),
+        'id' => 'new_' . random_int(1, 100000),
         'title' => '',
         'sort' => 0,
         'price' => 0,

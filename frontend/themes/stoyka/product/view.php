@@ -34,7 +34,7 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
         <a class="back-to right" onclick="javascript:window.history.back();">Вернуться</a>
     </div>
 
-    <div class="item product-detail" data-id="172" data-href="<?= Url::to($model->getUrl()); ?>" data-image="<?=$model->image->getImageFileUrl('image') ?>" data-title="<?= $model->title ?>" data-price="195" data-is-lucky="False" data-price-half="" data-description="<?= $model->description ?>" data-weight="170" data-unique_code="701" data-is-active="true" data-recommendation-url="" data-disallow_discount="false">
+    <div class="item product-detail" data-id="172" data-href="<?= Url::to($model->getUrl()); ?>" data-image="<?=$model->image->getImageFileUrl('image') ?>" data-title="<?= $model->title ?>" data-price="195" data-is-lucky="False" data-price-half="" data-description="<?= strip_tags($model->description) ?>" data-weight="170" data-unique_code="701" data-is-active="true" data-recommendation-url="" data-disallow_discount="false">
         <div class="product-loader">
             <div class="loader-inner ball-scale-ripple-multiple">
                 <div></div>
@@ -67,7 +67,7 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
             <div class="suggestions hidden-sm-down" style="display:none">
                 <h3>Многим понравилось еще</h3>
                 <ul class="list-product clear">
-                    <li class="product" data-href="/menu/rolly/roll-taiskii/" data-id="839" data-image="<?=$model->image->getImageFileUrl('image') ?>" data-title="<?= $model->title ?>" data-is-lucky="False" data-price="285" data-price-half="143" data-description="<?= $model->description ?>" data-weight="230" data-unique_code="1324" data-is-active="true" data-recommendation-url="" data-disallow_discount="false">
+                    <li class="product" data-href="/menu/rolly/roll-taiskii/" data-id="839" data-image="<?=$model->image->getImageFileUrl('image') ?>" data-title="<?= $model->title ?>" data-is-lucky="False" data-price="285" data-price-half="143" data-description="<?= strip_tags($model->description) ?>" data-weight="230" data-unique_code="1324" data-is-active="true" data-recommendation-url="" data-disallow_discount="false">
                         <a href="<?= Url::to($model->getUrl()); ?>" class="product__capture">
                             <span class="product__img">
                                 <?php if($model->image): ?>

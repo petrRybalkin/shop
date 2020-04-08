@@ -20,8 +20,7 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
 ?>
 
 <li class="product with-accent lucky-product-False" data-href="<?= Url::to($model->getUrl()); ?>"
-    data-id="<?= $model->id; ?>" data-title="<?= $model->title; ?>" data-is-lucky="False"
-    data-price="<?= Yii::$app->formatter->asDecimal($model->price); ?>">
+    data-id="<?= $model->id; ?>" data-title="<?= $model->title; ?>" data-is-lucky="False" data-price="<?= Yii::$app->formatter->asDecimal($model->price); ?>">
     <a href="<?= Url::to($model->getUrl()); ?>" class="product__capture">
         <span class="product__img">
             <?= Html::img($model->image ? $model->image->getThumbFileUrl('image', 'thumb') : 'DEFAULT IMAGE', [
@@ -30,7 +29,7 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
             ]) ?>
         </span>
         <p class="product__title" data-title="<?= $model->title; ?>"><?= $model->title; ?></p>
-        <div class="product__info" data-toggle="popover" data-placement="bottom" data-content="<?= $model->description; ?>"><?= $model->description; ?><?= $model->weight; ?> гр.</div>
+        <div class="product__info" data-toggle="popover" data-placement="bottom" data-content="<?= strip_tags($model->description) ?>"><?= $model->description; ?><?= $model->weight; ?> гр.</div>
     </a>
     <div class="product__descr" style="display:none;">
         <?= $model->description; ?>

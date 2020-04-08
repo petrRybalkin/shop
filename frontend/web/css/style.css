@@ -2574,6 +2574,7 @@ label[for="id_captcha_1"]{margin-right:20px}
 @media(max-width: 320px){.slider,.sliderContent,.sliderContent .item {height:125px;min-height:110px;max-height:370px}}
 @media(min-width: 768px){.banner .action-resp{display:none}}
 @media(max-width:767px){
+	.breadcrumb {margin-bottom: 46px}
 	.promo input{width:185px!important}
 	.promo a{width:100px!important}
 	.banner-time{zoom:1!important;margin-top:1px!important;margin-bottom:-2px!important;padding-bottom:5px;border-bottom:1px solid #ccc}

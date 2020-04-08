@@ -23,7 +23,7 @@ YiiAsset::register($this);
 <div class="order-view">
 
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-7 col-sm-12 col-xs-12">
             <?= GridView::widget([
                 'dataProvider' => new ArrayDataProvider([
                     'allModels' => $model->orderItems,
@@ -45,7 +45,7 @@ YiiAsset::register($this);
                 ],
             ]) ?>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-5 col-sm-12 col-xs-12">
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [

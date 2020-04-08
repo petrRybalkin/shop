@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use common\components\gd\ImageUploadBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -10,14 +11,36 @@ use yii\db\ActiveRecord;
  *
  * @property int $id
  * @property int|null $list_id
+ * @property int|null $product_1c_id
  * @property int|null $sort
  * @property string|null $title
+ * @property string|null $image
  * @property int|null $price
  *
  * @property ProductList $list
+ *
+ * @mixin ImageUploadBehavior
  */
 class ProductListItem extends ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => ImageUploadBehavior::class,
+                'attribute' => 'image',
+                'thumbs' => [
+                    'thumb' => ['width' => 130, 'height' => 119],
+                ],
+                'filePath' => '@webroot/images/list-item/[[pk]].[[extension]]',
+                'fileUrl' => '/images/list-item/[[pk]].[[extension]]',
+                'thumbPath' => '@webroot/images/list-item/[[profile]]_[[pk]].[[extension]]',
+                'thumbUrl' => '/images/list-item/[[profile]]_[[pk]].[[extension]]',
+            ],
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -32,7 +55,8 @@ class ProductListItem extends ActiveRecord
     public function rules()
     {
         return [
-            [['list_id', 'price', 'sort'], 'integer'],
+            [['list_id', 'price', 'sort', 'product_1c_id'], 'integer'],
+            ['image', 'file', 'extensions' => 'jpeg, jpg, gif, png'],
             [['title'], 'string', 'max' => 255],
             [['list_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductList::class, 'targetAttribute' => ['list_id' => 'id']],
         ];
@@ -46,8 +70,10 @@ class ProductListItem extends ActiveRecord
         return [
             'id' => 'ID',
             'list_id' => 'List ID',
+            'product_1c_id' => '1C ID',
             'sort' => 'Sort',
             'title' => 'Title',
+            'image' => 'Image',
             'price' => 'Price',
         ];
     }

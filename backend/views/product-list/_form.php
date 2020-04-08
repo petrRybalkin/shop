@@ -91,7 +91,7 @@ VueJsProductListAsset::register($this);
                             <div class="form-group">
                                 <label class="sr-only">Заголовок</label>
                                 <input class="form-control" placeholder="Название"
-                                       :name="'items[' + item.id + '][title]'" :value="item.title">
+                                       :name="'items[' + item.id + '][title]'" v-model="item.title">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -99,7 +99,7 @@ VueJsProductListAsset::register($this);
                                 <label class="sr-only">Цена</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control" placeholder="Цена"
-                                           :name="'items[' + item.id + '][price]'" :value="item.price">
+                                           :name="'items[' + item.id + '][price]'" v-model="item.price">
                                     <div class="input-group-addon">UAH</div>
                                 </div>
                             </div>
@@ -109,7 +109,7 @@ VueJsProductListAsset::register($this);
                                 <label class="sr-only">1C ID</label>
                                 <div class="input-group">
                                     <input type="number" class="form-control" placeholder="1C ID"
-                                           :name="'items[' + item.id + '][product_1c_id]'" :value="item.product_1c_id">
+                                           :name="'items[' + item.id + '][product_1c_id]'" v-model="item.product_1c_id">
                                 </div>
                             </div>
                         </div>
@@ -117,7 +117,7 @@ VueJsProductListAsset::register($this);
                             <div class="form-group">
                                 <label class="sr-only">Сортировка</label>
                                 <input type="number" class="form-control" placeholder="Сортировка"
-                                       :name="'items[' + item.id + '][sort]'" :value="item.sort">
+                                       :name="'items[' + item.id + '][sort]'" v-model="item.sort">
                             </div>
                         </div>
                         <div class="col-md-1">

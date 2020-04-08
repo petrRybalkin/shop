@@ -1,6 +1,7 @@
 <?php
 namespace frontend\models;
 
+use backend\models\Settings;
 use Yii;
 use yii\base\Model;
 use common\models\User;
@@ -75,15 +76,16 @@ class SignupForm extends Model
      */
     protected function sendEmail($user)
     {
+        $siteName = Settings::getVal('siteName');
         return Yii::$app
             ->mailer
             ->compose(
                 ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
                 ['user' => $user]
             )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
+            ->setFrom([Yii::$app->params['supportEmail'] => $siteName])
             ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
+            ->setSubject('Регистрация на сайте ' . $siteName)
             ->send();
     }
 }

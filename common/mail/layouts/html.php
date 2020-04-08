@@ -1,4 +1,6 @@
 <?php
+
+use backend\models\Settings;
 use yii\helpers\Html;
 use yii\mail\MessageInterface;
 use yii\web\View;
@@ -12,7 +14,7 @@ use yii\web\View;
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=<?= Yii::$app->charset ?>" />
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Settings::getVal('siteName') ?></title>
     <?php $this->head() ?>
 </head>
 <body>

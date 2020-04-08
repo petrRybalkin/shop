@@ -114,7 +114,7 @@ class Telegram extends Component
                 continue;
             }
             if ($attribute === 'created_at') {
-                $value = Yii::$app->formatter->asDatetime($value);
+                $value = Yii::$app->formatter->asDatetime(time());
             }
             $orderText[] = ("<b>" . $order->getAttributeLabel($attribute) . "</b>: <i>" . $value . "</i>");
         }

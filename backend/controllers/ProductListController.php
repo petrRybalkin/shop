@@ -65,7 +65,6 @@ class ProductListController extends Controller
         $model = new ProductList();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->unlinkAll('productListItems', true);
             return $this->redirect(['index', 'id' => $model->id]);
         }
 

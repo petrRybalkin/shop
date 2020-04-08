@@ -31,6 +31,8 @@ use yz\shoppingcart\CartPositionTrait;
  * @property ProductImage $image
  * @property ProductList[] $lists
  * @property ProductListMap[] $productListMaps
+ *
+ * @mixin CartPositionTrait
  */
 class Product extends ActiveRecord implements CartPositionInterface
 {

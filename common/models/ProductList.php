@@ -7,6 +7,7 @@ use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "product_list".
@@ -70,13 +71,27 @@ class ProductList extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        $this->unlinkAll('productListItems', true);
+        $productListItemIds = $this->getProductListItems()->select('id')->indexBy('id')->column();
 
         if ($items = Yii::$app->request->post('items')) {
-            foreach ($items as $item) {
-                $productListItem = new ProductListItem();
+            foreach ($items as $key => $item) {
+                $productListItem = null;
+                if (strpos($key, 'new_') === false && $productListItem = ProductListItem::findOne($key)) {
+                    unset($productListItemIds[$key]);
+                }
+                $productListItem = $productListItem ?: new ProductListItem();
                 $productListItem->setAttributes($item);
-                $this->link('productListItems', $productListItem);
+                $productListItem->list_id = $this->id;
+                if ($img = UploadedFile::getInstanceByName("items[{$key}][image]")) {
+                    $productListItem->image = $img;
+                }
+                $productListItem->save();
+            }
+        }
+
+        if ($productListItemIds) {
+            foreach (array_keys($productListItemIds) as $id) {
+                ProductListItem::findOne($id)->delete();
             }
         }
 

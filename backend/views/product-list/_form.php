@@ -1,8 +1,10 @@
 <?php
 
+use backend\assets\VueJsProductListAsset;
 use common\models\ProductList;
+use common\models\ProductListItem;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\helpers\Json;
 use yii\web\View;
 use yii\widgets\ActiveForm;
 
@@ -14,62 +16,78 @@ $this->registerJsFile(YII_DEBUG
     ? 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js'
     : 'https://cdn.jsdelivr.net/npm/vue');
 
-$items = Json::encode($model->getProductListItems()->asArray()->all() ?: [
+$list = $model->getProductListItems()->all();
+$default = [
     [
         'id' => random_int(1, 100000),
         'title' => '',
         'sort' => 0,
         'price' => 0,
+        'image' => '/img/empty.png',
+        'product_1c_id' => '',
     ]
-]);
-
-$js = "function randomInteger(max) {
-        // случайное число от min до (max+1)
-        let rand = Math.random() * (max + 1);
-        return Math.floor(rand);
-    }
-
-    const app = new Vue({
-        el: '#product-items',
-        data: {
-            items: {$items}
-        },
-        methods: {
-            addItem: function () {
-                this.items.push({
-                    id: randomInteger(100000),
-                    title: '',
-                    sort: 0,
-                    price: 0
-                });
-            },
-            rmItem: function (index) {
-                this.items.splice(index, 1);
-            }
-        }
-    })";
-
-$this->registerJs($js);
+];
+$items = $list ? ArrayHelper::getColumn($list, function (ProductListItem $item) {
+    $return = $item->attributes;
+    $return['image'] = $item->getThumbFileUrl('image', 'thumb', '/img/empty.png');
+    return $return;
+}) : $default;
+$this->registerJsVar('listItems', $items);
+VueJsProductListAsset::register($this);
 ?>
 
 
 <div class="product-list-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'enableClientValidation' => false,
+        'options' => [
+            'enctype' => 'multipart/form-data',
+        ],
+    ]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'required')->checkbox() ?>
 
-
     <div class="panel panel-info">
         <div class="panel-heading">Состав</div>
         <div class="panel-body" id="product-items">
             <ul class="list-group">
+
+                <li class="list-group-item">
+                    <div class="row" style="font-weight: bold;">
+                        <div class="col-md-4">
+                            Фото
+                        </div>
+                        <div class="col-md-3">
+                            Название
+                        </div>
+                        <div class="col-md-2">
+                            Цена
+                        </div>
+                        <div class="col-md-1">
+                            1C ID
+                        </div>
+                        <div class="col-md-1">
+                            Сортировка
+                        </div>
+                    </div>
+                </li>
+
                 <li class="list-group-item" v-for="(item, index) in items" :key="item.id">
 
                     <div class="row">
                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="sr-only">Фото</label>
+                                <input class="form-control" placeholder="Фото" type="file"
+                                       :name="'items[' + item.id + '][image]'"
+                                       accept=".png, .jpg, .jpeg">
+                                <img :src="item.image" width="182" height="119">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="sr-only">Заголовок</label>
                                 <input class="form-control" placeholder="Название"
@@ -86,14 +104,23 @@ $this->registerJs($js);
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
+                            <div class="form-group">
+                                <label class="sr-only">1C ID</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" placeholder="1C ID"
+                                           :name="'items[' + item.id + '][product_1c_id]'" :value="item.product_1c_id">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
                             <div class="form-group">
                                 <label class="sr-only">Сортировка</label>
                                 <input type="number" class="form-control" placeholder="Сортировка"
                                        :name="'items[' + item.id + '][sort]'" :value="item.sort">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <a href="javascript:;" class="btn btn-danger btn-sm" @click="rmItem(index)">
                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                             </a>
@@ -101,11 +128,13 @@ $this->registerJs($js);
                     </div>
 
                 </li>
-            </ul>
 
-            <a href="javascript:;" class="btn btn-success" @click="addItem">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Добавить
-            </a>
+                <li class="list-group-item" style="text-align: right;">
+                    <a href="javascript:;" class="btn btn-success" @click="addItem">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Добавить
+                    </a>
+                </li>
+            </ul>
 
         </div>
     </div>

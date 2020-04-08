@@ -30,7 +30,7 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
             ]) ?>
         </span>
         <p class="product__title" data-title="<?= $model->title; ?>"><?= $model->title; ?></p>
-        <div class="product__info"><?= $model->description; ?> <br><?= $model->weight; ?> гр.</div>
+        <div class="product__info" data-toggle="popover" data-placement="bottom" data-content="<?= $model->description; ?>"><?= $model->description; ?><?= $model->weight; ?> гр.</div>
     </a>
     <div class="product__descr" style="display:none;">
         <?= $model->description; ?>

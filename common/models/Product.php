@@ -3,9 +3,11 @@
 namespace common\models;
 
 use frontend\components\JsonLDHelper;
+use Throwable;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\StaleObjectException;
 use yii\helpers\Url;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
@@ -23,14 +25,16 @@ use yz\shoppingcart\CartPositionTrait;
  * @property int|null $product_1c_id
  * @property int|null $old_price
  * @property int|null $weight
- * @property int|null $list_id
  * @property string|null $seoTitle
  * @property string|null $seoDescription
  *
  * @property Category $category
  * @property ProductImage[] $images
  * @property ProductImage $image
- * @property ProductList $list
+ * @property ProductList[] $lists
+ * @property ProductListMap[] $productListMaps
+ *
+ * @mixin CartPositionTrait
  */
 class Product extends ActiveRecord implements CartPositionInterface
 {
@@ -61,7 +65,7 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'list_id'], 'integer'],
+            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits'], 'integer'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 0],
@@ -89,13 +93,20 @@ class Product extends ActiveRecord implements CartPositionInterface
             'description' => 'Описание',
             'price' => 'Цена',
             'weight' => 'Вес (в граммах)',
-            'list_id' => 'Доп опции',
             'superprice' => '"Суперцена"',
             'hits' => '"Хит"',
             'old_price' => 'Старая цена',
             'seoTitle' => 'Seo Title',
             'seoDescription' => 'Seo Description',
         ];
+    }
+
+    /**
+     * @return ActiveQuery
+     */
+    public function getProductListMaps()
+    {
+        return $this->hasMany(ProductListMap::class, ['product_id' => 'id']);
     }
 
     /**
@@ -106,16 +117,6 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function getCategory()
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
-    }
-
-    /**
-     * Gets query for [[Category]].
-     *
-     * @return ActiveQuery
-     */
-    public function getList()
-    {
-        return $this->hasOne(ProductList::class, ['id' => 'list_id']);
     }
 
     /**
@@ -175,5 +176,18 @@ class Product extends ActiveRecord implements CartPositionInterface
         }
         
         JsonLDHelper::add($seo);
+    }
+
+    /**
+     * @return bool
+     * @throws Throwable
+     * @throws StaleObjectException
+     */
+    public function beforeDelete()
+    {
+        foreach ($this->images as $image) {
+            $image->delete();
+        }
+        return parent::beforeDelete();
     }
 }

@@ -16,7 +16,7 @@ class ProductListSearch extends ProductList
     public function rules()
     {
         return [
-            [['id', 'required'], 'integer'],
+            [['id', 'required', 'max_attributes'], 'integer'],
             [['title'], 'safe'],
         ];
     }
@@ -59,6 +59,7 @@ class ProductListSearch extends ProductList
         $query->andFilterWhere([
             'id' => $this->id,
             'required' => $this->required,
+            'max_attributes' => $this->max_attributes,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title]);

@@ -26,6 +26,7 @@ use yii\helpers\ArrayHelper;
  * @property Category $parent
  * @property Category[] $child
  * @property Product[] $products
+ * @property CategoryListMap[] $categoryListMaps
  *
  * @mixin ImageUploadBehavior
  */
@@ -88,6 +89,16 @@ class Category extends ActiveRecord
             'image' => 'Изображение',
             'show_in_main' => 'Отображать на главной?',
         ];
+    }
+
+    /**
+     * Gets query for [[CategoryListMaps]].
+     *
+     * @return ActiveQuery
+     */
+    public function getCategoryListMaps()
+    {
+        return $this->hasMany(CategoryListMap::class, ['category_id' => 'id']);
     }
 
     /**

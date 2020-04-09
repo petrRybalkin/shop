@@ -48,6 +48,8 @@ VueJsProductListAsset::register($this);
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'max_attributes')->textInput() ?>
+
     <?= $form->field($model, 'required')->checkbox() ?>
 
     <div class="panel panel-info">

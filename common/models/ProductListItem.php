@@ -5,6 +5,8 @@ namespace common\models;
 use common\components\gd\ImageUploadBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yz\shoppingcart\CartPositionInterface;
+use yz\shoppingcart\CartPositionTrait;
 
 /**
  * This is the model class for table "product_list_item".
@@ -20,9 +22,11 @@ use yii\db\ActiveRecord;
  * @property ProductList $list
  *
  * @mixin ImageUploadBehavior
+ * @mixin CartPositionTrait
  */
-class ProductListItem extends ActiveRecord
+class ProductListItem extends ActiveRecord implements CartPositionInterface
 {
+    use CartPositionTrait;
 
     public function behaviors()
     {
@@ -58,7 +62,13 @@ class ProductListItem extends ActiveRecord
             [['list_id', 'price', 'sort', 'product_1c_id'], 'integer'],
             ['image', 'file', 'extensions' => 'jpeg, jpg, gif, png'],
             [['title'], 'string', 'max' => 255],
-            [['list_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductList::class, 'targetAttribute' => ['list_id' => 'id']],
+            [
+                ['list_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => ProductList::class,
+                'targetAttribute' => ['list_id' => 'id']
+            ],
         ];
     }
 
@@ -86,5 +96,21 @@ class ProductListItem extends ActiveRecord
     public function getList()
     {
         return $this->hasOne(ProductList::class, ['id' => 'list_id']);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getId()
+    {
+        return "add_{$this->id}";
     }
 }

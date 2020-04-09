@@ -15,6 +15,7 @@ use yii\web\UploadedFile;
  * @property int $id
  * @property string|null $title
  * @property int|null $required
+ * @property int $max_attributes
  *
  * @property ProductListItem[] $productListItems
  */
@@ -34,7 +35,8 @@ class ProductList extends ActiveRecord
     public function rules()
     {
         return [
-            [['required'], 'integer'],
+            [['required', 'max_attributes'], 'integer'],
+            [['max_attributes'], 'default', 'value' => 1],
             [['title'], 'string', 'max' => 255],
         ];
     }
@@ -48,6 +50,7 @@ class ProductList extends ActiveRecord
             'id' => 'ID',
             'title' => 'Название списка',
             'required' => 'Обязательно',
+            'max_attributes' => 'Максимальное кол-во элементов для выбора',
         ];
     }
 

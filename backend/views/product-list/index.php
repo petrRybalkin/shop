@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'required',
+            'max_attributes',
 
             [
                 'class' => 'yii\grid\ActionColumn',

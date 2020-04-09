@@ -1426,7 +1426,16 @@ background-size:contain;line-height:1.9;z-index:100}
 .list-product .product .bot,.list-product .product .left{bottom:0;left:0;transform:rotate(-180deg)}
 .list-product .product .left,.list-product .product .right{background:url("../img/icons.png") 0 -109px no-repeat;width:1px;height:174px}
 .list-product .product .top,.list-product .product .bot{background:url("../img/icons.png") 0 -293px no-repeat;width:92px;height:1px}
-.list-product .product__info{height:40px;margin:auto 10px 12px;color:#a7a4a4;font-size:13px;line-height:1.2;text-align:center}
+.list-product .product__info{height:50px;margin:1px 10px;color:#a7a4a4;font-size:13px;line-height:1.2;text-align:center}
+.list-product .product__info p{
+	/*white-space: nowrap;*/
+    overflow: hidden;
+   /* text-overflow: ellipsis;
+    padding: 5px;*/
+  display: -webkit-box;
+  -webkit-box-orient: vertical;  
+  -webkit-line-clamp: 2;
+}
 .list-product .product.with-accent,.list-product .product.lucky-product-True{-moz-box-shadow:0 0 15px 1px rgba(0,0,0,0.1);-webkit-box-shadow:0 0 15px 1px rgba(0,0,0,0.1);box-shadow:0 0 15px 1px rgba(0,0,0,0.1)}
 .list-product.five .product{width:16.6%}
 .list-product.five .product__info{display:block!important}
@@ -2379,6 +2388,12 @@ label[for="id_captcha_1"]{margin-right:20px}
     left: -17px;
     top: 4px;
 }
+.list-product ul{margin: 25em 0 0 11em}
+.pagination > .active > a,.pagination > .active > span,.pagination > .active > a:hover,
+.pagination > .active > span:hover,.pagination > .active > a:focus,.pagination > .active > span:focus{color:#000;background-color:#de6c28;border-color: #de6c28}
+.pagination > .disabled > span,.pagination > .disabled > span:hover,.pagination > .disabled > span:focus,
+.pagination > .disabled > a,.pagination > .disabled > a:hover,.pagination > .disabled > a:focus{background-color:transparent}
+.pagination > li > a,.pagination > li > span{color:#000;background-color:transparent}
 @media(max-width:33.9em){.hidden-xs-down{display:none!important}}
 @media(min-width:34em){.hidden-sm-up{display:none!important}}
 @media(max-width:47.9em){.hidden-sm-down{display:none!important}}
@@ -2388,7 +2403,7 @@ label[for="id_captcha_1"]{margin-right:20px}
 @media(max-width:74.9em){.hidden-lg-down{display:none!important}}
 @media(min-width:75em){.hidden-xl-up{display:none!important}}
 .hidden-xl-down{display:none!important}
-@media(max-width:1500px){.list-product .product{width:20%!important}}
+@media(max-width:1500px){.list-product .product{width:20%!important}.list-product ul{margin:0 0 0 50%}}
 @media(max-width:1330px){.product-buy{margin-left:0!important}}
 @media(max-width:1239px){
 	body{min-width:320px;width:100%}
@@ -2549,11 +2564,13 @@ label[for="id_captcha_1"]{margin-right:20px}
 	.header-bottom__basket{padding:0 30px 0 57px;line-height:49px}
 	.cat-nav .swiper-wrapper .swiper-slide a{width:90px;height:90px;font-size:8px}
 	.basket-note div{line-height:1.7}
+	.list-product ul{margin:0}
 }
 @media(max-width: 1042px){
 	.actions.hidden-sm-down{margin-top:0px!important}
 	.slider,.sliderContent .item {background:transparent}
 }
+@media(max-width: 920px){.list-product ul{position:relative;margin:25em 0 0 0;left:-15em}}
 @media(max-width: 850px){.slider,.sliderContent,.sliderContent .item {height:350px;min-height:110px;max-height:370px}}
 @media(max-width: 767px){.slider,.sliderContent,.sliderContent .item {height:270px;min-height:110px;max-height:370px}}
 @media(max-width: 600px){.slider,.sliderContent,.sliderContent .item {height:200px;min-height:110px;max-height:370px}}
@@ -2565,6 +2582,8 @@ label[for="id_captcha_1"]{margin-right:20px}
 @media(max-width: 320px){.slider,.sliderContent,.sliderContent .item {height:125px;min-height:110px;max-height:370px}}
 @media(min-width: 768px){.banner .action-resp{display:none}}
 @media(max-width:767px){
+	.list-product ul{margin:25em 0 0 3em}
+	.breadcrumb {margin-bottom: 46px}
 	.promo input{width:185px!important}
 	.promo a{width:100px!important}
 	.banner-time{zoom:1!important;margin-top:1px!important;margin-bottom:-2px!important;padding-bottom:5px;border-bottom:1px solid #ccc}
@@ -2876,6 +2895,7 @@ label[for="id_captcha_1"]{margin-right:20px}
 	#promocode-window .form-block.error span{top:40px}
 	.basket-note div{padding-top:37px;padding-left:0;background-size:150px;line-height:1.5;text-align:left}
 }
+@media(max-width: 648px){.list-product ul{margin:0 0 0 50%}}
 @media(max-width:580px){.constructor .body .items{width:100%!important}
 	.constructor .full-item{width:100%!important;margin-top:20px}
 	.constructor .full-item .txt{text-align:center}
@@ -2899,6 +2919,7 @@ label[for="id_captcha_1"]{margin-right:20px}
 	.list-product.pizza-list .product-type,.list-product.list-cat-pizzas .product-type{margin-top:0}
 	.list-product.list-cat-assorti-sety .product__title,.list-product.list-cat-napitki .product__title{font-size:13px}
 }
+@media(max-width: 472px){.list-product ul{margin:0 0 0 10em;position:relative;left:-5em}}
 @media(max-width:320px){
 	.list-product .product{display:inline-block;float:none;width:70%!important;min-width:190px;margin-bottom:27px}
 	.list-product .product__title{display:block;height:auto!important;font-size:18px;line-height:20px}

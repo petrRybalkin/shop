@@ -36,6 +36,7 @@
                     ['label' => 'Товары', 'icon' => 'file-code-o', 'url' => ['/product']],
                     ['label' => 'Статьи', 'icon' => 'file-code-o', 'url' => ['/page']],
                     ['label' => 'Slider', 'icon' => 'file-code-o', 'url' => ['/slider']],
+                    ['label' => 'Пользователи ', 'icon' => 'file-code-o', 'url' => ['/user-list/index']],
                     ['label' => 'Настойки', 'icon' => 'file-code-o', 'url' => ['/site/settings']],
 //                    [
 //                        'label' => 'Some tools',

@@ -3,9 +3,11 @@
 namespace common\models;
 
 use frontend\components\JsonLDHelper;
+use Throwable;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\StaleObjectException;
 use yii\helpers\Url;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
@@ -174,5 +176,18 @@ class Product extends ActiveRecord implements CartPositionInterface
         }
         
         JsonLDHelper::add($seo);
+    }
+
+    /**
+     * @return bool
+     * @throws Throwable
+     * @throws StaleObjectException
+     */
+    public function beforeDelete()
+    {
+        foreach ($this->images as $image) {
+            $image->delete();
+        }
+        return parent::beforeDelete();
     }
 }

@@ -60,7 +60,6 @@ YiiAsset::register($this);
                     'person_count',
                     'name',
                     'phone',
-                    'city',
                     'address',
                     'price',
                     'delivery',

@@ -38,7 +38,6 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
             'person_count',
             'name',
             'phone',
-            'city',
             'address',
             'price',
             'delivery',

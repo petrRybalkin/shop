@@ -32,7 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'person_count',
             'name',
             'phone',
-            'city',
             'address',
             'price',
             'delivery',

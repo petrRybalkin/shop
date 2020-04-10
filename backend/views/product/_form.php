@@ -18,6 +18,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'status')->checkbox() ?>
+
     <?= $form->field($model, 'description')->widget(Redactor::class, [
         'clientOptions' => [
             'imageManagerJson' => ['/redactor/upload/image-json'],

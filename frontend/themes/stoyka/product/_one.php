@@ -18,7 +18,7 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
     'position' => View::POS_READY,
 ]);
 ?>
-
+<?php if($model->status == 1) { ?>
 <li class="product with-accent lucky-product-False" data-href="<?= Url::to($model->getUrl()); ?>"
     data-id="<?= $model->id; ?>" data-title="<?= $model->title; ?>" data-is-lucky="False" data-price="<?= Yii::$app->formatter->asDecimal($model->price); ?>">
     <a href="<?= Url::to($model->getUrl()); ?>" class="product__capture">
@@ -65,4 +65,5 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
     <div class="label" style="background-color:#FF9800"> Хит! </div>
     <?php } ?>
 </li>
+<?php } ?>
                       

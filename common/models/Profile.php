@@ -49,10 +49,10 @@ class Profile extends ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'user_id' => Yii::t('app', 'User ID'),
-            'name' => Yii::t('app', 'Name'),
-            'phone' => Yii::t('app', 'Phone'),
-            'city' => Yii::t('app', 'City'),
-            'address' => Yii::t('app', 'Address'),
+            'name' => Yii::t('app', 'Имя'),
+            'phone' => Yii::t('app', 'Телефон'),
+            'city' => Yii::t('app', 'Город'),
+            'address' => Yii::t('app', 'Адрес'),
         ];
     }
 

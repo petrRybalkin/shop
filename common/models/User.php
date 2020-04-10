@@ -7,6 +7,8 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /**
  * User model
@@ -64,6 +66,25 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'username' => 'Username',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'email' => 'Email',
+            'status' => 'Статус',
+            'created_at' => 'Создан',
+            'updated_at' => 'Обновлен',
+            'verification_token' => 'Verification Token',
+        ];
+    }
+
+    /**
      * Gets query for [[User]].
      *
      * @return ActiveQuery
@@ -71,6 +92,56 @@ class User extends ActiveRecord implements IdentityInterface
     public function getProfile()
     {
         return $this->hasOne(Profile::class, ['user_id' => 'id']);
+    }
+
+    public static function statusList()
+    {
+        return [
+            self::STATUS_DELETED => 'Удален',
+            self::STATUS_INACTIVE => 'Не активен',
+            self::STATUS_ACTIVE => 'Активный',
+        ];
+    }
+
+    public static function statusColorList()
+    {
+        return [
+            self::STATUS_INACTIVE => 'info',
+            self::STATUS_ACTIVE => 'success',
+            self::STATUS_DELETED => 'danger',
+        ];
+    }
+
+    /**
+     * @param string $default
+     * @param null $status
+     * @return string
+     */
+    public function getStatusLabel($default = '-', $status = null)
+    {
+        return ArrayHelper::getValue(self::statusList(), $status ?: $this->status, $default);
+    }
+
+    /**
+     * @param string $default
+     * @param null $status
+     * @return string
+     */
+    public function getStatusColor($default = 'default', $status = null)
+    {
+        return ArrayHelper::getValue(self::statusColorList(), $status ?: $this->status, $default);
+    }
+
+    /**
+     * @param array $options
+     * @return string
+     */
+    public function getStatusTag($options = [])
+    {
+        if (!array_key_exists('class', $options)) {
+            $options['class'] = 'label label-' . $this->getStatusColor();
+        }
+        return Html::tag('span', $this->getStatusLabel(), $options);
     }
 
     /**

@@ -8,6 +8,8 @@ use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\db\StaleObjectException;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
@@ -22,6 +24,7 @@ use yz\shoppingcart\CartPositionTrait;
  * @property string|null $title
  * @property string|null $description
  * @property int|null $price
+ * @property int|null $status
  * @property int|null $product_1c_id
  * @property int|null $old_price
  * @property int|null $weight
@@ -40,6 +43,9 @@ class Product extends ActiveRecord implements CartPositionInterface
 {
 
     use CartPositionTrait;
+
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
 
     public function getPrice()
     {
@@ -65,7 +71,7 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits'], 'integer'],
+            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status'], 'integer'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 0],
@@ -86,6 +92,7 @@ class Product extends ActiveRecord implements CartPositionInterface
     {
         return [
             'id' => 'ID',
+            'status' => 'Активный',
             'product_1c_id' => '1C ID',
             'category_id' => 'Категория',
             'sort' => 'Сортировка',
@@ -99,6 +106,54 @@ class Product extends ActiveRecord implements CartPositionInterface
             'seoTitle' => 'Seo Title',
             'seoDescription' => 'Seo Description',
         ];
+    }
+
+    public static function statusList()
+    {
+        return [
+            self::STATUS_INACTIVE => 'Нет',
+            self::STATUS_ACTIVE => 'Да',
+        ];
+    }
+
+    public static function statusColorList()
+    {
+        return [
+            self::STATUS_INACTIVE => 'danger',
+            self::STATUS_ACTIVE => 'success',
+        ];
+    }
+
+    /**
+     * @param string $default
+     * @param null $status
+     * @return string
+     */
+    public function getStatusLabel($default = '-', $status = null)
+    {
+        return ArrayHelper::getValue(self::statusList(), $status ?: $this->status, $default);
+    }
+
+    /**
+     * @param string $default
+     * @param null $status
+     * @return string
+     */
+    public function getStatusColor($default = 'default', $status = null)
+    {
+        return ArrayHelper::getValue(self::statusColorList(), $status ?: $this->status, $default);
+    }
+
+    /**
+     * @param array $options
+     * @return string
+     */
+    public function getStatusTag($options = [])
+    {
+        if (!array_key_exists('class', $options)) {
+            $options['class'] = 'label label-' . $this->getStatusColor();
+        }
+        return Html::tag('span', $this->getStatusLabel(), $options);
     }
 
     /**

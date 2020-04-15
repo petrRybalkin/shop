@@ -38,6 +38,14 @@ $this->title = 'Товары';
             'price',
             'superprice',
             'hits',
+            [
+                'attribute' => 'status',
+                'filter' => Product::statusList(),
+                'format' => 'raw',
+                'value' => function (Product $model) {
+                    return Html::a($model->getStatusTag(), ['view', 'id' => $model->id]);
+                }
+            ],
             //'old_price',
             //'seoTitle',
             //'seoDescription:ntext',

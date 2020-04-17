@@ -25,6 +25,7 @@ use yz\shoppingcart\CartPositionTrait;
  * @property string|null $description
  * @property int|null $price
  * @property int|null $status
+ * @property int|null $sale
  * @property int|null $product_1c_id
  * @property int|null $old_price
  * @property int|null $weight
@@ -46,6 +47,8 @@ class Product extends ActiveRecord implements CartPositionInterface
 
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
+    const SALE_INACTIVE = 0;
+    const SALE_ACTIVE = 1;
 
     public function getPrice()
     {
@@ -71,7 +74,7 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status'], 'integer'],
+            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status', 'sale'], 'integer'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 0],
@@ -93,6 +96,7 @@ class Product extends ActiveRecord implements CartPositionInterface
         return [
             'id' => 'ID',
             'status' => 'Активный',
+            'sale' => 'Акционный товар',
             'product_1c_id' => '1C ID',
             'category_id' => 'Категория',
             'sort' => 'Сортировка',
@@ -100,8 +104,8 @@ class Product extends ActiveRecord implements CartPositionInterface
             'description' => 'Описание',
             'price' => 'Цена',
             'weight' => 'Вес (в граммах)',
-            'superprice' => '"Суперцена"',
-            'hits' => '"Хит"',
+            'superprice' => 'Суперцена',
+            'hits' => 'Хит',
             'old_price' => 'Старая цена',
             'seoTitle' => 'Seo Title',
             'seoDescription' => 'Seo Description',
@@ -121,6 +125,22 @@ class Product extends ActiveRecord implements CartPositionInterface
         return [
             self::STATUS_INACTIVE => 'danger',
             self::STATUS_ACTIVE => 'success',
+        ];
+    }
+
+    public static function saleList()
+    {
+        return [
+            self::SALE_INACTIVE => 'Нет',
+            self::SALE_ACTIVE => 'Да',
+        ];
+    }
+
+    public static function saleColorList()
+    {
+        return [
+            self::SALE_INACTIVE => 'danger',
+            self::SALE_ACTIVE => 'success',
         ];
     }
 
@@ -157,11 +177,50 @@ class Product extends ActiveRecord implements CartPositionInterface
     }
 
     /**
+     * @param string $default
+     * @param null $sale
+     * @return string
+     */
+    public function getSaleLabel($default = '-', $sale = null)
+    {
+        return ArrayHelper::getValue(self::saleList(), $sale ?: $this->sale, $default);
+    }
+
+    /**
+     * @param string $default
+     * @param null $sale
+     * @return string
+     */
+    public function getSaleColor($default = 'default', $sale = null)
+    {
+        return ArrayHelper::getValue(self::saleColorList(), $sale ?: $this->sale, $default);
+    }
+
+    /**
+     * @param array $options
+     * @return string
+     */
+    public function getSaleTag($options = [])
+    {
+        if (!array_key_exists('class', $options)) {
+            $options['class'] = 'label label-' . $this->getSaleColor();
+        }
+        return Html::tag('span', $this->getSaleLabel(), $options);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getProductListMaps()
     {
         return $this->hasMany(ProductListMap::class, ['product_id' => 'id']);
+    }
+
+    public function getProductsSale()
+    {
+        return Product::find()->where([
+            'product.sale' => 1,
+        ]);
     }
 
     /**

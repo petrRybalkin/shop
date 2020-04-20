@@ -11,6 +11,7 @@ use yii\db\StaleObjectException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use common\models\Rating;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
 
@@ -74,7 +75,7 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status', 'sale'], 'integer'],
+            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status', 'sale', 'rating'], 'integer'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 0],
@@ -242,6 +243,26 @@ class Product extends ActiveRecord implements CartPositionInterface
     {
         return $this->hasMany(ProductImage::class, ['product_id' => 'id']);
     }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    // public function getRating($sum){
+    //     $rating="";
+    //     $count='';
+    //     foreach( $sum as $plus){
+    //         $rating=$rating+$plus->value;
+    //         $count=$count+1;
+    //     }
+    //     if($rating>0) {
+    //         return $rating / $count;
+    //     }else{
+    //         return 0;
+    //     }
+    // }
+    public function getRating()
+    {
+        return $this->hasMany(Rating::className(), ['product_id'=>'id']);
+    }
 
     /**
      * Gets query for [[ProductImages]].
@@ -290,6 +311,14 @@ class Product extends ActiveRecord implements CartPositionInterface
         }
         
         JsonLDHelper::add($seo);
+    }
+
+    public function afterSave($insert, $changedAttributes) 
+    {
+        if ($insert) {
+            Rating::create($this->rating, $this->id);
+        }
+        return parent::afterSave($insert, $changedAttributes);
     }
 
     /**

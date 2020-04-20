@@ -53,8 +53,26 @@ class ProductController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $db = Yii::$app->db;
+        $ip = Yii::$app->request->getUserIP();
+        // - rating;
+            $fetchArRat = $db->createCommand("SELECT id FROM rating WHERE product_id='".$model->id."' AND ip ='".$ip."'")->queryScalar();
+            $disabled = $fetchArRat ? true : false;
+            $rating = Yii::$app->request->post('rating');
+            if (isset($rating) && Rating::create($rating, $model->id))
+            {
+                $fetchRatingCountSum = $db->createCommand("SELECT count(*), sum(rating) FROM rating WHERE product_id = '".$model->id."'")->queryAll();
+                $count = $fetchRatingCountSum[0]['count(*)'];
+                $SummRating = $fetchRatingCountSum[0]['sum(rating)'];
+                $itogRat = $SummRating/$count;
+                $db->createCommand("UPDATE article SET count_rating = '".$count."', rating = '".$itogRat."' WHERE id = '".$model->id."' ")->execute();
+                $this->refresh();
+            }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'disabled' => $disabled,
         ]);
     }
 

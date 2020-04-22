@@ -29,11 +29,13 @@ use yii\widgets\ActiveForm;
             'plugins' => ['clips', 'fontcolor','imagemanager']
         ]
     ])?>
+    <div>Акционный товар будет виден на Главной странице:</div>
+    <?= $form->field($model, 'sale')->checkbox() ?>
 
     <?= $form->field($model, 'sort')->textInput() ?>
 
     <?= $form->field($model, 'product_1c_id')->textInput() ?>
-    <div>выбарите одну из опций (при надобности):</div>
+    <div>выберите одну из опций (при надобности):</div>
     <?= $form->field($model, 'superprice')->checkbox() ?>
 
     <?= $form->field($model, 'hits')->checkbox() ?>

@@ -3,6 +3,7 @@
 use backend\models\Settings;
 use frontend\widgets\MainPageProductsWidget;
 use frontend\widgets\MainPageDiscriptionWidget;
+use frontend\widgets\MainPageProductsSaleWidget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
@@ -11,7 +12,8 @@ use yii\helpers\Url;
 Settings::seo();
 ?>
 
-<?= MainPageProductsWidget::widget() ?>
+<?//= MainPageProductsWidget::widget() ?>
+<?= MainPageProductsSaleWidget::widget() ?>
 
 </div>
 <section style="margin-top: 70px;">

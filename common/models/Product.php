@@ -11,6 +11,7 @@ use yii\db\StaleObjectException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\common\models\Rating;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
 
@@ -25,11 +26,14 @@ use yz\shoppingcart\CartPositionTrait;
  * @property string|null $description
  * @property int|null $price
  * @property int|null $status
+ * @property int|null $sale
  * @property int|null $product_1c_id
  * @property int|null $old_price
  * @property int|null $weight
  * @property string|null $seoTitle
  * @property string|null $seoDescription
+ * @property int|null $rating
+ * @property int|null $update_utime
  *
  * @property Category $category
  * @property ProductImage[] $images
@@ -46,6 +50,8 @@ class Product extends ActiveRecord implements CartPositionInterface
 
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
+    const SALE_INACTIVE = 0;
+    const SALE_ACTIVE = 1;
 
     public function getPrice()
     {
@@ -71,7 +77,8 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status'], 'integer'],
+            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status', 'sale', 'update_utime'], 'integer'],
+            ['rating', 'number'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 0],
@@ -93,6 +100,7 @@ class Product extends ActiveRecord implements CartPositionInterface
         return [
             'id' => 'ID',
             'status' => 'Активный',
+            'sale' => 'Акционный товар',
             'product_1c_id' => '1C ID',
             'category_id' => 'Категория',
             'sort' => 'Сортировка',
@@ -100,8 +108,8 @@ class Product extends ActiveRecord implements CartPositionInterface
             'description' => 'Описание',
             'price' => 'Цена',
             'weight' => 'Вес (в граммах)',
-            'superprice' => '"Суперцена"',
-            'hits' => '"Хит"',
+            'superprice' => 'Суперцена',
+            'hits' => 'Хит',
             'old_price' => 'Старая цена',
             'seoTitle' => 'Seo Title',
             'seoDescription' => 'Seo Description',
@@ -121,6 +129,22 @@ class Product extends ActiveRecord implements CartPositionInterface
         return [
             self::STATUS_INACTIVE => 'danger',
             self::STATUS_ACTIVE => 'success',
+        ];
+    }
+
+    public static function saleList()
+    {
+        return [
+            self::SALE_INACTIVE => 'Нет',
+            self::SALE_ACTIVE => 'Да',
+        ];
+    }
+
+    public static function saleColorList()
+    {
+        return [
+            self::SALE_INACTIVE => 'danger',
+            self::SALE_ACTIVE => 'success',
         ];
     }
 
@@ -157,11 +181,50 @@ class Product extends ActiveRecord implements CartPositionInterface
     }
 
     /**
+     * @param string $default
+     * @param null $sale
+     * @return string
+     */
+    public function getSaleLabel($default = '-', $sale = null)
+    {
+        return ArrayHelper::getValue(self::saleList(), $sale ?: $this->sale, $default);
+    }
+
+    /**
+     * @param string $default
+     * @param null $sale
+     * @return string
+     */
+    public function getSaleColor($default = 'default', $sale = null)
+    {
+        return ArrayHelper::getValue(self::saleColorList(), $sale ?: $this->sale, $default);
+    }
+
+    /**
+     * @param array $options
+     * @return string
+     */
+    public function getSaleTag($options = [])
+    {
+        if (!array_key_exists('class', $options)) {
+            $options['class'] = 'label label-' . $this->getSaleColor();
+        }
+        return Html::tag('span', $this->getSaleLabel(), $options);
+    }
+
+    /**
      * @return ActiveQuery
      */
     public function getProductListMaps()
     {
         return $this->hasMany(ProductListMap::class, ['product_id' => 'id']);
+    }
+
+    public function getProductsSale()
+    {
+        return Product::find()->where([
+            'product.sale' => 1,
+        ]);
     }
 
     /**
@@ -182,6 +245,26 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function getImages()
     {
         return $this->hasMany(ProductImage::class, ['product_id' => 'id']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    // public function getRating($sum){
+    //     $rating="";
+    //     $count='';
+    //     foreach( $sum as $plus){
+    //         $rating=$rating+$plus->value;
+    //         $count=$count+1;
+    //     }
+    //     if($rating>0) {
+    //         return $rating / $count;
+    //     }else{
+    //         return 0;
+    //     }
+    // }
+    public function getRating()
+    {
+        return $this->hasMany(Rating::class, ['product_id'=> 'id']);
     }
 
     /**
@@ -231,6 +314,14 @@ class Product extends ActiveRecord implements CartPositionInterface
         }
         
         JsonLDHelper::add($seo);
+    }
+
+    public function afterSave($insert, $changedAttributes) 
+    {
+        if ($insert) {
+            Rating::create($this->rating, $this->id);
+        }
+        return parent::afterSave($insert, $changedAttributes);
     }
 
     /**

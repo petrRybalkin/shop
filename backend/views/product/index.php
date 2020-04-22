@@ -33,6 +33,15 @@ $this->title = 'Товары';
                 }
             ],
             'title',
+            [
+                'attribute' => 'sale',
+                //'label' => 'На Главной',
+                'filter' => Product::saleList(),
+                'format' => 'raw',
+                'value' => function (Product $model) {
+                    return Html::a($model->getSaleTag(), ['view', 'id' => $model->id]);
+                }
+            ],
             'weight',
             'description:html',
             'price',

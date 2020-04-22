@@ -25,7 +25,7 @@
         "yiidoc/yii2-redactor": "2.0.1",
         "pheme/yii2-settings": "0.7",
         "ext-curl": "*",
-        "matthew-p/yii2-image-optimize": "1.0"
+        "matthew-p/yii2-image-optimize": "1.0",
         "kartik-v/yii2-widget-rating": "*"
     },
     "require-dev": {

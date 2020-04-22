@@ -1,4 +1,8 @@
 <?php
+
+use MP\ImageOptimize\ImageOptimizeController;
+use MP\ImageOptimize\ImageOptimizerService;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -27,6 +31,22 @@ return [
                 '@yii/rbac/migrations',
                 '@vendor/pheme/yii2-settings/migrations',
             ]
+        ],
+        'image-optimize' => [
+            'class'           => ImageOptimizeController::class,
+            'log'             => YII_DEBUG,
+            'imageExtensions' => [
+                ImageOptimizerService::IMAGE_PNG, ImageOptimizerService::IMAGE_JPG, ImageOptimizerService::IMAGE_JPEG,
+            ],
+            'folders'         => [ // Add your folders for images optimize
+                '@backend/web/images',
+//                '@frontend/web/uploads/test2' => [ // with options
+//                    'execlude' => [ // Exclude subfolders or files
+//                        '@frontend/web/uploads/test/subfolder',
+//                        '@frontend/web/uploads/test/file.png', // Filename WITH PATH
+//                    ]
+//                ],
+            ],
         ],
     ],
     'components' => [

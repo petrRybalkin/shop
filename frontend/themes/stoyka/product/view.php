@@ -122,9 +122,9 @@ $this->registerJsFile(Yii::getAlias('@web/js/site.js'), [
                             ]),
                         ]
                     ]) ?>
-                    <?= $this->render('_rating', ['model' => $model, 'disabled' => $disabled]); ?>
                 </div>
             </div>
+            <?= $this->render('_rating', ['model' => $model, 'disabled' => $disabled]); ?>
             <div class="social"></div>
         </div>
     </div>

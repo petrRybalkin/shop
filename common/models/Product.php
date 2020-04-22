@@ -11,7 +11,7 @@ use yii\db\StaleObjectException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use common\models\Rating;
+use app\common\models\Rating;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
 
@@ -32,6 +32,8 @@ use yz\shoppingcart\CartPositionTrait;
  * @property int|null $weight
  * @property string|null $seoTitle
  * @property string|null $seoDescription
+ * @property int|null $rating
+ * @property int|null $update_utime
  *
  * @property Category $category
  * @property ProductImage[] $images
@@ -75,7 +77,8 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status', 'sale', 'rating'], 'integer'],
+            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status', 'sale', 'update_utime'], 'integer'],
+            ['rating', 'number'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 0],
@@ -261,7 +264,7 @@ class Product extends ActiveRecord implements CartPositionInterface
     // }
     public function getRating()
     {
-        return $this->hasMany(Rating::className(), ['product_id'=>'id']);
+        return $this->hasMany(Rating::class, ['product_id'=> 'id']);
     }
 
     /**

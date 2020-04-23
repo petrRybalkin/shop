@@ -6,6 +6,7 @@ use common\models\ProductImage;
 use Yii;
 use common\models\Product;
 use common\models\ProductSearch;
+use yii\db\Expression;
 use yii\db\StaleObjectException;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -84,6 +85,7 @@ class ProductController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->update_utime = new Expression('NOW()');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['/product-image/index', 'id' => $model->id]);

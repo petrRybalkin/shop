@@ -11,7 +11,7 @@ use yii\db\StaleObjectException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use app\common\models\Rating;
+use common\models\Rating;
 use yz\shoppingcart\CartPositionInterface;
 use yz\shoppingcart\CartPositionTrait;
 
@@ -77,11 +77,12 @@ class Product extends ActiveRecord implements CartPositionInterface
     public function rules()
     {
         return [
-            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status', 'sale', 'update_utime'], 'integer'],
+            [['category_id', 'price', 'old_price', 'weight', 'product_1c_id', 'sort', 'superprice', 'hits', 'status', 'sale'], 'integer'],
             ['rating', 'number'],
             [['description', 'seoDescription'], 'string'],
             [['title', 'seoTitle'], 'string', 'max' => 255],
             [['sort'], 'default', 'value' => 0],
+            [['update_utime'], 'default', 'value' => 0],
             [
                 ['category_id'],
                 'exist',
@@ -246,6 +247,7 @@ class Product extends ActiveRecord implements CartPositionInterface
     {
         return $this->hasMany(ProductImage::class, ['product_id' => 'id']);
     }
+
     /**
      * @return \yii\db\ActiveQuery
      */

@@ -12,8 +12,8 @@ use yii\helpers\Url;
 Settings::seo();
 ?>
 
-<?//= MainPageProductsWidget::widget() ?>
 <?= MainPageProductsSaleWidget::widget() ?>
+<?= MainPageProductsWidget::widget() ?>
 
 </div>
 <section style="margin-top: 70px;">

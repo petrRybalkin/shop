@@ -39,7 +39,7 @@ $this->title = 'Товары';
                 'filter' => Product::saleList(),
                 'format' => 'raw',
                 'value' => function (Product $model) {
-                    return Html::a($model->getSaleTag(), ['view', 'id' => $model->id]);
+                    return Html::a($model->getSaleTag(), ['update', 'id' => $model->id]);
                 }
             ],
             'weight',
@@ -52,7 +52,7 @@ $this->title = 'Товары';
                 'filter' => Product::statusList(),
                 'format' => 'raw',
                 'value' => function (Product $model) {
-                    return Html::a($model->getStatusTag(), ['view', 'id' => $model->id]);
+                    return Html::a($model->getStatusTag(), ['update', 'id' => $model->id]);
                 }
             ],
             //'old_price',

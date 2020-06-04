@@ -81,6 +81,7 @@ class ProductController extends Controller
 
             $db->createCommand("UPDATE product SET rating='".$itogRat."' WHERE id='".$model->id."'")->execute();
             $this->refresh();
+            Yii::$app->session->setFlash('success', 'Благодарим Вас за обращение к нам. Мы ответим вам как можно скорее.');
         }
 
         return $this->render('view', [
